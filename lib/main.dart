@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stylish/view/splash.dart';
 
 void main() {
-  var name;
-  name = "ahmed";
-  print(name);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,5 +15,4 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Splash(),
     );
-  }
-}
+F}
