@@ -15,4 +15,5 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Splash(),
     );
-F}
+  }
+}
