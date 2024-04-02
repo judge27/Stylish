@@ -6,26 +6,26 @@ import '../const.dart';
 
 const List<OnBoardingModel> item = [
   OnBoardingModel(
-      bannerImage: splash1,
+      bannerImage: kSplash1,
       titleText: "Choose Products",
       nextText: "Next",
-      onBoardingImage: circle,
+      onBoardingImage: kCircle,
       pageNumber: "1",
       prevText: "      ",
       nextPage: OnboardPage1.id2),
   OnBoardingModel(
-      bannerImage: splash2,
+      bannerImage: kSplash2,
       titleText: "Make Payment",
       nextText: "Next",
-      onBoardingImage: circle2,
+      onBoardingImage: kCircle2,
       pageNumber: "2",
       prevText: "Prev",
       nextPage: OnboardPage1.id3),
   OnBoardingModel(
-      bannerImage: splash3,
+      bannerImage: kSplash3,
       titleText: "Get Your Order",
       nextText: "Get Started",
-      onBoardingImage: circle3,
+      onBoardingImage: kCircle3,
       pageNumber: "3",
       prevText: " Prev      ",
       nextPage: Signin.id),

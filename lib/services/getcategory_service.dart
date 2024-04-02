@@ -5,7 +5,7 @@ import 'package:stylish/services/dio_helper.dart';
 class CategoriesService {
   Future<List<ProductModel>> getProducts({required int id}) async {
     Map<String, dynamic> data =
-        await DioHelper().get(url: baseUrl + "categories/" + id.toString());
+        await DioHelper().get(url: kBaseUrl + "categories/" + id.toString());
 
     Map<String, dynamic> products = data["data"];
     List<ProductModel> productsList = [];

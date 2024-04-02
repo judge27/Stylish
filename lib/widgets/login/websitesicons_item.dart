@@ -41,7 +41,7 @@ class WebsitesLogoItem extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
-                  child: Image.asset(google),
+                  child: Image.asset(kGoogle),
                 ),
               ),
             ),
@@ -56,7 +56,7 @@ class WebsitesLogoItem extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
-                  child: Image.asset(apple),
+                  child: Image.asset(kApple),
                 ),
               ),
             ),
@@ -71,7 +71,7 @@ class WebsitesLogoItem extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
-                  child: Image.asset(facebook),
+                  child: Image.asset(kFacebook),
                 ),
               ),
             ),

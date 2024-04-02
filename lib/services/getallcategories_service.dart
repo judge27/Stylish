@@ -7,7 +7,7 @@ class GetAllCategories {
   Dio dio = Dio();
   Future<List<CategoryNameModel>> getProducts() async {
     Map<String, dynamic> data =
-        await DioHelper().get(url: baseUrl + "categories");
+        await DioHelper().get(url: kBaseUrl + "categories");
     Map<String, dynamic> categories = data["data"];
     List<CategoryNameModel> categoriesList = [];
     for (int i = 0; i < categories.length; i++) {

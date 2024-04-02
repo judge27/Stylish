@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stylish/const.dart';
 import 'package:stylish/model/custombutton_model.dart';
 import 'package:stylish/model/textinput_model.dart';
 import 'package:stylish/model/websiteslogo_model.dart';
@@ -20,7 +21,7 @@ class Signin extends StatelessWidget {
     return Stack(children: [
       const BackgroundImage(),
       Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: kPrimaryColor,
           body: SafeArea(
               child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),

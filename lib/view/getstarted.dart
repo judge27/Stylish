@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/const.dart';
 import 'package:stylish/model/custombutton_model.dart';
 import 'package:stylish/widgets/login/backgroundimage_item.dart';
 import 'package:stylish/widgets/login/custombutton_item.dart';
@@ -11,7 +12,7 @@ class GetStarted extends StatelessWidget {
     return Stack(children: [
       const BackgroundImage(),
       Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kPrimaryColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,

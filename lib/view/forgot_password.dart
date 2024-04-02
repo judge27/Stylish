@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/const.dart';
 import 'package:stylish/model/custombutton_model.dart';
 import 'package:stylish/model/textinput_model.dart';
 import 'package:stylish/widgets/login/backgroundimage_item.dart';
@@ -13,7 +14,7 @@ class ForgotPassword extends StatelessWidget {
     return Stack(children: [
       const BackgroundImage(),
       Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: kPrimaryColor,
           body: SafeArea(
               child: SingleChildScrollView(
                   child: Column(

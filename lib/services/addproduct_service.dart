@@ -14,7 +14,7 @@ class AddProductService {
     required bool isInfav,
     required bool isInCart,
   }) async {
-    dynamic data = DioHelper().post(url: baseUrl + "products", data: {
+    dynamic data = DioHelper().post(url: kBaseUrl + "products", data: {
       "id": id,
       "price": price,
       "image": image,
