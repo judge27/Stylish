@@ -12,7 +12,7 @@ import 'package:stylish/widgets/login/websitesicons_item.dart';
 
 class Signup extends StatelessWidget {
   const Signup({super.key});
-
+  static const String id = "SignupPage";
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -124,11 +124,7 @@ class Signup extends StatelessWidget {
                             accountColor: Colors.white,
                             siginColor: const Color(0xFFF83758),
                             onSignTaped: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Signin()),
-                              );
+                              Navigator.pushNamed(context, Signin.id);
                             },
                           ),
                         ),

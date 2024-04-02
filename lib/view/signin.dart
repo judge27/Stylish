@@ -14,7 +14,7 @@ import 'package:stylish/widgets/login/websitesicons_item.dart';
 
 class Signin extends StatelessWidget {
   const Signin({super.key});
-
+  static const String id = "SigninPage";
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -114,12 +114,8 @@ class Signin extends StatelessWidget {
                               boderRadius: 10,
                               title: "LOGIN",
                               height: 55,
-                              onTap: () => {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) => GetStarted())))
-                              },
+                              onTap: () =>
+                                  {Navigator.pushNamed(context, GetStarted.id)},
                             ),
                           ),
                         ),
@@ -133,11 +129,7 @@ class Signin extends StatelessWidget {
                             accountColor: Colors.white,
                             siginColor: const Color(0xFFF83758),
                             onSignTaped: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const Signup()),
-                              );
+                              Navigator.pushNamed(context, Signup.id);
                             },
                           ),
                         ),

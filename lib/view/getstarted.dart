@@ -5,7 +5,7 @@ import 'package:stylish/widgets/login/custombutton_item.dart';
 
 class GetStarted extends StatelessWidget {
   const GetStarted({Key? key}) : super(key: key);
-
+  static const String id = "GetStartedPage";
   @override
   Widget build(BuildContext context) {
     return Stack(children: [

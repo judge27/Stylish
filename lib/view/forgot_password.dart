@@ -7,7 +7,7 @@ import 'package:stylish/widgets/login/textinput_item.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({super.key});
-
+  static const String id = "ForgotPasswordPage";
   @override
   Widget build(BuildContext context) {
     return Stack(children: [

@@ -39,9 +39,7 @@ class OnBoardingItem extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Signin()),
-                );
+                Navigator.pushNamed(context, Signin.id);
               },
               child: const Text(
                 "Skip",
@@ -120,13 +118,9 @@ class OnBoardingItem extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     if (item[index].nextPage == const Signin()) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => item[index].nextPage));
+                      Navigator.pushNamed(context, item[index].nextPage);
                     } else {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => item[index].nextPage),
-                      );
+                      Navigator.pushNamed(context, item[index].nextPage);
                     }
                   },
                   child: Text(

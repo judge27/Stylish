@@ -6,7 +6,7 @@ import 'package:stylish/view/onboard_page1.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
-
+  static const String id = "SplashPage";
   @override
   State<Splash> createState() => _SplashState();
 }
@@ -16,16 +16,8 @@ class _SplashState extends State<Splash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-            // ignore: prefer_const_constructors
-            builder: (BuildContext context) => OnboardPage1(
-                  index: 0,
-                )),
-      ),
-    );
+    Timer(const Duration(seconds: 3),
+        () => Navigator.pushNamed(context, OnboardPage1.id1));
   }
 
   Widget build(BuildContext context) {

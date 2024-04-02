@@ -7,7 +7,7 @@ class OnBoardingModel {
   final String nextText;
   final String bannerImage;
   final String onBoardingImage;
-  final Widget nextPage;
+  final String nextPage;
 
   const OnBoardingModel({
     required this.titleText,
