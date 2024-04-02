@@ -124,7 +124,7 @@ class Signup extends StatelessWidget {
                             accountColor: Colors.white,
                             siginColor: const Color(0xFFF83758),
                             onSignTaped: () {
-                              Navigator.pushNamed(context, Signin.id);
+                              Navigator.pop(context);
                             },
                           ),
                         ),

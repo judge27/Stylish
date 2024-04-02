@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/model/product_model.dart';
 import 'package:stylish/services/dio_helper.dart';
