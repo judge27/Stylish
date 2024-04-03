@@ -36,7 +36,6 @@ class OnboardPage1 extends StatelessWidget {
   static const String id1 = "OnBoardingPage1";
   static const String id2 = "OnBoardingPage2";
   static const String id3 = "OnBoardingPage3";
-
   final int index;
 
   @override

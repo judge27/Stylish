@@ -117,7 +117,7 @@ class OnBoardingItem extends StatelessWidget {
                 Image.asset(item[index].onBoardingImage),
                 GestureDetector(
                   onTap: () {
-                    if (item[index].nextPage == const Signin()) {
+                    if (item[index].nextPage ==  Signin()) {
                       Navigator.pushNamed(context, item[index].nextPage);
                     } else {
                       Navigator.pushNamed(context, item[index].nextPage);

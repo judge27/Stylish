@@ -1,4 +1,5 @@
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:stylish/view/forgot_password.dart';
 import 'package:stylish/view/getstarted.dart';
@@ -7,7 +8,11 @@ import 'package:stylish/view/signin.dart';
 import 'package:stylish/view/signup.dart';
 import 'package:stylish/view/splash.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -20,8 +25,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         Splash.id: (context) => const Splash(),
-        Signin.id: (context) => const Signin(),
-        Signup.id: (context) => const Signup(),
+        Signin.id: (context) =>  Signin(),
+        Signup.id: (context) =>  Signup(),
         ForgotPassword.id: (context) => const ForgotPassword(),
         GetStarted.id: (context) => const GetStarted(),
         OnboardPage1.id1: (context) => const OnboardPage1(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:stylish/model/textinput_model.dart';
+import 'package:stylish/view/onboard_page1.dart';
 
 class PasswordInput extends StatefulWidget {
   const PasswordInput({super.key, required this.item});
@@ -21,7 +22,13 @@ class _PasswordInputState extends State<PasswordInput> {
             color: widget.item.fillBorderColor,
             borderRadius: BorderRadius.circular(widget.item.borderRadius),
             border: Border.all(color: widget.item.boderColor)),
-        child: TextField(
+        child: TextFormField(
+          validator: (data) {
+            if (data!.isEmpty) {
+              return "Value Is Required!";
+            }
+          },
+          onChanged: widget.item.onChange,
           decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

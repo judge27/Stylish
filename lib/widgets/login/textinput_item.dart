@@ -18,7 +18,13 @@ class TextInput extends StatelessWidget {
             color: item.fillBorderColor,
             borderRadius: BorderRadius.circular(item.borderRadius),
             border: Border.all(color: item.boderColor)),
-        child: TextField(
+        child: TextFormField(
+          validator: (data) {
+            if (data!.isEmpty) {
+              return "Value Is Required!";
+            }
+          },
+          onChanged: item.onChange,
           decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: EdgeInsets.symmetric(horizontal: item.contentPadding),

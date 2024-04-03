@@ -14,6 +14,7 @@ class TextInputModel {
   final double contentPadding;
   IconData? suffixIcon;
   bool? obscureText;
+  void Function(String)? onChange;
 
   TextInputModel({
     this.suffixIcon,
@@ -29,5 +30,6 @@ class TextInputModel {
     required this.hint,
     required this.inputAction,
     required this.prefixIcon,
+    this.onChange,
   });
 }
