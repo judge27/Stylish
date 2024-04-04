@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stylish/const.dart';
+import 'package:stylish/model/auth_model.dart';
 import 'package:stylish/model/custombutton_model.dart';
 import 'package:stylish/model/textinput_model.dart';
 import 'package:stylish/widgets/login/backgroundimage_item.dart';
@@ -40,6 +42,9 @@ class ForgotPassword extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 35),
                   child: TextInput(
                     item: TextInputModel(
+                      onChange: (data){
+                        AuthModel.email=data;
+                      },
                       contentPadding: 15,
                       boderColor: Colors.transparent,
                       borderRadius: 16,
@@ -79,6 +84,7 @@ class ForgotPassword extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 35),
                       child: CustomButtonItem(
                         item: CustomButtonModel(
+
                             fontSize: 20,
                             titleColor: Colors.white,
                             fillColor: const Color(0xFFFF5656),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/model/auth_model.dart';
@@ -20,14 +21,33 @@ class Signin extends StatefulWidget {
   const Signin({super.key});
   static const String id = "SigninPage";
 
+
   @override
   State<Signin> createState() => _SigninState();
 }
 
 class _SigninState extends State<Signin> {
-
   String? email;
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  User? _user;
+  @override
+  void initState() {
+    super.initState();
+    _auth.authStateChanges().listen((event) {
+      setState(() {
+        _user=event;
+      });
+    });
 
+
+  }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if(_user!=null)
+      Navigator.pushNamed(context, GetStarted.id);
+  }
   String? password;
   bool isLoading = false;
 
@@ -89,6 +109,9 @@ class _SigninState extends State<Signin> {
                                         prefixIcon: Icons.email,
                                       ),
                                     ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
                                     PasswordInput(
                                       item: TextInputModel(
                                         onChange: (data) {
@@ -133,7 +156,7 @@ class _SigninState extends State<Signin> {
                                 Column(
                                   children: [
                                     const SizedBox(
-                                      height: 63,
+                                      height: 40,
                                     ),
                                     Container(
                                       child: CustomButtonItem(
@@ -151,20 +174,18 @@ class _SigninState extends State<Signin> {
                                                 isLoading = true;
                                                 setState(() {});
                                                 try {
-                                                  await loginUser();
+                                                  await AuthModel.loginUser();
                                                   AuthModel.showSnackBar(
                                                       context,
                                                       message: "Success.");
-                                                  Navigator.pushNamed(context, GetStarted.id);
+                                                  Navigator.pushNamed(
+                                                      context, GetStarted.id);
                                                 } on FirebaseAuthException catch (e) {
-                                                  if (e.code ==
-                                                      'user-not-found') {
-                                                    AuthModel.showSnackBar(context,message:
-                                                        'No user found for that email.');
-                                                  } else if (e.code ==
-                                                      'wrong-password') {
-                                                    AuthModel.showSnackBar(context,message:'Wrong password provided for that user.');
-                                                  }
+                                                AuthModel.showSnackBar(
+                                                    context,
+                                                    message:
+                                                    'Email or Password is not Correct!');
+
                                                 } catch (e) {
                                                   print(e);
                                                 }
@@ -175,10 +196,21 @@ class _SigninState extends State<Signin> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 50,
+                                      height: 35,
                                     ),
                                     WebsitesLogoItem(
                                       item: WebsitesLogoModel(
+                                        onGoogleTaped: () async{
+                                         await AuthModel.handleGoogleSignIn();
+                                          Navigator.pushNamed(context, GetStarted.id);
+
+                                        },
+                                        onFacebookTaped: (){
+                                        },
+                                        onAppleTaped: ()async{
+                                          await GoogleSignIn().signOut();
+                                          FirebaseAuth.instance.signOut();
+                                        },
                                         accountText: "Create An Account",
                                         signinText: "Sign Up",
                                         accountColor: Colors.white,
@@ -198,11 +230,5 @@ class _SigninState extends State<Signin> {
                       )))))
     ]);
   }
-}
 
-Future<void> loginUser() async {
-  final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-    email: AuthModel.email!,
-    password: AuthModel.password!,
-  );
 }

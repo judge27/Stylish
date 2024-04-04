@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         Splash.id: (context) => const Splash(),
-        Signin.id: (context) =>  Signin(),
-        Signup.id: (context) =>  Signup(),
+        Signin.id: (context) => const Signin(),
+        Signup.id: (context) => const Signup(),
         ForgotPassword.id: (context) => const ForgotPassword(),
         GetStarted.id: (context) => const GetStarted(),
         OnboardPage1.id1: (context) => const OnboardPage1(
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
             ),
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: Splash.id,
+      initialRoute:Splash.id,
     );
   }
 }
