@@ -126,7 +126,6 @@ class BottomRegistrationWidget extends StatelessWidget {
                             color: Color(0xFFF83758),
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
                           )),
                     ),
                   ),
