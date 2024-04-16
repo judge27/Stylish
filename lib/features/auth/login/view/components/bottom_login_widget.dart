@@ -11,7 +11,7 @@ class BottomLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height/2.497,
+        height: context.height/2.6,
         child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25,),
     child:Column(

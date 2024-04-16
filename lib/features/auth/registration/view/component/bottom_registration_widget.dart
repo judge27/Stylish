@@ -13,7 +13,7 @@ class BottomRegistrationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height / 2.55,
+        height: context.height / 2.97,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, ),
           child: Column(
@@ -33,7 +33,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 12,),
               Container(
                 alignment: Alignment.center,
                 child: const Text(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 const String kLogo = "assets/images/logo.png";
 const String kSplash1 = "assets/images/splash1.png";
 const String kSplash2 = "assets/images/splash2.png";

@@ -17,6 +17,7 @@ class LoginBodyWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
         child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
           child: BlocProvider<LogincontrollerCubit>.value(
             value: controller,
             child: BlocBuilder<LogincontrollerCubit, LogincontrollerState>(
