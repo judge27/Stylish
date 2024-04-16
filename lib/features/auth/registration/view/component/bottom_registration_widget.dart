@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/registration/controller/registrationcontroller_cubit.dart';
 
@@ -12,20 +11,18 @@ class BottomRegistrationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: context.height / 2.97,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, ),
-          child: Column(
+    return  Column(
+
             children: [
               BlocProvider<RegistrationcontrollerCubit>.value(
                 value: controller,
                 child: BlocBuilder<RegistrationcontrollerCubit, RegistrationcontrollerState>(
                   builder: (context, state) {
                     return InkWell(
-                      onTap: () => controller.confirmRegistration(context),
-                      child:
-                      Padding(
+                      onTap: () {
+                        controller.confirmRegistration(context);
+                      },
+                      child: Padding(
                         padding: EdgeInsets.only(bottom: 25),
                         child:    Core.coreButton("Create Account"),
                       )
@@ -33,7 +30,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 12,),
+              SizedBox(height: 30,),
               Container(
                 alignment: Alignment.center,
                 child: const Text(
@@ -133,8 +130,6 @@ class BottomRegistrationWidget extends StatelessWidget {
                 ],
               ),
             ],
-          ),
-        )
     );
   }
 }

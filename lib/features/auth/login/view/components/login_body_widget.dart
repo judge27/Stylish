@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
+import 'package:stylish/features/auth/login/view/components/bottom_login_widget.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 class LoginBodyWidget extends StatelessWidget {
@@ -24,7 +26,9 @@ class LoginBodyWidget extends StatelessWidget {
               builder: (context, state) {
                 return Form(
                   key: controller.formKey,
-                  child: Column(
+                  child: Container(
+                    height: context.height,
+                    child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -43,9 +47,8 @@ class LoginBodyWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 35,
                       ),
-
                       // Email TextField // Username or Email
                       TextFieldWidget(
                         item: TextFieldModel(
@@ -61,7 +64,6 @@ class LoginBodyWidget extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-
                       // Password TextField // Password
                       TextFieldWidget(
                           item: TextFieldModel(
@@ -93,9 +95,12 @@ class LoginBodyWidget extends StatelessWidget {
                           ),
                         ],
                       ),
+                      Spacer(flex: 1,),
+                      BottomLoginWidget(controller: controller),
+                      Spacer(flex: 3,),
                     ],
                   ),
-                );
+                ));
               },
             ),
           ),

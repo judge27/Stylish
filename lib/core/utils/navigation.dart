@@ -6,6 +6,8 @@ import 'package:stylish/features/auth/onboarding/view/page/onboarding_page.dart'
 import 'package:stylish/features/auth/registration/view/page/registration_page.dart';
 
 class Navigation {
+
+
   static Route<dynamic> onGenerateRoute(RouteSettings settings){
   switch(settings.name){
     case 'registration':return MaterialPageRoute<dynamic>(builder: (BuildContext context)=>const RegistrationPage());
@@ -17,7 +19,9 @@ class Navigation {
 
   }
   }
+
   static List<Route> routes=[
   MaterialPageRoute<dynamic>(builder: (BuildContext context)=>const OnboardingPage()),
   ];
+
 }

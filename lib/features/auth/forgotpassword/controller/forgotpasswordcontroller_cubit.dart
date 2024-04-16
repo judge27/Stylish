@@ -11,7 +11,7 @@ class ForgotpasswordcontrollerCubit extends Cubit<ForgotpasswordcontrollerState>
 
   void confirmForgotPassword(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, 'login', arguments: '');
+     Navigator.pop(context);
     }
     else {
       print("invaild inputs");

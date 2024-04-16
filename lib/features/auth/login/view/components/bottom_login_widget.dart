@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
 
@@ -10,20 +9,18 @@ class BottomLoginWidget extends StatelessWidget {
   final LogincontrollerCubit controller;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: context.height/2.6,
-        child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25,),
-    child:Column(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
           children: [
             BlocProvider<LogincontrollerCubit>.value(
               value: controller,
               child: BlocBuilder<LogincontrollerCubit, LogincontrollerState>(
                 builder: (context, state) {
                   return InkWell(
-                      onTap: () => controller.confirmLogin(context:context),
-                      child:
-                      Padding(
+                      onTap: () {
+                       controller.confirmLogin(context: context);
+                      },
+                    child: Padding(
                         padding: EdgeInsets.only(bottom: 25),
                         child:    Core.coreButton("Login"),
                       )
@@ -31,8 +28,7 @@ class BottomLoginWidget extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 20,),
-
+            SizedBox(height: 40,),
             Container(
               alignment: Alignment.center,
               child: const Text(
@@ -132,7 +128,6 @@ class BottomLoginWidget extends StatelessWidget {
               ],
             ),
           ],
-        )
-    ));
+        );
   }
 }

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/registration/controller/registrationcontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/features/auth/registration/view/component/bottom_registration_widget.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
 class RegistrationWidget extends StatelessWidget {
@@ -26,7 +28,9 @@ class RegistrationWidget extends StatelessWidget {
               builder: (context, state) {
                 return Form(
                   key: controller.formKey,
-                    child: Column(
+                    child:Container(
+                        height: context.height,
+                        child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Screen title Text //Welcome Back!
@@ -79,15 +83,14 @@ class RegistrationWidget extends StatelessWidget {
                       obscureText: true,
                       validator: Validation().validatePassword,
                     )),
-                    // Forgot Password TextButton
-                    const SizedBox(height: 50,),
-
-
+                    Spacer(flex: 1,),
+                    BottomRegistrationWidget(controller: controller,),
+                    Spacer(flex: 2,),
                   ],
                 )
+                )
                 );
-
-              },
+              }
             ),
           ),
         )
