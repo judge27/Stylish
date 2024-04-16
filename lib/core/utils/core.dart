@@ -2,21 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Core {
-
   // Auth button view with custom Title
-  static Container coreButton (String buttonText) {
+  static Container coreButton(String buttonText) {
     return Container(
       height: 55,
       decoration: BoxDecoration(
           color: const Color(0xFFF83758),
-          borderRadius: BorderRadius.circular(4)
-      ),
+          borderRadius: BorderRadius.circular(4)),
       alignment: Alignment.center,
-      child: Text(buttonText, style: const TextStyle(
-          color: Colors.white,
-          fontSize: 22,
-          fontWeight: FontWeight.w700
-      ),),
+      child: Text(
+        buttonText,
+        style: const TextStyle(
+            color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
+      ),
     );
   }
 
@@ -63,5 +61,4 @@ class Core {
       ),
     ),
   );
-
 }

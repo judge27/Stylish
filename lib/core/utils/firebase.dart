@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class FireBaseModel {
   static late String name;
   static late String email;
@@ -10,12 +11,12 @@ class FireBaseModel {
   //  snackBar with Custom Message
   void showToast(BuildContext context, {required String message}) {
     Fluttertoast.showToast(
-        msg: message,
-        gravity: ToastGravity.TOP,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Color(0xFFF83758),
-        textColor: Colors.white,
-        fontSize: 18.0,
+      msg: message,
+      gravity: ToastGravity.TOP,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Color(0xFFF83758),
+      textColor: Colors.white,
+      fontSize: 18.0,
     );
   }
 

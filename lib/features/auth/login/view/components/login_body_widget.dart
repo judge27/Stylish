@@ -7,6 +7,7 @@ import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dar
 import 'package:stylish/features/auth/login/view/components/bottom_login_widget.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
+
 class LoginBodyWidget extends StatelessWidget {
   const LoginBodyWidget(
       {super.key, required this.name, required this.controller});
@@ -25,48 +26,48 @@ class LoginBodyWidget extends StatelessWidget {
             child: BlocBuilder<LogincontrollerCubit, LogincontrollerState>(
               builder: (context, state) {
                 return Form(
-                  key: controller.formKey,
-                  child: Container(
-                    height: context.height,
-                    child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Screen title Text //Welcome Back!
-                      SizedBox(
-                        width: 190,
-                        child: Text(
-                          "Welcome Back "+name+" !",
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 43,
-                            fontWeight: FontWeight.w800,
+                    key: controller.formKey,
+                    child: Container(
+                      height: context.height,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Screen title Text //Welcome Back!
+                          SizedBox(
+                            width: 190,
+                            child: Text(
+                              "Welcome Back " + name + " !",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 43,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.clip,
+                            ),
                           ),
-                          maxLines: 2,
-                          overflow: TextOverflow.clip,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      // Email TextField // Username or Email
-                      TextFieldWidget(
-                        item: TextFieldModel(
-                          inputDecoration: Core().inputDecoration.copyWith(
-                              prefixIcon: const Icon(Icons.email),
-                              hintText: "Username or Email"),
-                          controller: controller.emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          validator: Validation().validateEmail,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      // Password TextField // Password
-                      TextFieldWidget(
-                          item: TextFieldModel(
+                          const SizedBox(
+                            height: 35,
+                          ),
+                          // Email TextField // Username or Email
+                          TextFieldWidget(
+                            item: TextFieldModel(
+                              inputDecoration: Core().inputDecoration.copyWith(
+                                  prefixIcon: const Icon(Icons.email),
+                                  hintText: "Username or Email"),
+                              controller: controller.emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              validator: Validation().validateEmail,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          // Password TextField // Password
+                          TextFieldWidget(
+                              item: TextFieldModel(
                             controller: controller.passwordController,
                             keyboardType: TextInputType.visiblePassword,
                             textInputAction: TextInputAction.done,
@@ -76,31 +77,36 @@ class LoginBodyWidget extends StatelessWidget {
                             obscureText: true,
                             validator: Validation().validatePassword,
                           )),
-                      // Forgot Password TextButton
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            child: const Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                color: Color(0xFFF83758),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 18,
+                          // Forgot Password TextButton
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              TextButton(
+                                child: const Text(
+                                  "Forgot Password?",
+                                  style: TextStyle(
+                                    color: Color(0xFFF83758),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  controller.navTOForgotPassword(
+                                      context: context);
+                                },
                               ),
-                            ),
-                            onPressed: () {
-                              controller.navTOForgotPassword(context: context);
-                            },
+                            ],
+                          ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                          BottomLoginWidget(controller: controller),
+                          Spacer(
+                            flex: 3,
                           ),
                         ],
                       ),
-                      Spacer(flex: 1,),
-                      BottomLoginWidget(controller: controller),
-                      Spacer(flex: 3,),
-                    ],
-                  ),
-                ));
+                    ));
               },
             ),
           ),

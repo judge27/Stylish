@@ -1,14 +1,12 @@
 class Validation {
-
   // Name validation method
-  String? validateName(String? input){
-     final RegExp alphaExp = RegExp('[a-zA-Z]');
-     if(alphaExp.hasMatch(input!)) {
-       return null;
-     }
-     else {
-       return 'Only Alphabets are allowed in a username';
-     }
+  String? validateName(String? input) {
+    final RegExp alphaExp = RegExp('[a-zA-Z]');
+    if (alphaExp.hasMatch(input!)) {
+      return null;
+    } else {
+      return 'Only Alphabets are allowed in a username';
+    }
   }
 
   // Email validation method
@@ -23,12 +21,10 @@ class Validation {
     final regex = RegExp(pattern);
     if (value!.isEmpty) {
       return 'Please enter Email';
-    }
-    else {
+    } else {
       if (!regex.hasMatch(value)) {
         return 'Enter a valid email address';
-      }
-      else {
+      } else {
         return null;
       }
     }
@@ -37,7 +33,7 @@ class Validation {
   // Password validation method
   String? validatePassword(String? value) {
     RegExp regex =
-    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
     if (value!.isEmpty) {
       return 'Please enter password';
     } else {
@@ -48,5 +44,4 @@ class Validation {
       }
     }
   }
-
 }

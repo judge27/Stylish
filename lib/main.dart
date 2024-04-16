@@ -14,7 +14,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -24,8 +23,7 @@ class MyApp extends StatelessWidget {
       builder: FToastBuilder(),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Navigation.onGenerateRoute,
-      onGenerateInitialRoutes:(_)=>Navigation.routes,
+      onGenerateInitialRoutes: (_) => Navigation.routes,
     );
   }
 }
-

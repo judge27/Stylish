@@ -17,7 +17,7 @@ class OnboardingWidget extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, 'login',arguments: '');
+                Navigator.pushNamed(context, 'login', arguments: '');
               },
               child: const Text(
                 "Skip",
@@ -108,8 +108,8 @@ class OnboardingWidget extends StatelessWidget {
                                   ),
                                   Image.asset(controller.body[index].kCircle),
                                   GestureDetector(
-                                    onTap: () =>
-                                        controller.changeNextPage(index: index,context: context),
+                                    onTap: () => controller.changeNextPage(
+                                        index: index, context: context),
                                     child: Text(
                                       "Next",
                                       style: const TextStyle(

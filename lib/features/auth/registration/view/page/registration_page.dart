@@ -10,19 +10,19 @@ class RegistrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<RegistrationcontrollerCubit>(
       create: (context) => RegistrationcontrollerCubit(),
-      child: BlocBuilder<RegistrationcontrollerCubit, RegistrationcontrollerState>(
+      child:
+          BlocBuilder<RegistrationcontrollerCubit, RegistrationcontrollerState>(
         builder: (context, state) {
-          final RegistrationcontrollerCubit controller =RegistrationcontrollerCubit();
+          final RegistrationcontrollerCubit controller =
+              RegistrationcontrollerCubit();
           return Scaffold(
             backgroundColor: const Color(0xFFFFFFFF).withOpacity(0.94),
-            body:  RegistrationWidget(controller: controller,),
+            body: RegistrationWidget(
+              controller: controller,
+            ),
           );
         },
       ),
     );
   }
 }
-
-
-
-

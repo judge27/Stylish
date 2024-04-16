@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  TextFieldWidget({super.key,required this.item});
+  TextFieldWidget({super.key, required this.item});
   TextFieldModel item;
   @override
   // String? hintText;
@@ -12,7 +12,7 @@ class TextFieldWidget extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: item.onChange,
       controller: item.controller,
-      validator:item.validator,
+      validator: item.validator,
       decoration: item.inputDecoration,
       keyboardType: item.keyboardType,
       textInputAction: item.textInputAction,
@@ -26,6 +26,4 @@ class TextFieldWidget extends StatelessWidget {
     color: Color(0xFF676767),
     fontSize: 16,
   );
-
-
 }

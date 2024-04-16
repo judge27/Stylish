@@ -9,7 +9,6 @@ class OnboardingModel {
     required this.pageNumber,
     required this.title,
     required this.kCircle,
-    this.prevText="",
-});
-
+    this.prevText = "",
+  });
 }
