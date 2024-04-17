@@ -30,7 +30,7 @@ class BottomRegistrationWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 30,
+          height: 15,
         ),
         Container(
           alignment: Alignment.center,
@@ -50,7 +50,9 @@ class BottomRegistrationWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () async{
+                await controller.handleGoogleSignin(context: context);
+              },
               child: CircleAvatar(
                 radius: 33.5,
                 backgroundColor: const Color(0xFFF83758),
@@ -65,7 +67,9 @@ class BottomRegistrationWidget extends StatelessWidget {
               width: 20,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async{
+                await controller.handleGoogleSignout(context: context);
+              },
               child: CircleAvatar(
                 radius: 33.5,
                 backgroundColor: const Color(0xFFF83758),

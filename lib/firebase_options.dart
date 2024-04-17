@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -74,12 +71,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDa18cwwzBCO6OhecjKmeSq22TRvz7kKss',
-    appId: '1:273079324502:ios:3f86113efc75c20ccb50f7',
+    appId: '1:273079324502:ios:9cb87aaf407c1574cb50f7',
     messagingSenderId: '273079324502',
     projectId: 'stylish-app-18604',
     storageBucket: 'stylish-app-18604.appspot.com',
     androidClientId: '273079324502-sdh6ctr822n284tk8trqc2v0okh205vk.apps.googleusercontent.com',
-    iosClientId: '273079324502-5kveo380lg05g7v67dis8j7ji42889u5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.stylish.RunnerTests',
+    iosClientId: '273079324502-j6scpsi2rq1mbkg1teriukvuimn2is3v.apps.googleusercontent.com',
+    iosBundleId: 'com.example.stylish',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAc7Gx9BF5rCAMm-eXlDYZ055W_wSypqaw',
+    appId: '1:273079324502:web:23238ac4aef45667cb50f7',
+    messagingSenderId: '273079324502',
+    projectId: 'stylish-app-18604',
+    authDomain: 'stylish-app-18604.firebaseapp.com',
+    storageBucket: 'stylish-app-18604.appspot.com',
+    measurementId: 'G-N74W8TQG6C',
+  );
+
 }

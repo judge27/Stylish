@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/utils/core.dart';
+import 'package:stylish/core/utils/firebase.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
 
 class BottomLoginWidget extends StatelessWidget {
@@ -48,7 +51,9 @@ class BottomLoginWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () async{
+               await controller.handleGoogleSignin(context: context);
+              },
               child: CircleAvatar(
                 radius: 33.5,
                 backgroundColor: const Color(0xFFF83758),
@@ -63,7 +68,9 @@ class BottomLoginWidget extends StatelessWidget {
               width: 20,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async{
+               await controller.handleGoogleSignout(context:context);
+              },
               child: CircleAvatar(
                 radius: 33.5,
                 backgroundColor: const Color(0xFFF83758),

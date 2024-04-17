@@ -1,13 +1,17 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stylish/core/utils/navigation.dart';
 
 class FireBaseModel {
   static late String name;
   static late String email;
   static late String password;
   static late String password2;
+
   //  snackBar with Custom Message
   void showToast(BuildContext context, {required String message}) {
     Fluttertoast.showToast(
@@ -28,7 +32,7 @@ class FireBaseModel {
     );
   }
 
-  //  email and password  registration function
+  //  email and password  registration method
   Future<void> createUser() async {
     final credential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -37,7 +41,7 @@ class FireBaseModel {
     );
   }
 
-  // google social registration function
+  // google social registration method
   Future<void> handleGoogleSignIn() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -45,5 +49,19 @@ class FireBaseModel {
         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  // send a password reset email to a user
+  Future<void> resetPassword() async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+
+  bool checkUserNullable() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

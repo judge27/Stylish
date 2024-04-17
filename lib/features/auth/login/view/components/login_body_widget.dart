@@ -10,10 +10,8 @@ import 'package:stylish/features/auth/registration/view/component/textfield_widg
 
 class LoginBodyWidget extends StatelessWidget {
   const LoginBodyWidget(
-      {super.key, required this.name, required this.controller});
-
+      {super.key, required this.controller});
   final LogincontrollerCubit controller;
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class LoginBodyWidget extends StatelessWidget {
                           SizedBox(
                             width: 190,
                             child: Text(
-                              "Welcome Back " + name + " !",
+                              "Welcome Back!",
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 43,
@@ -102,7 +100,7 @@ class LoginBodyWidget extends StatelessWidget {
                           ),
                           BottomLoginWidget(controller: controller),
                           Spacer(
-                            flex: 3,
+                            flex: 20,
                           ),
                         ],
                       ),

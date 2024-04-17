@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 import 'package:stylish/core/utils/firebase.dart';
 
@@ -8,6 +9,14 @@ part 'registrationcontroller_state.dart';
 
 class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   RegistrationcontrollerCubit() : super(RegistrationcontrollerInitial());
+  GlobalKey<FormState> formKey = GlobalKey();
+
+  late String email;
+
+  late String name;
+
+  late String password;
+
 
   TextEditingController nameController = TextEditingController();
 
@@ -15,10 +24,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
 
   TextEditingController passwordController = TextEditingController();
 
-  GlobalKey<FormState> formKey = GlobalKey();
-  late String email;
-  late String name;
-  late String password;
+
 
   void confirmRegistration(BuildContext context) async {
     if (formKey.currentState!.validate()) {
@@ -28,7 +34,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
       try {
         await FireBaseModel().createUser();
         FireBaseModel().showToast(context, message: "Success.");
-        Navigator.pushNamed(context, 'login', arguments: '');
+        Navigator.pushNamed(context, 'login');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           FireBaseModel().showToast(context,
@@ -44,4 +50,22 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
       print("invaild inputs");
     }
   }
+
+
+
+  Future<void> handleGoogleSignin({required BuildContext context})async{
+    await FireBaseModel().handleGoogleSignIn();
+    FireBaseModel().showToast(context, message: "Success");
+    Navigator.pushNamed(context, 'login');
+  }
+
+
+
+  Future<void> handleGoogleSignout({required BuildContext context})async{
+    await GoogleSignIn().signOut();
+    FirebaseAuth.instance.signOut();
+    FireBaseModel().showToast(context, message: "Success");
+    Navigator.pop(context);
+  }
+
 }

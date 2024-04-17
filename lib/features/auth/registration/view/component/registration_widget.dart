@@ -89,13 +89,13 @@ class RegistrationWidget extends StatelessWidget {
                             validator: Validation().validatePassword,
                           )),
                           Spacer(
-                            flex: 1,
+                            flex: 2,
                           ),
                           BottomRegistrationWidget(
                             controller: controller,
                           ),
                           Spacer(
-                            flex: 2,
+                            flex: 6,
                           ),
                         ],
                       )));
