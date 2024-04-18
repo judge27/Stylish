@@ -1,48 +1,40 @@
 {
   "project_info": {
-    "project_number": "273079324502",
-    "project_id": "stylish-app-18604",
-    "storage_bucket": "stylish-app-18604.appspot.com"
+    "project_number": "22008002867",
+    "project_id": "stylish-app-93002",
+    "storage_bucket": "stylish-app-93002.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:273079324502:android:c8491042137872a1cb50f7",
+        "mobilesdk_app_id": "1:22008002867:android:138321cf6f17f840916646",
         "android_client_info": {
           "package_name": "com.example.stylish"
         }
       },
       "oauth_client": [
         {
-          "client_id": "273079324502-sdh6ctr822n284tk8trqc2v0okh205vk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.stylish",
-            "certificate_hash": "ac85aff0f25ea541c0a4034e19c539a0b4c1306e"
-          }
-        },
-        {
-          "client_id": "273079324502-qkocdhmg61vtif1oio9keil0osaratli.apps.googleusercontent.com",
+          "client_id": "22008002867-7028jgmaf5u99k73qnb5o9mtqklf8pi6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_GoUWQi8gKbiFHRQT2kct3WODGwCkjQU"
+          "current_key": "AIzaSyC7Nx4ZFpF5d7SNaUI98DY4P3lu8v6zuTU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "273079324502-qkocdhmg61vtif1oio9keil0osaratli.apps.googleusercontent.com",
+              "client_id": "22008002867-7028jgmaf5u99k73qnb5o9mtqklf8pi6.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "273079324502-5kveo380lg05g7v67dis8j7ji42889u5.apps.googleusercontent.com",
+              "client_id": "22008002867-6fl6sr1oelu847sm8l543or23eujn78f.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.stylish.RunnerTests"
+                "bundle_id": "com.example.stylish"
               }
             }
           ]

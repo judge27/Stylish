@@ -10,6 +10,7 @@ import 'package:stylish/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: "stylish-app-93002",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
