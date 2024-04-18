@@ -34,7 +34,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
       try {
         await FireBaseModel().createUser();
         FireBaseModel().showToast(context, message: "Success.");
-        Navigator.pushNamed(context, 'login');
+        Navigator.pushNamed(context, 'phonenumber');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           FireBaseModel().showToast(context,

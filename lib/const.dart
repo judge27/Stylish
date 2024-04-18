@@ -12,4 +12,5 @@ const String kGoogle = "assets/images/google.png";
 const String kGetstarted = "assets/images/getstarted.png";
 const String kLoginBackground = "assets/images/loginbackground.jpg";
 const String kBaseUrl = "https://student.valuxapps.com/api/";
+const String kAuth = "assets/images/auth.png";
 const Color kPrimaryColor = Colors.transparent;

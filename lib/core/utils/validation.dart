@@ -44,4 +44,19 @@ class Validation {
       }
     }
   }
-}
+
+  String? validatePhone(String? value){
+    RegExp regExp=RegExp('/(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g');
+    if (value!.isEmpty) {
+      return 'Please enter phone number';
+    } else {
+      if (!regExp.hasMatch(value)) {
+        return 'Enter valid phone number';
+      } else {
+        return null;
+      }
+    }
+  }
+
+  }
+

@@ -4,6 +4,8 @@ import 'package:stylish/features/auth/forgotpassword/view/page/forgotpassword_pa
 import 'package:stylish/features/auth/login/view/page/login_page.dart';
 import 'package:stylish/features/auth/onboarding/view/page/onboarding_page.dart';
 import 'package:stylish/features/auth/registration/view/page/registration_page.dart';
+import 'package:stylish/features/auth/verification/view/page/phonenumber_page.dart';
+import 'package:stylish/features/auth/verification/view/page/verification_page.dart';
 
 class Navigation {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -17,6 +19,12 @@ class Navigation {
       case 'forgotpassword':
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => const ForgotPasswordPage());
+      case 'otp':
+        return MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => const VerificationPage());
+      case 'phonenumber':
+        return MaterialPageRoute<dynamic>(
+            builder: (BuildContext context) => const PhoneNumberPage());
       default:
         return MaterialPageRoute<dynamic>(
             builder: (BuildContext context) => const OnboardingPage());
