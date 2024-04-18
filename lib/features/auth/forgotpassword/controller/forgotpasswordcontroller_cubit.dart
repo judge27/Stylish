@@ -29,6 +29,4 @@ class ForgotpasswordcontrollerCubit
       print("invaild inputs");
     }
   }
-
-
 }
