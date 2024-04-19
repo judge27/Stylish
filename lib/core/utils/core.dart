@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Core {
+
   // Auth button view with custom Title
-  static Container coreButton(String buttonText) {
+   Container coreButton(String buttonText) {
     return Container(
       height: 55,
-      decoration: BoxDecoration(
-          color: const Color(0xFFF83758),
-          borderRadius: BorderRadius.circular(4)),
+      decoration: boxDecoration,
       alignment: Alignment.center,
       child: Text(
         buttonText,
@@ -17,6 +16,13 @@ class Core {
       ),
     );
   }
+
+
+  // Button Decoration Object
+  BoxDecoration boxDecoration=BoxDecoration(
+  color: const Color(0xFFF83758),
+  borderRadius: BorderRadius.circular(4));
+
 
   // TextField Decoration Object
   InputDecoration inputDecoration = InputDecoration(
@@ -61,4 +67,7 @@ class Core {
       ),
     ),
   );
+
+
+
 }

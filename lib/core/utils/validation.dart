@@ -1,3 +1,6 @@
+
+import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
+
 class Validation {
   // Name validation method
   String? validateName(String? input) {
@@ -44,19 +47,29 @@ class Validation {
       }
     }
   }
+  // Phone Number validation method
 
-  String? validatePhone(String? value){
-    RegExp regExp=RegExp('/(\+\d{1,3}\s?)?((\(\d{3}\)\s?)|(\d{3})(\s|-?))(\d{3}(\s|-?))(\d{4})(\s?(([E|e]xt[:|.|]?)|x|X)(\s?\d+))?/g');
+  bool validatePhone(String? value){
+    RegExp regExp=RegExp(r'^(?:[+0]9)?[0-9]{10}$');
+    bool isPhoneValidated = false;
     if (value!.isEmpty) {
-      return 'Please enter phone number';
+      return isPhoneValidated;
     } else {
-      if (!regExp.hasMatch(value)) {
-        return 'Enter valid phone number';
-      } else {
-        return null;
+      if(regExp.hasMatch(value)) {
+        isPhoneValidated = true;
+        return isPhoneValidated;
       }
+      else{
+        return isPhoneValidated;
+    }
     }
   }
 
+  //  smsCode validation method
+  String? validateVerificationCode(String? value){
+    if(value!.isEmpty) {
+      return "Please Enter The Code";
+    }
   }
+}
 

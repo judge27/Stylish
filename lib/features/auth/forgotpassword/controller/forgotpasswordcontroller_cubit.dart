@@ -14,15 +14,13 @@ class ForgotpasswordcontrollerCubit
 
   TextEditingController emailController = TextEditingController();
 
-
- Future<void> confirmForgotPassword(BuildContext context) async{
+  Future<void> confirmForgotPassword(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       try {
-        FireBaseModel.email=emailController.text;
+        FireBaseModel.email = emailController.text;
         await FireBaseModel().resetPassword();
         FireBaseModel().showToast(context, message: "Success");
-      }
-      on FirebaseAuthException catch(e){
+      } on FirebaseAuthException catch (e) {
         print(e);
       }
     } else {

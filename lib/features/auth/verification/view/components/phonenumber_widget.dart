@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/utils/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
 
@@ -26,7 +25,7 @@ class PhoneNumberWidget extends StatelessWidget {
                   final VerificationcontrollerCubit controller =
                       VerificationcontrollerCubit();
                   return Form(
-                      key: controller.formKey,
+                      key: controller.phoneKey,
                       child: Container(
                         height: context.height,
                         child: Column(
@@ -58,9 +57,15 @@ class PhoneNumberWidget extends StatelessWidget {
                             ),
                             // Phonefield with country code
                             IntlPhoneField(
+                              autofocus: true,
+                              initialCountryCode: 'EG',
+                              validator: (value) {
+                                Validation().validatePhone(
+                                    controller.phoneController.text);
+                              },
                               controller: controller.phoneController,
                               onChanged: (data) {
-                                controller.temp = data.countryCode;
+                                controller.countrycode = data.countryCode;
                                 controller.phoneController.text =
                                     data as String;
                               },
@@ -78,7 +83,7 @@ class PhoneNumberWidget extends StatelessWidget {
                                 controller.confirmSubmitPhoneNumber(
                                     context: context, controller: controller);
                               },
-                              child: Core.coreButton("Submit"),
+                              child: Core().coreButton("Submit"),
                             ),
                             const Spacer(
                               flex: 5,

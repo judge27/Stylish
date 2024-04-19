@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/utils/firebase.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
 
 class BottomLoginWidget extends StatelessWidget {
@@ -25,7 +22,7 @@ class BottomLoginWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 25),
-                    child: Core.coreButton("Login"),
+                    child: Core().coreButton("Login"),
                   ));
             },
           ),

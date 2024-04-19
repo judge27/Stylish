@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/forgotpassword/controller/forgotpasswordcontroller_cubit.dart';
@@ -14,7 +14,7 @@ class ForgotPasswordWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 50),
         child: SingleChildScrollView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             child: BlocProvider<ForgotpasswordcontrollerCubit>(
               create: (context) => ForgotpasswordcontrollerCubit(),
               child: BlocBuilder<ForgotpasswordcontrollerCubit,
@@ -48,7 +48,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                         TextFieldWidget(
                           item: TextFieldModel(
                             inputDecoration: Core().inputDecoration.copyWith(
-                                prefixIcon: Icon(Icons.email),
+                                prefixIcon: const Icon(Icons.email),
                                 hintText: "Enter your email address"),
                             controller: controller.emailController,
                             keyboardType: TextInputType.emailAddress,
@@ -61,7 +61,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                         ),
                         Container(
                             child: RichText(
-                          text: TextSpan(
+                          text: const TextSpan(
                               style: TextStyle(
                                 color: Color(0xFF676767),
                                 fontSize: 17,
@@ -82,14 +82,14 @@ class ForgotPasswordWidget extends StatelessWidget {
                           maxLines: 2,
                           textAlign: TextAlign.start,
                         )),
-                        SizedBox(
+                        const SizedBox(
                           height: 55,
                         ),
                         InkWell(
-                          onTap: () async{
+                          onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core.coreButton("Submit"),
+                          child: Core().coreButton("Submit"),
                         ),
                       ],
                     ),

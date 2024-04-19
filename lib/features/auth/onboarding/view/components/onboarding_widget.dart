@@ -39,7 +39,7 @@ class OnboardingWidget extends StatelessWidget {
               ),
             ),
             body: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -49,7 +49,7 @@ class OnboardingWidget extends StatelessWidget {
                       children: List.generate(controller.body.length, (index) {
                         return Column(
                           children: [
-                            Spacer(
+                            const Spacer(
                               flex: 1,
                             ),
                             Center(
@@ -84,13 +84,13 @@ class OnboardingWidget extends StatelessWidget {
                               maxLines: 3,
                               textAlign: TextAlign.center,
                             )),
-                            Spacer(
+                            const Spacer(
                               flex: 2,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(),
+                                const SizedBox(),
                                 Positioned(
                                     child: DotsIndicator(
                                   dotsCount: 3,
@@ -98,20 +98,20 @@ class OnboardingWidget extends StatelessWidget {
                                   reversed: false,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   decorator: DotsDecorator(
-                                      size: Size.square(9),
+                                      size: const Size.square(9),
                                       activeColor: Colors.redAccent,
-                                      activeSize: Size(18.0, 9.0),
+                                      activeSize: const Size(18.0, 9.0),
                                       activeShape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                       )),
                                 )),
-                                index == controller.body.length-1
+                                index == controller.body.length - 1
                                     ? GestureDetector(
                                         onTap: () => controller.changeNextPage(
                                             index: index, context: context),
-                                        child: Text(
+                                        child: const Text(
                                           "Next",
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Color(0xFFF83758),
                                             fontFamily: "Montserrat",
                                             fontSize: 20,
@@ -119,7 +119,7 @@ class OnboardingWidget extends StatelessWidget {
                                           ),
                                         ),
                                       )
-                                    : SizedBox(),
+                                    : const SizedBox(),
                               ],
                             )
                           ],

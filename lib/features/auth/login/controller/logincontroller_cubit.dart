@@ -10,67 +10,51 @@ part 'logincontroller_state.dart';
 class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   LogincontrollerCubit() : super(LogincontrollerInitial());
 
-  GlobalKey<FormState> formKey =GlobalKey();
+  GlobalKey<FormState> formKey = GlobalKey();
 
-  TextEditingController emailController =TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
-  TextEditingController passwordController =TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-
-  void confirmLogin({required BuildContext context}) async{
-    if(formKey.currentState!.validate()){
-      FireBaseModel.email=emailController.text;
-      FireBaseModel.password=passwordController.text;
+  void confirmLogin({required BuildContext context}) async {
+    if (formKey.currentState!.validate()) {
+      FireBaseModel.email = emailController.text;
+      FireBaseModel.password = passwordController.text;
       try {
         await FireBaseModel().loginUser();
-        FireBaseModel().showToast(
-            context,
-            message: "Success.");
-        Navigator.pushNamed(
-            context, 'forgotpassword');
+        FireBaseModel().showToast(context, message: "Let's Start Our Journey.");
+        Navigator.pushNamed(context, 'getstarted');
       } on FirebaseAuthException catch (e) {
-        FireBaseModel().showToast(
-            context,
-            message:
-            'Email or Password is not Correct!');
-
+        FireBaseModel()
+            .showToast(context, message: 'Email or Password is not Correct!');
       } catch (e) {
         print(e);
       }
-     }
-    else {
+    } else {
       print("invaild inputs");
     }
   }
 
-
-
   void navTOForgotPassword({required BuildContext context}) {
-     Navigator.pushNamed(context, 'forgotpassword',);
+    Navigator.pushNamed(
+      context,
+      'forgotpassword',
+    );
   }
-
-
 
   void navTORegistration({required BuildContext context}) {
     Navigator.pushNamed(context, 'registration');
   }
 
-
-
-  Future<void> handleGoogleSignin({required BuildContext context})async{
+  Future<void> handleGoogleSignin({required BuildContext context}) async {
     await FireBaseModel().handleGoogleSignIn();
     FireBaseModel().showToast(context, message: "Success");
     navTOForgotPassword(context: context);
   }
 
-
-
-  Future<void> handleGoogleSignout({required BuildContext context})async{
+  Future<void> handleGoogleSignout({required BuildContext context}) async {
     await GoogleSignIn().signOut();
     FirebaseAuth.instance.signOut();
     FireBaseModel().showToast(context, message: "Success");
   }
-
-
- }
-
+}

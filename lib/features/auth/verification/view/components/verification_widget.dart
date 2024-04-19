@@ -1,32 +1,30 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/utils/navigation.dart';
+import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
 
 class VerificationWidget extends StatelessWidget {
-  const VerificationWidget({super.key});
-
+  const VerificationWidget({super.key, required this.controller});
+  final VerificationcontrollerCubit controller;
   @override
   Widget build(BuildContext context) {
-    var code;
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
         child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
-            child: BlocProvider<VerificationcontrollerCubit>(
-              create: (context) => VerificationcontrollerCubit(),
+            child: BlocProvider<VerificationcontrollerCubit>.value(
+              value: controller,
               child: BlocBuilder<VerificationcontrollerCubit,
                   VerificationcontrollerState>(
                 builder: (context, state) {
                   final VerificationcontrollerCubit controller =
                       VerificationcontrollerCubit();
                   return Form(
-                      key: controller.formKey,
+                      key: controller.verificationKey,
                       child: Container(
                         height: context.height,
                         child: Column(
@@ -44,7 +42,7 @@ class VerificationWidget extends StatelessWidget {
                               height: 10,
                             ),
                             const Text(
-                              "Phone Number",
+                              "Verification Code",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 30,
@@ -58,9 +56,12 @@ class VerificationWidget extends StatelessWidget {
                             ),
                             // Phonefield with country code
                             Pinput(
+                              validator: Validation().validateVerificationCode,
                               onChanged: (value) {
-                                code = value;
+                                controller.smscode = value;
                               },
+                              controller: controller.verificationController,
+                              autofocus: true,
                               pinputAutovalidateMode:
                                   PinputAutovalidateMode.onSubmit,
                               showCursor: true,
@@ -72,9 +73,9 @@ class VerificationWidget extends StatelessWidget {
                             InkWell(
                               onTap: () async {
                                 await controller.confirmVerification(
-                                    context: context, code: code);
+                                    context: context, controller: controller);
                               },
-                              child: Core.coreButton("Verifiy"),
+                              child: Core().coreButton("Verifiy"),
                             ),
                             const Spacer(
                               flex: 5,

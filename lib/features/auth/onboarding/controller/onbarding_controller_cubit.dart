@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/utils/firebase.dart';
-import 'package:stylish/features/auth/login/view/page/login_page.dart';
 import 'package:stylish/features/auth/onboarding/model/onboarding_model.dart';
 
 part 'onbarding_controller_state.dart';
@@ -34,7 +32,6 @@ class OnbardingControllerCubit extends Cubit<OnbardingControllerState> {
         pageNumber: "3"),
   ];
 
-
   void changeNextPage({var index = 0, required BuildContext context}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onboarding', true);
@@ -48,15 +45,11 @@ class OnbardingControllerCubit extends Cubit<OnbardingControllerState> {
     }
   }
 
-
-
   void changePrevPage({var index = 0}) {
     if (index != 0)
       pageController.previousPage(
-          duration: Duration(seconds: 1), curve: Curves.linear);
+          duration: const Duration(seconds: 1), curve: Curves.linear);
   }
-
-
 
   void onSkipButton(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -70,6 +63,4 @@ class OnbardingControllerCubit extends Cubit<OnbardingControllerState> {
       Navigator.pushReplacementNamed(context, 'forgotpassword');
     }
   }
-
-
 }

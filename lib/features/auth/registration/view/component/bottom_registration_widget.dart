@@ -23,13 +23,13 @@ class BottomRegistrationWidget extends StatelessWidget {
                     controller.confirmRegistration(context);
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 25),
-                    child: Core.coreButton("Create Account"),
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: Core().coreButton("Create Account"),
                   ));
             },
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 15,
         ),
         Container(
@@ -50,7 +50,7 @@ class BottomRegistrationWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () async{
+              onTap: () async {
                 await controller.handleGoogleSignin(context: context);
               },
               child: CircleAvatar(
@@ -67,7 +67,7 @@ class BottomRegistrationWidget extends StatelessWidget {
               width: 20,
             ),
             GestureDetector(
-              onTap: () async{
+              onTap: () async {
                 await controller.handleGoogleSignout(context: context);
               },
               child: CircleAvatar(

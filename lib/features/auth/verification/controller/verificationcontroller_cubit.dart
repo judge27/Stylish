@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -11,62 +11,44 @@ part 'verificationcontroller_state.dart';
 class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
   VerificationcontrollerCubit() : super(VerificationcontrollerInitial());
 
-  GlobalKey<FormState> formKey=GlobalKey();
+  GlobalKey<FormState> phoneKey = GlobalKey();
+  GlobalKey<FormState> verificationKey = GlobalKey();
 
-  TextEditingController phoneController=TextEditingController();
-  String temp='';
-  String verifiy="";
+  TextEditingController phoneController = TextEditingController();
 
+  TextEditingController verificationController = TextEditingController();
 
-  void confirmSubmitPhoneNumber({required BuildContext context,required VerificationcontrollerCubit controller}){
-    if (formKey.currentState!.validate()){
-      String phone=phoneController.text;
-      phoneController.text=temp+phone;
-      FireBaseModel.phonenumber=phoneController.text;
-      FireBaseModel().verifyPhoneNumber(context:context,controller:controller);
-      Navigator.pushNamed(context, 'otp');
+  String smscode = "";
+  String countrycode = '';
+  String message = "";
+  String verificationId = "";
 
+  void confirmSubmitPhoneNumber(
+      {required BuildContext context,
+      required VerificationcontrollerCubit controller}) async {
+    if (Validation().validatePhone(phoneController.text)) {
+      FireBaseModel.phonenumber = countrycode + phoneController.text;
+      await FireBaseModel()
+          .verifyPhoneNumber(context: context, controller: controller);
+      FireBaseModel().showToast(context, message: "Code Sent");
+      Navigator.pushNamed(context, 'otp', arguments: controller);
+    } else {
+      if (phoneController.text.isEmpty) {
+        FireBaseModel()
+            .showToast(context, message: "Please Enter Phone Number");
+      } else {
+        FireBaseModel()
+            .showToast(context, message: "Please Enter Valid Phone Number");
+      }
     }
   }
-  Future<void> confirmVerification({required BuildContext context,var code})async{
-    try {
-      FirebaseAuth auth = FirebaseAuth.instance;
-      await auth.verifyPhoneNumber(
-        phoneNumber: phoneController.text,
-        timeout: const Duration(seconds: 120),
-        codeAutoRetrievalTimeout: (String verificationId) {
-          // Auto-resolution timed out...
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          if (e.code == 'invalid-phone-number') {
-            print('The provided phone number is not valid.');
-          }
-        },
-          codeSent: (String verificationId, int? resendToken) async {
-        // Update the UI - wait for the user to enter the SMS code
-        String smsCode =code;
 
-        // Create a PhoneAuthCredential with the code
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
-
-        // Sign the user in (or link) with the credential
-        await FirebaseAuth.instance.signInWithCredential(credential);
-      },
-        verificationCompleted: (PhoneAuthCredential credential) async {
-        // ANDROID ONLY!
-
-        // Sign the user in (or link) with the auto-generated credential
-        await auth.signInWithCredential(credential);
-      },
-      );
-      Navigator.pushNamed(context, 'login');
+  Future<void> confirmVerification(
+      {required BuildContext context,
+      required VerificationcontrollerCubit controller}) async {
+    if (verificationKey.currentState!.validate()) {
+      await FireBaseModel()
+          .verifyCode(context: context, controller: controller);
     }
-    on FirebaseAuthException catch(e){
-      print(e);
-    }
-
   }
-
-
-
 }
