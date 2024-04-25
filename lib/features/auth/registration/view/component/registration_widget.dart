@@ -86,7 +86,6 @@ class RegistrationWidget extends StatelessWidget {
                   ],
                 )
                 );
-
               },
             ),
           ),
