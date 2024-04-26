@@ -30,6 +30,7 @@ class RegistrationWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+
                           // Screen title Text //Welcome Back!
                           const SizedBox(
                             width: 190,
@@ -49,7 +50,7 @@ class RegistrationWidget extends StatelessWidget {
                           ),
                           // Name TextField // Your Name
                           TextFieldWidget(
-                            item: TextFieldModel(
+                            model: TextFieldModel(
                               inputDecoration: Core().inputDecoration,
                               controller: controller.nameController,
                               keyboardType: TextInputType.name,
@@ -60,9 +61,10 @@ class RegistrationWidget extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
+
                           // Email TextField // Username or Email
                           TextFieldWidget(
-                            item: TextFieldModel(
+                            model: TextFieldModel(
                               inputDecoration: Core().inputDecoration.copyWith(
                                   prefixIcon: const Icon(Icons.email),
                                   hintText: "Username or Email"),
@@ -78,7 +80,7 @@ class RegistrationWidget extends StatelessWidget {
 
                           // Password TextField // Password
                           TextFieldWidget(
-                              item: TextFieldModel(
+                              model: TextFieldModel(
                             keyboardType: TextInputType.visiblePassword,
                             controller: controller.passwordController,
                             textInputAction: TextInputAction.done,

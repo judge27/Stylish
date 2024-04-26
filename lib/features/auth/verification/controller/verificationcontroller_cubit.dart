@@ -1,54 +1,47 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:stylish/core/utils/firebase.dart';
-import 'package:stylish/core/utils/validation.dart';
+import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
 
 part 'verificationcontroller_state.dart';
 
 class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
   VerificationcontrollerCubit() : super(VerificationcontrollerInitial());
 
-  GlobalKey<FormState> phoneKey = GlobalKey();
   GlobalKey<FormState> verificationKey = GlobalKey();
 
-  TextEditingController phoneController = TextEditingController();
-
   TextEditingController verificationController = TextEditingController();
+  String smsCode = "";
 
-  String smscode = "";
-  String countrycode = '';
-  String message = "";
-  String verificationId = "";
+  StreamController<ErrorAnimationType> errorController = StreamController();
 
-  void confirmSubmitPhoneNumber(
-      {required BuildContext context,
-      required VerificationcontrollerCubit controller}) async {
-    if (Validation().validatePhone(phoneController.text)) {
-      FireBaseModel.phonenumber = countrycode + phoneController.text;
-      await FireBaseModel()
-          .verifyPhoneNumber(context: context, controller: controller);
-      FireBaseModel().showToast(context, message: "Code Sent");
-      Navigator.pushNamed(context, 'otp', arguments: controller);
+  Future<void> confirmVerification({required BuildContext context}) async {
+    if (verificationKey.currentState!.validate()) {
+      await FireBaseModel.getInstance()
+          .verifySmsCode(context: context, smsCode: smsCode);
     } else {
-      if (phoneController.text.isEmpty) {
-        FireBaseModel()
-            .showToast(context, message: "Please Enter Phone Number");
-      } else {
-        FireBaseModel()
-            .showToast(context, message: "Please Enter Valid Phone Number");
-      }
+      FireBaseModel.getInstance()
+          .showToast(context, message: "Please Enter Full Sms Code");
     }
   }
 
-  Future<void> confirmVerification(
+  Future<void> onResendCode(
       {required BuildContext context,
-      required VerificationcontrollerCubit controller}) async {
-    if (verificationKey.currentState!.validate()) {
-      await FireBaseModel()
-          .verifyCode(context: context, controller: controller);
+      required PhonenumbercontrollerCubit phoneNumberController}) async {
+    if (FireBaseModel.getInstance().resendCode) {
+      await FireBaseModel.getInstance().verifyPhoneNumber(
+        context: context,
+        controller: phoneNumberController,
+      );
+      FireBaseModel.getInstance().showToast(context, message: "Code Resent");
+    } else {
+      FireBaseModel.getInstance()
+          .showToast(context, message: "Can't Resend Code Now");
     }
   }
 }

@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
+import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
 
@@ -21,14 +23,14 @@ class BottomLoginWidget extends StatelessWidget {
                     controller.confirmLogin(context: context);
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 25),
-                    child: Core().coreButton("Login"),
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: Core().coreButton(buttonText: "Login"),
                   ));
             },
           ),
         ),
         SizedBox(
-          height: 40,
+          height: context.height/120,
         ),
         Container(
           alignment: Alignment.center,
@@ -41,8 +43,8 @@ class BottomLoginWidget extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 25,
+        SizedBox(
+          height: context.height/20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,8 +63,8 @@ class BottomLoginWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 20,
+             SizedBox(
+              width: context.width/10,
             ),
             GestureDetector(
               onTap: () async{
@@ -78,8 +80,8 @@ class BottomLoginWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 28,
+            SizedBox(
+              width: context.width/10,
             ),
             GestureDetector(
               onTap: () {},
@@ -95,8 +97,8 @@ class BottomLoginWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 20,
+         SizedBox(
+           height: context.height/1,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,8 +114,8 @@ class BottomLoginWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 8,
+             SizedBox(
+              width: 1,
             ),
             Container(
               alignment: Alignment.center,
@@ -130,6 +132,7 @@ class BottomLoginWidget extends StatelessWidget {
                     )),
               ),
             ),
+
           ],
         ),
       ],

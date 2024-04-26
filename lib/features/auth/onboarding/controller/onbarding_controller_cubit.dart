@@ -11,8 +11,9 @@ class OnbardingControllerCubit extends Cubit<OnbardingControllerState> {
   OnbardingControllerCubit() : super(OnbardingControllerInitial());
 
   PageController pageController = PageController();
-
+  int pageIndex=0;
   List body = [
+
     OnboardingModel(
         image: kSplash1,
         title: "Choose Products",
@@ -32,35 +33,36 @@ class OnbardingControllerCubit extends Cubit<OnbardingControllerState> {
         pageNumber: "3"),
   ];
 
-  void changeNextPage({var index = 0, required BuildContext context}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('onboarding', true);
-    if (FireBaseModel().checkUserNullable()) {
-      Navigator.pushReplacementNamed(
-        context,
-        'login',
-      );
-    } else {
-      Navigator.pushReplacementNamed(context, 'forgotpassword');
+  void changeNextPage({required int index , required BuildContext context}) {
+    if(index==body.length-1){
+      onSkipButton(context);
+    }
+    else{
+    pageIndex++;
+    pageController.jumpToPage(pageIndex);
     }
   }
 
-  void changePrevPage({var index = 0}) {
-    if (index != 0)
-      pageController.previousPage(
-          duration: const Duration(seconds: 1), curve: Curves.linear);
+  void changePrevPage({int index = 0,required BuildContext context}) {
+    if (index != 0) {
+      pageIndex--;
+      pageController.jumpToPage(pageIndex);
+    }
+    else{
+      Navigator.pop(context);
+    }
   }
 
   void onSkipButton(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('onboarding', true);
-    if (FireBaseModel().checkUserNullable()) {
+    if (FireBaseModel.getInstance().checkUserNullable()) {
       Navigator.pushReplacementNamed(
         context,
         'login',
       );
     } else {
-      Navigator.pushReplacementNamed(context, 'forgotpassword');
+      Navigator.pushReplacementNamed(context, 'getstarted');
     }
   }
 }

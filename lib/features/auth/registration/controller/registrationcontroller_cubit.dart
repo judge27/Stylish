@@ -9,6 +9,7 @@ part 'registrationcontroller_state.dart';
 
 class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   RegistrationcontrollerCubit() : super(RegistrationcontrollerInitial());
+
   GlobalKey<FormState> formKey = GlobalKey();
 
   late String email;
@@ -25,47 +26,41 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   TextEditingController passwordController = TextEditingController();
 
 
-
   void confirmRegistration(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      FireBaseModel.email = emailController.text;
-      FireBaseModel.password = passwordController.text;
-      name = nameController.text;
+      FireBaseModel.getInstance().email = emailController.text;
+      FireBaseModel.getInstance().password = passwordController.text;
       try {
-        await FireBaseModel().createUser();
-        FireBaseModel().showToast(context, message: "Success.");
+        await  FireBaseModel.getInstance().createUser();
+        FireBaseModel.getInstance().showToast(context, message: "Email & Password are Registered.");
         Navigator.pushNamed(context, 'phonenumber');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          FireBaseModel().showToast(context,
+          FireBaseModel.getInstance().showToast(context,
               message: "The password provided is too weak.");
         } else if (e.code == 'email-already-in-use') {
-          FireBaseModel().showToast(context,
+          FireBaseModel.getInstance().showToast(context,
               message: "The account already exists for that email.");
         }
       } catch (e) {
         print(e);
       }
-    } else {
-      print("invaild inputs");
     }
   }
 
 
 
   Future<void> handleGoogleSignin({required BuildContext context})async{
-    await FireBaseModel().handleGoogleSignIn();
-    FireBaseModel().showToast(context, message: "Success");
-    Navigator.pushNamed(context, 'login');
+    await  FireBaseModel.getInstance().handleGoogleSignIn();
+    FireBaseModel.getInstance().showToast(context, message: "Google Signed In");
+    Navigator.pushNamed(context, 'getstarted');
   }
 
 
 
-  Future<void> handleGoogleSignout({required BuildContext context})async{
-    await GoogleSignIn().signOut();
-    FirebaseAuth.instance.signOut();
-    FireBaseModel().showToast(context, message: "Success");
+  Future<void> handleGoogleSignout({required BuildContext context}) async{
+    await FireBaseModel.getInstance().handleGoogleSignout(context: context);
+    FireBaseModel.getInstance().showToast(context, message: "Google Signed Out");
     Navigator.pop(context);
   }
-
 }

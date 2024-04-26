@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class Core {
 
   // Auth button view with custom Title
-   Container coreButton(String buttonText) {
+   Container coreButton({double? height,required String buttonText}) {
     return Container(
-      height: 55,
+      height: height??55,
       decoration: boxDecoration,
       alignment: Alignment.center,
       child: Text(

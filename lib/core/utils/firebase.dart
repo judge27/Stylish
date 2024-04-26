@@ -1,19 +1,41 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
 import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
 
 class FireBaseModel {
-  static late String name;
-  static late String email;
-  static late String password;
-  static late String phonenumber;
-  static late String code;
-  static late int token;
-  FirebaseAuth auth = FirebaseAuth.instance;
+  static FireBaseModel _instance =FireBaseModel();
+  _FireBaseModel(){}
+ final FirebaseAuth _auth = FirebaseAuth.instance;
+
+   late String name;
+
+   late String email;
+
+   late String password;
+
+   late String phonenumber;
+
+   late String verificationId = "";
+
+    bool resendCode=false;
+
+  static FireBaseModel getInstance(){
+    return _instance;
+  }
+
+  // check the user login or nullable
+  bool checkUserNullable() {
+    final user = _auth.currentUser;
+    if (user == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   //  snackBar with Custom Message
   void showToast(BuildContext context, {required String message}) {
@@ -29,7 +51,7 @@ class FireBaseModel {
 
   // Login function with email and password
   Future<void> loginUser() async {
-    final credential = await auth.signInWithEmailAndPassword(
+    final credential = await _auth.signInWithEmailAndPassword(
       email: email!,
       password: password!,
     );
@@ -37,7 +59,7 @@ class FireBaseModel {
 
   //  email and password  registration method
   Future<void> createUser() async {
-    final credential = await auth.createUserWithEmailAndPassword(
+    final credential = await _auth.createUserWithEmailAndPassword(
       email: email!,
       password: password!,
     );
@@ -49,88 +71,62 @@ class FireBaseModel {
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-    UserCredential userCredential = await auth.signInWithCredential(credential);
+    UserCredential userCredential = await _auth.signInWithCredential(credential);
   }
+
+  // google social signout method
+  Future<void> handleGoogleSignout({required BuildContext context})async{
+    await GoogleSignIn().signOut();
+    _auth.signOut();
+  }
+
 
   // send a password reset email to a user
   Future<void> resetPassword() async {
-    await auth.sendPasswordResetEmail(email: email);
+    await _auth.sendPasswordResetEmail(email: email);
   }
 
-// check the user login or nullable
-  bool checkUserNullable() {
-    final user = auth.currentUser;
-    if (user == null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
 
   // verify the phone number method
   Future<void> verifyPhoneNumber({
     required BuildContext context,
-    required VerificationcontrollerCubit controller,
+    required PhonenumbercontrollerCubit controller,
   }) async {
-    PhoneVerificationCompleted verificationCompleted =
-        (PhoneAuthCredential phoneAuthCredential) async {
-      controller.message = phoneAuthCredential.smsCode ?? "";
-      controller.verificationController.text = controller.message;
-      await auth.signInWithCredential(phoneAuthCredential);
-      showToast(context,
-          message:
-              'Phone number automatically verified and user signed in: $phoneAuthCredential');
-    };
-
-    ///This is the code snippet which [detects the code from sms automatically]
-
-    PhoneVerificationFailed verificationFailed =
-        (FirebaseAuthException authException) {
-      controller.message =
-          'Phone number verification failed. Code: ${authException.code}. '
-          'Message: ${authException.message}';
-    };
-
-    PhoneCodeSent codeSent =
-        (String verificationId, [int? forceResendingToken]) async {
-      showToast(context,
-          message: 'Please check your phone for the verification code.');
-      controller.verificationId = verificationId;
-    };
-
-    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
-        (String verificationId) {
-      controller.verificationId = verificationId;
-    };
-
     try {
-      await auth.verifyPhoneNumber(
-          phoneNumber: phonenumber,
-          timeout: const Duration(seconds: 120),
-          verificationCompleted: verificationCompleted,
-          verificationFailed: verificationFailed,
-          codeSent: codeSent,
-          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+      FireBaseModel.getInstance().showToast(context, message: "Checking...");
+      await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber:  FireBaseModel.getInstance().phonenumber,
+        verificationCompleted: (PhoneAuthCredential credential) {},
+        verificationFailed: (FirebaseAuthException e) {},
+        codeSent: (String verificationId, int? resendToken) {
+          FireBaseModel.getInstance().verificationId = verificationId;
+          FireBaseModel.getInstance().showToast(context,
+              message: 'Please check your phone for the verification code.');
+          Navigator.pushNamed(context, 'otp',arguments: controller);
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
     } catch (e) {
-      showToast(context, message: 'Time out to Verify Phone Number: $e');
+      FireBaseModel.getInstance().showToast(context, message: "Wrong Excpection");
     }
   }
 
   // verifiy smsCode method
-  Future<void> verifyCode({
+  Future<void> verifySmsCode({
     required BuildContext context,
-    required VerificationcontrollerCubit controller,
+    required String smsCode,
   }) async {
     try {
-      final PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: controller.verificationId,
-        smsCode: controller.verificationController.text,
-      );
-      final User user = (await auth.signInWithCredential(credential)).user!;
-      showToast(context, message: 'Successfully signed in UID: ${user.uid}');
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: FireBaseModel.getInstance().verificationId, smsCode: smsCode);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      Navigator.pushNamed(context, 'getstarted');
+      FireBaseModel.getInstance().showToast(context, message: "Phone Verified");
     } catch (e) {
+      FireBaseModel.getInstance().showToast(context, message: "Code is Wrong");
       print(e);
-      showToast(context, message: 'Failed to sign in');
     }
+
   }
 }
