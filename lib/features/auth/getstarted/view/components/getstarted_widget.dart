@@ -18,7 +18,7 @@ class GetStartedWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Spacer(
+                const Spacer(
                   flex: 10,
                 ),
                 Container(
@@ -45,14 +45,19 @@ class GetStartedWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Spacer(
+                const Spacer(
                   flex: 1,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Core().coreButton("Get Started"),
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, 'dashboard');
+                    },
+                    child: Core().coreButton(buttonText: "Get Started"),
+                  ),
                 ),
-                Spacer(
+                const Spacer(
                   flex: 1,
                 ),
               ],

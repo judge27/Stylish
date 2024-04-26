@@ -18,14 +18,15 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
 
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-      FireBaseModel.email = emailController.text;
-      FireBaseModel.password = passwordController.text;
+      FireBaseModel.getInstance().email = emailController.text;
+      FireBaseModel.getInstance().password = passwordController.text;
       try {
-        await FireBaseModel().loginUser();
-        FireBaseModel().showToast(context, message: "Let's Start Our Journey.");
+        await FireBaseModel.getInstance().loginUser();
+        FireBaseModel.getInstance()
+            .showToast(context, message: "Let's Start Our Journey.");
         Navigator.pushNamed(context, 'getstarted');
       } on FirebaseAuthException catch (e) {
-        FireBaseModel()
+        FireBaseModel.getInstance()
             .showToast(context, message: 'Email or Password is not Correct!');
       } catch (e) {
         print(e);
@@ -36,10 +37,7 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   }
 
   void navTOForgotPassword({required BuildContext context}) {
-    Navigator.pushNamed(
-      context,
-      'forgotpassword',
-    );
+    Navigator.pushNamed(context, 'forgotpassword',);
   }
 
   void navTORegistration({required BuildContext context}) {
@@ -47,14 +45,13 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   }
 
   Future<void> handleGoogleSignin({required BuildContext context}) async {
-    await FireBaseModel().handleGoogleSignIn();
-    FireBaseModel().showToast(context, message: "Success");
-    navTOForgotPassword(context: context);
+    await FireBaseModel.getInstance().handleGoogleSignIn();
+    FireBaseModel.getInstance().showToast(context, message: "Success");
+    Navigator.pushNamed(context,"getstarted");
   }
 
   Future<void> handleGoogleSignout({required BuildContext context}) async {
-    await GoogleSignIn().signOut();
-    FirebaseAuth.instance.signOut();
+    FireBaseModel.getInstance().handleGoogleSignout(context: context);
     FireBaseModel().showToast(context, message: "Success");
   }
 }

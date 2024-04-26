@@ -66,9 +66,11 @@ class Validation {
   }
 
   //  smsCode validation method
-  String? validateVerificationCode(String? value){
-    if(value!.isEmpty) {
+  String? validateVerificationCode(String? value) {
+    if (value!.length < 6) {
       return "Please Enter The Code";
+    } else {
+      return null;
     }
   }
 }

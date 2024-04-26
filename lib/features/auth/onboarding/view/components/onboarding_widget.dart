@@ -45,6 +45,9 @@ class OnboardingWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: PageView(
+                          onPageChanged: (index){
+                            controller.pageIndex=index;
+                            },
                       controller: controller.pageController,
                       children: List.generate(controller.body.length, (index) {
                         return Column(
@@ -90,7 +93,20 @@ class OnboardingWidget extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const SizedBox(),
+                                GestureDetector(
+                                  onTap: () => controller.changePrevPage(
+                                      index: controller.pageIndex,
+                                      context: context),
+                                  child: const Text(
+                                    "Prev",
+                                    style: TextStyle(
+                                      color: Color(0xFFF83758),
+                                      fontFamily: "Montserrat",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                                 Positioned(
                                     child: DotsIndicator(
                                   dotsCount: 3,
@@ -105,10 +121,9 @@ class OnboardingWidget extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(5),
                                       )),
                                 )),
-                                index == controller.body.length - 1
-                                    ? GestureDetector(
+                                 GestureDetector(
                                         onTap: () => controller.changeNextPage(
-                                            index: index, context: context),
+                                            index: controller.pageIndex, context: context),
                                         child: const Text(
                                           "Next",
                                           style: TextStyle(
@@ -119,7 +134,6 @@ class OnboardingWidget extends StatelessWidget {
                                           ),
                                         ),
                                       )
-                                    : const SizedBox(),
                               ],
                             )
                           ],

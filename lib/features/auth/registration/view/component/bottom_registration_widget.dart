@@ -24,7 +24,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 25),
-                    child: Core().coreButton("Create Account"),
+                    child: Core().coreButton(buttonText: "Create Account"),
                   ));
             },
           ),

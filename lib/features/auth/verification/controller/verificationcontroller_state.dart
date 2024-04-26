@@ -1,6 +1,10 @@
 part of 'verificationcontroller_cubit.dart';
 
 @immutable
-sealed class VerificationcontrollerState {}
+ class VerificationcontrollerState {
 
-final class VerificationcontrollerInitial extends VerificationcontrollerState {}
+}
+
+final class VerificationcontrollerInitial extends VerificationcontrollerState {
+}
+

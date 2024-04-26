@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/core/utils/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/forgotpassword/controller/forgotpasswordcontroller_cubit.dart';
@@ -12,7 +15,7 @@ class ForgotPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 50),
+        padding:  EdgeInsets.symmetric(horizontal: context.width/25 ,vertical:  context.height/15),
         child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: BlocProvider<ForgotpasswordcontrollerCubit>(
@@ -28,8 +31,8 @@ class ForgotPasswordWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Screen title Text //Welcome Back!
-                        const SizedBox(
-                          width: 190,
+                         SizedBox(
+                          width: context.width,
                           child: Text(
                             "Forgot password?",
                             style: TextStyle(
@@ -41,12 +44,12 @@ class ForgotPasswordWidget extends StatelessWidget {
                             overflow: TextOverflow.clip,
                           ),
                         ),
-                        const SizedBox(
-                          height: 25,
+                         SizedBox(
+                          height: context.height/15,
                         ),
                         // Email TextField // Username or Email
                         TextFieldWidget(
-                          item: TextFieldModel(
+                          model: TextFieldModel(
                             inputDecoration: Core().inputDecoration.copyWith(
                                 prefixIcon: const Icon(Icons.email),
                                 hintText: "Enter your email address"),
@@ -56,8 +59,8 @@ class ForgotPasswordWidget extends StatelessWidget {
                             validator: Validation().validateEmail,
                           ),
                         ),
-                        const SizedBox(
-                          height: 25,
+                        SizedBox(
+                          height: context.height/15,
                         ),
                         Container(
                             child: RichText(
@@ -82,14 +85,14 @@ class ForgotPasswordWidget extends StatelessWidget {
                           maxLines: 2,
                           textAlign: TextAlign.start,
                         )),
-                        const SizedBox(
-                          height: 55,
+                         SizedBox(
+                          height: context.height/15,
                         ),
                         InkWell(
                           onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core().coreButton("Submit"),
+                          child: Core().coreButton(buttonText: "Submit"),
                         ),
                       ],
                     ),
