@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>273079324502-j6scpsi2rq1mbkg1teriukvuimn2is3v.apps.googleusercontent.com</string>
+	<string>22008002867-6fl6sr1oelu847sm8l543or23eujn78f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.273079324502-j6scpsi2rq1mbkg1teriukvuimn2is3v</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>273079324502-sdh6ctr822n284tk8trqc2v0okh205vk.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.22008002867-6fl6sr1oelu847sm8l543or23eujn78f</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDa18cwwzBCO6OhecjKmeSq22TRvz7kKss</string>
+	<string>AIzaSyAnbMNsQwcWdhKOPAeoe7OvTTXyY2k-nNU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>273079324502</string>
+	<string>22008002867</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.stylish</string>
 	<key>PROJECT_ID</key>
-	<string>stylish-app-18604</string>
+	<string>stylish-app-93002</string>
 	<key>STORAGE_BUCKET</key>
-	<string>stylish-app-18604.appspot.com</string>
+	<string>stylish-app-93002.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:273079324502:ios:9cb87aaf407c1574cb50f7</string>
+	<string>1:22008002867:ios:c396e11708661d1f916646</string>
 </dict>
 </plist>

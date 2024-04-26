@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 const String kLogo = "assets/images/logo.png";
 const String kSplash1 = "assets/images/splash1.png";
 const String kSplash2 = "assets/images/splash2.png";
@@ -13,4 +12,5 @@ const String kGoogle = "assets/images/google.png";
 const String kGetstarted = "assets/images/getstarted.png";
 const String kLoginBackground = "assets/images/loginbackground.jpg";
 const String kBaseUrl = "https://student.valuxapps.com/api/";
+const String kAuth = "assets/images/auth.png";
 const Color kPrimaryColor = Colors.transparent;

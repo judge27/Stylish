@@ -34,23 +34,30 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   dio: ^5.4.1
-  firebase_core: ^2.28.0
-  firebase_auth: ^4.19.0
+  firebase_core: ^2.30.0
+  firebase_auth: ^4.19.2
   modal_progress_hud_nsn: ^0.5.1
   font_awesome_flutter: ^10.7.0
   google_sign_in: ^6.2.1
   shared_preferences: ^2.2.3
   flutter_bloc: ^8.1.5
   sqflite: ^2.3.3
-  flutter_native_splash: ^2.4.0
+  fluttertoast: ^8.2.5
+  dots_indicator: ^2.1.1
+  intl_phone_field: ^3.2.0
+  pinput: ^4.0.0
+  firebase_app_check: ^0.2.2+2
+  pin_code_fields: ^8.0.1
+  flutter_launcher_icons: ^0.13.1
+  device_preview: ^1.1.0
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -63,7 +70,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -91,10 +97,10 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
 flutter_launcher_icons:
   ios: true
   android: true
-  image_path_android: "assets/logo/playstore.png"
-  image_path_ios: "assets/logo/playstore.png"
-  adaptive_icon_background: "assets/logo/playstore.png"
-  adaptive_icon_foreground: "assets/logo/playstore.png"
+  image_path: "assets/images/logo.png"
+  adaptive_icon_background: "#ffffff"

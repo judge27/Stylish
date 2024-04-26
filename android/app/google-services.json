@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "273079324502",
-    "project_id": "stylish-app-18604",
-    "storage_bucket": "stylish-app-18604.appspot.com"
+    "project_number": "939129675686",
+    "project_id": "stylish-temp",
+    "storage_bucket": "stylish-temp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:273079324502:android:c8491042137872a1cb50f7",
+        "mobilesdk_app_id": "1:939129675686:android:338335e6aff00cd0b07967",
         "android_client_info": {
           "package_name": "com.example.stylish"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "273079324502-sdh6ctr822n284tk8trqc2v0okh205vk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.stylish",
-            "certificate_hash": "ac85aff0f25ea541c0a4034e19c539a0b4c1306e"
-          }
-        },
-        {
-          "client_id": "273079324502-qkocdhmg61vtif1oio9keil0osaratli.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC_GoUWQi8gKbiFHRQT2kct3WODGwCkjQU"
+          "current_key": "AIzaSyAJ7Emay75h_9AU0snh_2XuhSHr5Rl66g8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "273079324502-qkocdhmg61vtif1oio9keil0osaratli.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "273079324502-5kveo380lg05g7v67dis8j7ji42889u5.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.stylish.RunnerTests"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

@@ -4,21 +4,25 @@ import 'package:flutter/material.dart';
 class Core {
 
   // Auth button view with custom Title
-  static Container coreButton (String buttonText) {
+   Container coreButton({double? height,required String buttonText}) {
     return Container(
-      height: 55,
-      decoration: BoxDecoration(
-          color: const Color(0xFFF83758),
-          borderRadius: BorderRadius.circular(4)
-      ),
+      height: height??55,
+      decoration: boxDecoration,
       alignment: Alignment.center,
-      child: Text(buttonText, style: const TextStyle(
-          color: Colors.white,
-          fontSize: 22,
-          fontWeight: FontWeight.w700
-      ),),
+      child: Text(
+        buttonText,
+        style: const TextStyle(
+            color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
+      ),
     );
   }
+
+
+  // Button Decoration Object
+  BoxDecoration boxDecoration=BoxDecoration(
+  color: const Color(0xFFF83758),
+  borderRadius: BorderRadius.circular(4));
+
 
   // TextField Decoration Object
   InputDecoration inputDecoration = InputDecoration(
@@ -63,5 +67,7 @@ class Core {
       ),
     ),
   );
+
+
 
 }

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
-import 'package:stylish/features/auth/login/view/components/bottom_login_widget.dart';
 import 'package:stylish/features/auth/login/view/components/login_body_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key, required this.name});
+  const LoginPage({super.key});
 
-  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +15,7 @@ class LoginPage extends StatelessWidget {
         builder: (context, state) {
           final LogincontrollerCubit controller =LogincontrollerCubit();
           return Scaffold(
-            bottomNavigationBar: BottomLoginWidget(controller: controller,),
-            body: LoginBodyWidget(name: name, controller:controller,),
+            body: LoginBodyWidget(controller:controller,),
           );
         },
       ),

@@ -1,11 +1,13 @@
 plugins {
-    id "com.android.application"
+    id 'com.android.application'
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
 }
 
 dependencies {
-
     implementation 'androidx.multidex:multidex:2.0.1'
 }
 def localProperties = new Properties()

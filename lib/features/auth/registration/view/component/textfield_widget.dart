@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  TextFieldWidget({super.key,required this.item});
-  TextFieldModel item;
+  TextFieldWidget({super.key, required this.model});
+  TextFieldModel model;
   @override
-  // String? hintText;
 
   Widget build(BuildContext context) {
+
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onChanged: item.onChange,
-      controller: item.controller,
-      validator:item.validator,
-      decoration: item.inputDecoration,
-      keyboardType: item.keyboardType,
-      textInputAction: item.textInputAction,
+      onChanged: model.onChange,
+      controller: model.controller,
+      validator: model.validator,
+      decoration: model.inputDecoration,
+      keyboardType: model.keyboardType,
+      textInputAction: model.textInputAction,
       style: textStyle,
-      obscureText: item.obscureText,
-      inputFormatters: item.inputFormaters,
+      obscureText: model.obscureText,
+      inputFormatters: model.inputFormaters,
     );
   }
 
