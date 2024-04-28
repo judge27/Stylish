@@ -33,11 +33,7 @@ class DashboardBodyWidget extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.w700
               ),) ,),
-              Center(child:Text("Profile",style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700
-              ),) ,),
+              UserPage()
             ],
           );
         },
