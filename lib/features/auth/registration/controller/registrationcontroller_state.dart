@@ -4,3 +4,4 @@ part of 'registrationcontroller_cubit.dart';
 sealed class RegistrationcontrollerState {}
 
 final class RegistrationcontrollerInitial extends RegistrationcontrollerState {}
+final class RegistrationcontrollerSecured extends RegistrationcontrollerState {}

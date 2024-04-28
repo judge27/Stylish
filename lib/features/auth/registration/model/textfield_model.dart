@@ -9,6 +9,7 @@ class TextFieldModel {
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
   bool obscureText;
+  TextStyle? textStyle;
   List<TextInputFormatter>? inputFormaters;
   TextFieldModel({
     this.inputFormaters,
@@ -18,6 +19,7 @@ class TextFieldModel {
     this.inputDecoration,
     this.controller,
     this.onChange,
+    this.textStyle,
     this.validator,
   });
 }

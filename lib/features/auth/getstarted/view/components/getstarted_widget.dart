@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/context_extension.dart';
+import 'package:stylish/core/utils/extensions.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/getstarted/view/components/background_image_widget.dart';
 
@@ -52,9 +52,9 @@ class GetStartedWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, 'dashboard');
+                      context.pushTo= 'dashboard';
                     },
-                    child: Core().coreButton(buttonText: "Get Started"),
+                    child: Core.instance.coreButton(buttonText: "Get Started"),
                   ),
                 ),
                 const Spacer(

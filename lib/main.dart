@@ -1,14 +1,9 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stylish/core/utils/firebase.dart';
 import 'package:stylish/core/utils/navigation.dart';
-import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dart';
-import 'package:stylish/features/auth/verification/view/page/verification_page.dart';
-import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';
 import 'package:stylish/firebase_options.dart';
 
 
@@ -25,7 +20,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Navigation.onGenerateRoute,
       onGenerateInitialRoutes: (_) => onBoarding
-          ? FireBaseModel().checkUserNullable()
+          ? FireBaseModel.instance.checkUserNullable()
               ? // Login Page
               Navigation.routes2
               : // GetStarted Page
@@ -35,9 +30,10 @@ void main() async {
 
   );
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => materialApp, // Wrap your app
-    ),
+    // DevicePreview(
+    //   enabled: false,
+    //   builder: (context) =>
+      materialApp, // Wrap your app
+    //),
   );
 }
