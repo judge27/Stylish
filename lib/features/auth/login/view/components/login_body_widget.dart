@@ -38,10 +38,10 @@ class LoginBodyWidget extends StatelessWidget {
                                 // Screen title Text //Welcome Back!
                                 SizedBox(
                                   width: context.width,
-                                  child: const Text(
+                                  child: Text(
                                     "Welcome Back!",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Theme.of(context).hintColor,
                                       fontSize: 43,
                                       fontWeight: FontWeight.w800,
                                     ),
@@ -52,7 +52,7 @@ class LoginBodyWidget extends StatelessWidget {
                                 SizedBox(
                                   height: context.height / 48,
                                 ),
-                                                         // Email TextField // Username or Email
+                                // Email TextField // Username or Email
                                 TextFieldWidget(
                                   model: TextFieldModel(
                                     inputDecoration: Core()
@@ -88,10 +88,10 @@ class LoginBodyWidget extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     TextButton(
-                                      child: const Text(
+                                      child: Text(
                                         "Forgot Password?",
                                         style: TextStyle(
-                                          color: Color(0xFFF83758),
+                                          color: Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 18,
                                         ),
@@ -112,7 +112,7 @@ class LoginBodyWidget extends StatelessWidget {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(bottom: 25),
-                                    child: Core().coreButton(buttonText: "Login"),
+                                    child: Core().coreButton(buttonText: "Login" , context: context),
                                   ),
                                 ),
                                 SizedBox(
@@ -120,10 +120,10 @@ class LoginBodyWidget extends StatelessWidget {
                                 ),
                                 Container(
                                   alignment: Alignment.center,
-                                  child: const Text(
+                                  child: Text(
                                     "- OR Continue with -",
                                     style: TextStyle(
-                                      color: Color(0xFF575757),
+                                      color: Theme.of(context).splashColor,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -143,7 +143,7 @@ class LoginBodyWidget extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 33.5,
                                         backgroundColor:
-                                            const Color(0xFFF83758),
+                                        Theme.of(context).primaryColor,
                                         child: CircleAvatar(
                                           radius: 32,
                                           backgroundColor:
@@ -163,7 +163,7 @@ class LoginBodyWidget extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 33.5,
                                         backgroundColor:
-                                            const Color(0xFFF83758),
+                                        Theme.of(context).primaryColor,
                                         child: CircleAvatar(
                                           radius: 32,
                                           backgroundColor:
@@ -180,7 +180,7 @@ class LoginBodyWidget extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 33.5,
                                         backgroundColor:
-                                            const Color(0xFFF83758),
+                                        Theme.of(context).primaryColor,
                                         child: CircleAvatar(
                                           radius: 32,
                                           backgroundColor:
@@ -199,10 +199,10 @@ class LoginBodyWidget extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.center,
-                                      child: const Text(
+                                      child: Text(
                                         "Create An Account",
                                         style: TextStyle(
-                                          color: Color(0xFF575757),
+                                          color : Theme.of(context).splashColor,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -218,9 +218,9 @@ class LoginBodyWidget extends StatelessWidget {
                                           Navigator.pushNamed(
                                               context, 'registration');
                                         },
-                                        child: const Text("Sign Up",
+                                        child: Text("Sign Up",
                                             style: TextStyle(
-                                              color: Color(0xFFF83758),
+                                              color: Theme.of(context).primaryColor,
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
                                               decoration:

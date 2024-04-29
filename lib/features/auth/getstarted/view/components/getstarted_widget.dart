@@ -54,7 +54,7 @@ class GetStartedWidget extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, 'dashboard');
                     },
-                    child: Core().coreButton(buttonText: "Get Started"),
+                    child: Core().coreButton(buttonText: "Get Started", context: context),
                   ),
                 ),
                 const Spacer(

@@ -1,29 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
 class Core {
 
   // Auth button view with custom Title
-   Container coreButton({double? height,required String buttonText}) {
+   Container coreButton({double? height,required String buttonText, required BuildContext context}) {
     return Container(
       height: height??55,
-      decoration: boxDecoration,
+      decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(4)),
       alignment: Alignment.center,
       child: Text(
         buttonText,
-        style: const TextStyle(
-            color: Colors.white, fontSize: 22, fontWeight: FontWeight.w700),
+        style: TextStyle(
+            color: Theme.of(context).hoverColor , fontSize: 22, fontWeight: FontWeight.w700),
       ),
     );
   }
-
-
-  // Button Decoration Object
-  BoxDecoration boxDecoration=BoxDecoration(
-  color: const Color(0xFFF83758),
-  borderRadius: BorderRadius.circular(4));
-
-
   // TextField Decoration Object
   InputDecoration inputDecoration = InputDecoration(
     hintText: "Your Name",

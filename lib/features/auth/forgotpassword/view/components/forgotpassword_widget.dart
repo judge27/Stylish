@@ -92,7 +92,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                           onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core().coreButton(buttonText: "Submit"),
+                          child: Core().coreButton(buttonText: "Submit", context: context),
                         ),
                       ],
                     ),

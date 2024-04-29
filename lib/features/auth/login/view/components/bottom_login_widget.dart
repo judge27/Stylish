@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
@@ -24,7 +23,7 @@ class BottomLoginWidget extends StatelessWidget {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 25),
-                    child: Core().coreButton(buttonText: "Login"),
+                    child: Core().coreButton(buttonText: "Login",  context: context),
                   ));
             },
           ),
@@ -34,10 +33,10 @@ class BottomLoginWidget extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.center,
-          child: const Text(
+          child: Text(
             "- OR Continue with -",
             style: TextStyle(
-              color: Color(0xFF575757),
+              color: Theme.of(context).splashColor,
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
@@ -55,7 +54,7 @@ class BottomLoginWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 33.5,
-                backgroundColor: const Color(0xFFF83758),
+                backgroundColor: Theme.of(context).primaryColor,
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
@@ -72,7 +71,7 @@ class BottomLoginWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 33.5,
-                backgroundColor: const Color(0xFFF83758),
+                backgroundColor: Theme.of(context).primaryColor,
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
@@ -87,7 +86,7 @@ class BottomLoginWidget extends StatelessWidget {
               onTap: () {},
               child: CircleAvatar(
                 radius: 33.5,
-                backgroundColor: const Color(0xFFF83758),
+                backgroundColor: Theme.of(context).primaryColor,
                 child: CircleAvatar(
                   radius: 32,
                   backgroundColor: const Color(0xFFFFFFFF),
@@ -105,10 +104,10 @@ class BottomLoginWidget extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              child: const Text(
+              child: Text(
                 "Create An Account",
                 style: TextStyle(
-                  color: Color(0xFF575757),
+                  color: Theme.of(context).splashColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -123,9 +122,9 @@ class BottomLoginWidget extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(context, 'registration');
                 },
-                child: const Text("Sign Up",
+                child: Text("Sign Up",
                     style: TextStyle(
-                      color: Color(0xFFF83758),
+                      color: Theme.of(context).primaryColor,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline,

@@ -134,7 +134,7 @@ class VerificationWidget extends StatelessWidget {
                                     context: context,
                                     phoneNumberController: controller2);
                               },
-                              child: Core().coreButton(buttonText: "   Resend   "),
+                              child: Core().coreButton(buttonText: "   Resend   ", context: context),
                             ),
                             const Spacer(
                               flex: 5,
