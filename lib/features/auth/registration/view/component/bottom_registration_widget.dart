@@ -35,10 +35,10 @@ class BottomRegistrationWidget extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.center,
-                      child: const Text(
+                      child: Text(
                         "- OR Continue with -",
                         style: TextStyle(
-                          color: Color(0xFF575757),
+                          color: Theme.of(context).splashColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
@@ -57,7 +57,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                           },
                           child: CircleAvatar(
                             radius: 33.5,
-                            backgroundColor: const Color(0xFFF83758),
+                            backgroundColor: Theme.of(context).primaryColor,
                             child: CircleAvatar(
                               radius: 32,
                               backgroundColor: const Color(0xFFFFFFFF),
@@ -75,7 +75,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                           },
                           child: CircleAvatar(
                             radius: 33.5,
-                            backgroundColor: const Color(0xFFF83758),
+                            backgroundColor: Theme.of(context).primaryColor,
                             child: CircleAvatar(
                               radius: 32,
                               backgroundColor: const Color(0xFFFFFFFF),
@@ -90,7 +90,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                           onTap: () {},
                           child: CircleAvatar(
                             radius: 33.5,
-                            backgroundColor: const Color(0xFFF83758),
+                            backgroundColor: Theme.of(context).primaryColor,
                             child: CircleAvatar(
                               radius: 32,
                               backgroundColor: const Color(0xFFFFFFFF),
@@ -106,10 +106,10 @@ class BottomRegistrationWidget extends StatelessWidget {
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          child: const Text(
+                          child: Text(
                             "I Already Have an Account",
                             style: TextStyle(
-                              color: Color(0xFF575757),
+                              color: Theme.of(context).splashColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
@@ -124,9 +124,9 @@ class BottomRegistrationWidget extends StatelessWidget {
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: const Text("Login",
+                            child: Text("Login",
                                 style: TextStyle(
-                                  color: Color(0xFFF83758),
+                                  color: Theme.of(context).primaryColor,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.underline,

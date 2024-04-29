@@ -37,10 +37,10 @@ class RegistrationWidget extends StatelessWidget {
                           // Screen title Text //Welcome Back!
                           SizedBox(
                             width: context.width,
-                            child: const Text(
+                            child: Text(
                               "Create an account",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).hintColor,
                                 fontSize: 35,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -55,12 +55,12 @@ class RegistrationWidget extends StatelessWidget {
                           TextFieldWidget(
                             model: TextFieldModel(
                                 inputDecoration:
-                                    Core.instance.authInputDecoration,
+                                    Core.instance.authInputDecoration(context),
                                 controller: controller.nameController,
                                 keyboardType: TextInputType.name,
                                 textInputAction: TextInputAction.next,
                                 validator: Validation.instance.validateName,
-                                textStyle: Core.instance.authTextStyle),
+                                ),
                           ),
                           SizedBox(
                             height: context.height / 48,
@@ -70,14 +70,14 @@ class RegistrationWidget extends StatelessWidget {
                           TextFieldWidget(
                             model: TextFieldModel(
                                 inputDecoration:
-                                    Core.instance.authInputDecoration.copyWith(
+                                    Core.instance.authInputDecoration(context).copyWith(
                                         prefixIcon: const Icon(Icons.email),
                                         hintText: "Username or Email"),
                                 controller: controller.emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 textInputAction: TextInputAction.next,
                                 validator: Validation.instance.validateEmail,
-                                textStyle: Core.instance.authTextStyle),
+                              )
                           ),
                           SizedBox(
                             height: context.height / 48,
@@ -90,7 +90,7 @@ class RegistrationWidget extends StatelessWidget {
                                   controller: controller.passwordController,
                                   textInputAction: TextInputAction.done,
                                   inputDecoration: Core
-                                      .instance.authInputDecoration
+                                      .instance.authInputDecoration(context)
                                       .copyWith(
                                     prefixIcon: const Icon(Icons.lock),
                                     hintText: "Password",
@@ -108,7 +108,7 @@ class RegistrationWidget extends StatelessWidget {
                                   obscureText: controller.obscurePassword,
                                   validator:
                                       Validation.instance.validatePassword,
-                                  textStyle: Core.instance.authTextStyle)),
+                              )),
                           SizedBox(
                             height: context.height / 45,
                           ),
