@@ -5,7 +5,6 @@ import 'package:stylish/features/auth/login/view/page/login_page.dart';
 import 'package:stylish/features/auth/onboarding/view/page/onboarding_page.dart';
 import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/view/page/registration_page.dart';
-import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
 import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dart';
 import 'package:stylish/features/auth/verification/view/page/verification_page.dart';
 import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:stylish/core/utils/extensions.dart';
 import 'package:stylish/core/utils/firebase.dart';
 
 part 'logincontroller_state.dart';
@@ -10,48 +10,50 @@ part 'logincontroller_state.dart';
 class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   LogincontrollerCubit() : super(LogincontrollerInitial());
 
+  // key object of the login page form
   GlobalKey<FormState> formKey = GlobalKey();
 
+
+  // controller object of email textField
   TextEditingController emailController = TextEditingController();
 
+  // controller object of password textField
   TextEditingController passwordController = TextEditingController();
 
+  // password showen & hiden variable
+  bool obscurePassword = true;
+
+  // Show & Hide Password Method
+  void togglePassword(){
+    obscurePassword = !obscurePassword;
+    emit(LogincontrollerSecured());
+  }
+
+
+  // Login User Method
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-      FireBaseModel.getInstance().email = emailController.text;
-      FireBaseModel.getInstance().password = passwordController.text;
+      FireBaseModel.instance.email = emailController.text;
+      FireBaseModel.instance.password = passwordController.text;
       try {
-        await FireBaseModel.getInstance().loginUser();
-        FireBaseModel.getInstance()
-            .showToast(context, message: "Let's Start Our Journey.");
-        Navigator.pushNamed(context, 'getstarted');
+        await FireBaseModel.instance.loginUser(context: context);
       } on FirebaseAuthException catch (e) {
-        FireBaseModel.getInstance()
-            .showToast(context, message: 'Email or Password is not Correct!');
+        context.showToastMessage = 'Email or Password is not Correct!';
       } catch (e) {
         print(e);
       }
-    } else {
-      print("invaild inputs");
     }
   }
 
-  void navTOForgotPassword({required BuildContext context}) {
-    Navigator.pushNamed(context, 'forgotpassword',);
-  }
 
-  void navTORegistration({required BuildContext context}) {
-    Navigator.pushNamed(context, 'registration');
-  }
 
+  // Login With Google Account Method
   Future<void> handleGoogleSignin({required BuildContext context}) async {
-    await FireBaseModel.getInstance().handleGoogleSignIn();
-    FireBaseModel.getInstance().showToast(context, message: "Success");
-    Navigator.pushNamed(context,"getstarted");
+    await FireBaseModel.instance.handleGoogleSignIn(context: context);
   }
 
+  // Logout From Google Account Method
   Future<void> handleGoogleSignout({required BuildContext context}) async {
-    FireBaseModel.getInstance().handleGoogleSignout(context: context);
-    FireBaseModel().showToast(context, message: "Success");
+    await FireBaseModel.instance.handleGoogleSignout(context: context);
   }
 }

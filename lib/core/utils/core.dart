@@ -1,13 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class Core {
+  static Core instance = Core._init();
+
+  Core._init();
 
   // Auth button view with custom Title
-   Container coreButton({double? height,required String buttonText}) {
+  Container coreButton({double? height, required String buttonText,BoxDecoration? decoration}) {
     return Container(
-      height: height??55,
-      decoration: boxDecoration,
+      height: height ?? 55,
+      decoration: decoration??=boxDecoration,
       alignment: Alignment.center,
       child: Text(
         buttonText,
@@ -17,15 +23,12 @@ class Core {
     );
   }
 
-
   // Button Decoration Object
-  BoxDecoration boxDecoration=BoxDecoration(
-  color: const Color(0xFFF83758),
-  borderRadius: BorderRadius.circular(4));
+  BoxDecoration boxDecoration = BoxDecoration(
+      color: const Color(0xFFF83758), borderRadius: BorderRadius.circular(4));
 
-
-  // TextField Decoration Object
-  InputDecoration inputDecoration = InputDecoration(
+  // Auth TextField Decoration Object
+  InputDecoration authInputDecoration = InputDecoration(
     hintText: "Your Name",
     errorStyle: const TextStyle(
       fontSize: 16,
@@ -68,6 +71,28 @@ class Core {
     ),
   );
 
+  // auth textField Style Object
+  TextStyle authTextStyle = const TextStyle(
+    color: Color(0xFF676767),
+    fontSize: 16,
+  );
 
+  // User TextField Decoration Object
+  InputDecoration userInputDecoration = const InputDecoration(
+    contentPadding: EdgeInsets.only(bottom: 8),
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    labelText: "Full Name",
+    labelStyle: TextStyle(
+        fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+    hintStyle: TextStyle(
+        fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+    errorStyle: TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w800,
+    ),
+  );
 
+  // user textField Style Object
+  TextStyle userTextStyle = const TextStyle(
+      color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700);
 }

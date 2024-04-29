@@ -1,12 +1,10 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/context_extension.dart';
+import 'package:stylish/core/utils/extensions.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
-import 'package:stylish/features/auth/login/view/components/bottom_login_widget.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
@@ -17,223 +15,108 @@ class LoginBodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(),
-        child: SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: BlocProvider<LogincontrollerCubit>.value(
-                value: controller,
-                child: BlocBuilder<LogincontrollerCubit, LogincontrollerState>(
-                    builder: (context, state) {
-                  return Form(
-                      key: controller.formKey,
+        padding: EdgeInsets.symmetric(horizontal: context.width / 25),
+        child: BlocProvider<LogincontrollerCubit>.value(
+            value: controller,
+            child: BlocBuilder<LogincontrollerCubit, LogincontrollerState>(
+                builder: (context, state) {
+              return Form(
+                  key: controller.formKey,
+                  child: SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
                       child: Container(
                           height: context.height,
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: context.height/24,
-                                ),
-                                // Screen title Text //Welcome Back!
-                                SizedBox(
-                                  width: context.width,
-                                  child: const Text(
-                                    "Welcome Back!",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 43,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.clip,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: context.height / 10,
+                              ),
+                              // Screen title Text //Welcome Back!
+                              SizedBox(
+                                width: context.width,
+                                child: const Text(
+                                  "Welcome Back!",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 43,
+                                    fontWeight: FontWeight.w800,
                                   ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.clip,
                                 ),
-                                SizedBox(
-                                  height: context.height / 48,
-                                ),
-                                                         // Email TextField // Username or Email
-                                TextFieldWidget(
-                                  model: TextFieldModel(
-                                    inputDecoration: Core()
-                                        .inputDecoration
-                                        .copyWith(
-                                            prefixIcon: const Icon(Icons.email),
-                                            hintText: "Username or Email"),
-                                    controller: controller.emailController,
-                                    keyboardType: TextInputType.emailAddress,
-                                    textInputAction: TextInputAction.next,
-                                    validator: Validation().validateEmail,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: context.height / 48,
-                                ),
-                                // Password TextField // Password
-                                TextFieldWidget(
-                                    model: TextFieldModel(
-                                  controller: controller.passwordController,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  textInputAction: TextInputAction.done,
-                                  inputDecoration: Core()
-                                      .inputDecoration
+                              ),
+                              SizedBox(
+                                height: context.height / 36,
+                              ),
+                              // Email TextField // Username or Email
+                              TextFieldWidget(
+                                model: TextFieldModel(
+                                  inputDecoration: Core.instance.authInputDecoration
                                       .copyWith(
-                                          prefixIcon: const Icon(Icons.lock),
-                                          hintText: "Password"),
-                                  obscureText: true,
-                                  validator: Validation().validatePassword,
-                                )),
-                                // Forgot Password TextButton
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    TextButton(
-                                      child: const Text(
-                                        "Forgot Password?",
-                                        style: TextStyle(
-                                          color: Color(0xFFF83758),
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        controller.navTOForgotPassword(
-                                            context: context);
-                                      },
-                                    ),
-                                  ],
+                                          prefixIcon: const Icon(Icons.email),
+                                          hintText: "Username or Email"),
+                                  controller: controller.emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                  validator: Validation.instance.validateEmail,
+                                  textStyle:Core.instance.authTextStyle
                                 ),
-                                SizedBox(
-                                  height: context.height / 48,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    controller.confirmLogin(context: context);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 25),
-                                    child: Core().coreButton(buttonText: "Login"),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: context.height / 32,
-                                ),
-                                Container(
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    "- OR Continue with -",
-                                    style: TextStyle(
-                                      color: Color(0xFF575757),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
+                              ),
+                              SizedBox(
+                                height: context.height / 36,
+                              ),
+                              // Password TextField // Password
+                              TextFieldWidget(
+                                  model: TextFieldModel(
+                                controller: controller.passwordController,
+                                keyboardType: TextInputType.visiblePassword,
+                                textInputAction: TextInputAction.done,
+                                inputDecoration:
+                                    Core.instance.authInputDecoration.copyWith(
+                                  prefixIcon: const Icon(Icons.lock),
+                                  hintText: "Password",
+                                  suffixIcon: InkWell(
+                                    onTap: controller.togglePassword,
+                                    child: Icon(
+                                      controller.obscurePassword
+                                          ? CupertinoIcons.eye_fill
+                                          : CupertinoIcons.eye_slash_fill,
+                                      color: Colors.black54,
+                                      size: 24,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: context.height / 48,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () async {
-                                        await controller.handleGoogleSignin(
-                                            context: context);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 33.5,
-                                        backgroundColor:
-                                            const Color(0xFFF83758),
-                                        child: CircleAvatar(
-                                          radius: 32,
-                                          backgroundColor:
-                                              const Color(0xFFFFFFFF),
-                                          child: Image.asset(kGoogle),
-                                        ),
+                                obscureText: controller.obscurePassword,
+                                validator: Validation.instance.validatePassword,
+                                textStyle:Core.instance.authTextStyle
+                              )),
+                              Row(
+                                children: [
+                                  const Spacer(),
+                                  InkWell(
+                                    onTap: () {
+                                      context.pushTo = "forgotpassword";
+                                    },
+                                    // Forgot Password TextButton
+                                    child: const Text(
+                                      "Forgot Password?",
+                                      style: TextStyle(
+                                        color: Color(0xFFF83758),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 18,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: context.width / 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        await controller.handleGoogleSignout(
-                                            context: context);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 33.5,
-                                        backgroundColor:
-                                            const Color(0xFFF83758),
-                                        child: CircleAvatar(
-                                          radius: 32,
-                                          backgroundColor:
-                                              const Color(0xFFFFFFFF),
-                                          child: Image.asset(kApple),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: context.width / 10,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {},
-                                      child: CircleAvatar(
-                                        radius: 33.5,
-                                        backgroundColor:
-                                            const Color(0xFFF83758),
-                                        child: CircleAvatar(
-                                          radius: 32,
-                                          backgroundColor:
-                                              const Color(0xFFFFFFFF),
-                                          child: Image.asset(kFacebook),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                 SizedBox(
-                                  height: context.height/48,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: const Text(
-                                        "Create An Account",
-                                        style: TextStyle(
-                                          color: Color(0xFF575757),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                     SizedBox(
-                                      width: context.width/16,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Navigator.pushNamed(
-                                              context, 'registration');
-                                        },
-                                        child: const Text("Sign Up",
-                                            style: TextStyle(
-                                              color: Color(0xFFF83758),
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                            )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: context.height/8,)
-                              ],
-                          )));
-                }))));
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: context.height / 48,
+                              ),
+                            ],
+                          ))));
+            })));
     //
     //                 ],
     //               ),

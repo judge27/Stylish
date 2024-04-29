@@ -1,7 +1,10 @@
 
-import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
-
 class Validation {
+
+  static Validation instance = Validation._init();
+
+  Validation._init();
+
   // Name validation method
   String? validateName(String? input) {
     final RegExp alphaExp = RegExp('[a-zA-Z]');
@@ -73,5 +76,6 @@ class Validation {
       return null;
     }
   }
+
 }
 

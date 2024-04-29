@@ -1,66 +1,76 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
+import 'package:stylish/core/utils/extensions.dart';
 import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/database_users_data.dart';
 
 part 'registrationcontroller_state.dart';
 
 class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   RegistrationcontrollerCubit() : super(RegistrationcontrollerInitial());
 
+  // key object of the registrationPage form
   GlobalKey<FormState> formKey = GlobalKey();
 
-  late String email;
-
-  late String name;
-
-  late String password;
-
-
+  // controller object of name textField
   TextEditingController nameController = TextEditingController();
 
+  // controller object of email textField
   TextEditingController emailController = TextEditingController();
 
+  // controller object of password textField
   TextEditingController passwordController = TextEditingController();
 
+  // password showen & hiden variable
+  bool obscurePassword = true;
 
+  // Show & Hide Password Method
+  void togglePassword(){
+    obscurePassword = !obscurePassword;
+    emit(RegistrationcontrollerSecured());
+  }
+
+  // Register User Method
   void confirmRegistration(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      FireBaseModel.getInstance().email = emailController.text;
-      FireBaseModel.getInstance().password = passwordController.text;
+      FireBaseModel.instance.email = emailController.text;
+      FireBaseModel.instance.password = passwordController.text;
+      FireBaseModel.instance.name=nameController.text;
       try {
-        await  FireBaseModel.getInstance().createUser();
-        FireBaseModel.getInstance().showToast(context, message: "Email & Password are Registered.");
-        Navigator.pushNamed(context, 'phonenumber');
+        await (await DatabaseUsersData.getInstance).insert(
+            name: nameController.text,
+            email: emailController.text,
+            password: passwordController.text);
+         await FireBaseModel.instance.createUser(context: context);
+        log("*********${nameController.text}****************");
+        log("*********${emailController.text}****************");
+        log("*********${passwordController.text}****************");
+        log("*********inserted  sucessfully****************");
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          FireBaseModel.getInstance().showToast(context,
-              message: "The password provided is too weak.");
+          context.showToastMessage = "The password provided is too weak.";
         } else if (e.code == 'email-already-in-use') {
-          FireBaseModel.getInstance().showToast(context,
-              message: "The account already exists for that email.");
+          context.showToastMessage =
+              "The account already exists for that email.";
         }
       } catch (e) {
         print(e);
       }
     }
   }
-
-
-
-  Future<void> handleGoogleSignin({required BuildContext context})async{
-    await  FireBaseModel.getInstance().handleGoogleSignIn();
-    FireBaseModel.getInstance().showToast(context, message: "Google Signed In");
-    Navigator.pushNamed(context, 'getstarted');
+  // Register With Google Account Method
+  Future<void> handleGoogleSignin({required BuildContext context}) async {
+    await FireBaseModel.instance.handleGoogleSignIn(context: context);
+  }
+  // Logout From Google Account Method
+  Future<void> handleGoogleSignout({required BuildContext context}) async {
+    await FireBaseModel.instance.handleGoogleSignout(context: context);
   }
 
 
 
-  Future<void> handleGoogleSignout({required BuildContext context}) async{
-    await FireBaseModel.getInstance().handleGoogleSignout(context: context);
-    FireBaseModel.getInstance().showToast(context, message: "Google Signed Out");
-    Navigator.pop(context);
-  }
 }
