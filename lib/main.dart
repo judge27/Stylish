@@ -11,6 +11,7 @@ import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/navigation.dart';
 import 'package:stylish/core/firebase/firebase_options.dart';
 import 'package:stylish/core/theme/apptheme_cubit.dart';
+import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dart';
 import 'features/auth/onboarding/view/page/onboarding_page.dart';
 
 void main() async {
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
                   Navigation.routes3
                       : // Onboarding Page
                   Navigation.routes,
-                );
+                 );
               }
               else {
                return MaterialApp(
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
                   Navigation.routes3
                       : // Onboarding Page
                   Navigation.routes,
-                );
+
+               );
               }
         }));
   }

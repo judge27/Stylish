@@ -54,7 +54,7 @@ class LoginBodyWidget extends StatelessWidget {
                               // Email TextField // Username or Email
                               TextFieldWidget(
                                 model: TextFieldModel(
-                                  inputDecoration: Core.instance.authInputDecoration
+                                  inputDecoration: Core.instance.authInputDecoration(context)
                                       .copyWith(
                                           prefixIcon: const Icon(Icons.email),
                                           hintText: "Username or Email"),
@@ -62,7 +62,6 @@ class LoginBodyWidget extends StatelessWidget {
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   validator: Validation.instance.validateEmail,
-                                  textStyle:Core.instance.authTextStyle
                                 ),
                               ),
                               SizedBox(
@@ -75,7 +74,7 @@ class LoginBodyWidget extends StatelessWidget {
                                 keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.done,
                                 inputDecoration:
-                                    Core.instance.authInputDecoration.copyWith(
+                                    Core.instance.authInputDecoration(context).copyWith(
                                   prefixIcon: const Icon(Icons.lock),
                                   hintText: "Password",
                                   suffixIcon: InkWell(
@@ -91,7 +90,6 @@ class LoginBodyWidget extends StatelessWidget {
                                 ),
                                 obscureText: controller.obscurePassword,
                                 validator: Validation.instance.validatePassword,
-                                textStyle:Core.instance.authTextStyle
                               )),
                               SizedBox(height: 5,),
                               Row(

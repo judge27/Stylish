@@ -30,10 +30,10 @@ class PhoneNumberWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                             Text(
                               "Mobile Number",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).hintColor,
                                 fontSize: 35,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -41,12 +41,12 @@ class PhoneNumberWidget extends StatelessWidget {
                               overflow: TextOverflow.clip,
                             ),
                             const SizedBox(height: 20,),
-                            const SizedBox(
+                             SizedBox(
                               width: 350,
                               child: Text(
                                 "Please enter your mobile phone Number",
                                 style: TextStyle(
-                                  color: Color(0xffB3B3B3),
+                                  color: Theme.of(context).splashColor,
                                   fontSize: 21,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -71,10 +71,10 @@ class PhoneNumberWidget extends StatelessWidget {
                                 controller.phoneController.text =
                                     data as String;
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                   labelText: "Phone Number",
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(),
+                                    borderSide: BorderSide(color: Theme.of(context).primaryColor),
                                   )),
                             ),
                             const Spacer(
