@@ -43,25 +43,28 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
 
     if (formKey.currentState!.validate()) {
       try {
+
       final userCredential=await FireBaseModel.instance
             .registerWithEmailAndPassword(context: context,
             email: emailController.text.trim(),
             password: passwordController.text.trim()
         );
-      print("************************** Hello World1 **************************");
 
       final UserModel userModel=UserModel(
           id: userCredential.user!.uid.toString(),
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-          profilePicture: 'assets/images/default_avatar.png',
+          profilePicture: '',
           phoneNumber: '',
       );
-      print("************************** Hello World2 **************************");
+
+      FireBaseModel.instance.name=nameController.text;
+      FireBaseModel.instance.email=emailController.text;
+      FireBaseModel.instance.password=passwordController.text;
+      FireBaseModel.instance.constImage= '';
 
       await FirebaseUsersData.getInstance.saveUserRecord(userModel);
-      print("************************** Hello World5 **************************");
 
       context.showToastMessage = "Accepted Registration.";
         Navigator.pushNamed(context, Routes.PHONE_NUMBER);
@@ -70,12 +73,6 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
 
       }
     }
-
-
-    // await (await DatabaseUsersData.getInstance).insert(
-    //     name: nameController.text,
-    //     email: emailController.text,
-    //     password: passwordController.text);
   }
 
   // Register With Google Account Method

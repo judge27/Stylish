@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
@@ -46,12 +45,12 @@ class UserItemWidget extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   radius: 64,
-                                  backgroundImage: AssetImage(controller
+                                  backgroundImage: NetworkImage(controller
                                       .user.profilePicture
                                       .toString()),
                                 ),
                                 InkWell(
-                                    onTap: controller.getImage,
+                                    onTap: () =>controller.getImageUrl(),
                                     child: const CircleAvatar(
                                       radius: 20,
                                       child: CircleAvatar(

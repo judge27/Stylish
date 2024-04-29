@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:path/path.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
-import 'package:stylish/features/dashboard/modules/users/model/repo/database_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
 
@@ -18,6 +19,7 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
   UsercontrollerCubit() : super(UserLoading()) {
     init();
   }
+  final storage= FirebaseStorage.instance;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
@@ -37,11 +39,6 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
 
   final firebaseUserData = FirebaseUsersData.getInstance;
 
-  void getImage() async {
-    FireBaseModel.instance.image =
-        await FireBaseModel.instance.pickImage(source: ImageSource.gallery);
-    emit(UserImage());
-  }
 
   // Show & Hide Password Method
   void togglePassword() {
@@ -53,16 +50,26 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
   Future<void> init() async {
     emit(UserLoading());
     try {
+      user.profilePicture='';
       user = await firebaseUserData.fetech();
+      await getImageUrl();
       nameController.text = user.name;
       emailController.text = user.email;
       passwordController.text = user.password;
+      print("****************"+nameController.text+"****************");
+      print("****************"+emailController.text+"****************");
+      print("****************"+passwordController.text+"****************");
       emit(UserLoaded());
     } catch (_) {
       user = UserModel.empty();
     }
   }
-
+  Future<void> getImageUrl() async{
+    final ref = storage.ref().child('default_avatar.png');
+    final url= await ref.getDownloadURL();
+    user.profilePicture=url;
+    FireBaseModel.instance.constImage=user.profilePicture;
+  }
   Future<void> onSave({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
       if (user.name == nameController.text &&
@@ -74,13 +81,14 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
           'Name': nameController.text,
           'Email': emailController.text,
           'Password': passwordController.text,
-          'ProfilePicture': 'assets/images/default_avatar.png'
+          'ProfilePicture': user.profilePicture,
+          'PhoneNumber':FireBaseModel.instance.phonenumber
         };
         await FirebaseUsersData.getInstance.updateSingleField(model);
         user.name = nameController.text;
         user.password = passwordController.text;
         user.email = emailController.text;
-        user.profilePicture = 'assets/images/default_avatar.png';
+        user.phoneNumber=FireBaseModel.instance.phonenumber;
         context.showToastMessage = "Data Updated Successfully";
       }
     }
@@ -91,7 +99,6 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
       FirebaseUsersData.getInstance.delete(id: auth!.uid.toString());
       context.showToastMessage="User Deleted";
       context.pushTo=Routes.LOGIN;
-
     }
     catch(_){
 
