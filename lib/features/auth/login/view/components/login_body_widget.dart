@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
@@ -98,7 +99,7 @@ class LoginBodyWidget extends StatelessWidget {
                                   const Spacer(),
                                   InkWell(
                                     onTap: () {
-                                      context.pushTo = "forgotpassword";
+                                      context.pushTo = Routes.FORGOT_PASSWORD;
                                     },
                                     // Forgot Password TextButton
                                     child:  Text(

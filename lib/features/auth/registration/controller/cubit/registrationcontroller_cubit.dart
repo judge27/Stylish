@@ -55,7 +55,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-          profilePicture: 'assets/images/jordan3.png',
+          profilePicture: 'assets/images/default_avatar.png',
           phoneNumber: '',
       );
       print("************************** Hello World2 **************************");
@@ -64,7 +64,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
       print("************************** Hello World5 **************************");
 
       context.showToastMessage = "Accepted Registration.";
-        Navigator.pushNamed(context, Routes.GETSTARTED);
+        Navigator.pushNamed(context, Routes.PHONE_NUMBER);
       }
       catch(_){
 
