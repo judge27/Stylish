@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/features/auth/registration/controller/registrationcontroller_cubit.dart';
+import 'package:stylish/features/auth/registration/controller/cubit/registrationcontroller_cubit.dart';
 
 class BottomRegistrationWidget extends StatelessWidget {
   const BottomRegistrationWidget({super.key, required this.controller});
@@ -28,7 +28,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                         controller.confirmRegistration(context);
                       },
                       child: Core.instance
-                          .coreButton(buttonText: "Create Account"),
+                          .coreButton(buttonText: "Create Account",context: context),
                     ),
                     SizedBox(
                       height: context.height / 48,

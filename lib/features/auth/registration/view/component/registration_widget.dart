@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/registration/controller/registrationcontroller_cubit.dart';
+import 'package:stylish/features/auth/registration/controller/cubit/registrationcontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
@@ -98,8 +98,8 @@ class RegistrationWidget extends StatelessWidget {
                                       onTap: controller.togglePassword,
                                       child: Icon(
                                         controller.obscurePassword
-                                            ? CupertinoIcons.eye_fill
-                                            : CupertinoIcons.eye_slash_fill,
+                                            ? CupertinoIcons.eye_slash_fill
+                                            : CupertinoIcons.eye_fill,
                                         color: Colors.black54,
                                         size: 24,
                                       ),

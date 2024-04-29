@@ -4,9 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/database_users_data.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
+import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
+
+import '../../../../../core/navigation/routes.dart';
 
 part 'registrationcontroller_state.dart';
 
@@ -29,48 +33,58 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   bool obscurePassword = true;
 
   // Show & Hide Password Method
-  void togglePassword(){
+  void togglePassword() {
     obscurePassword = !obscurePassword;
     emit(RegistrationcontrollerSecured());
   }
 
   // Register User Method
   void confirmRegistration(BuildContext context) async {
+
     if (formKey.currentState!.validate()) {
-      FireBaseModel.instance.email = emailController.text;
-      FireBaseModel.instance.password = passwordController.text;
-      FireBaseModel.instance.name=nameController.text;
       try {
-        await (await DatabaseUsersData.getInstance).insert(
-            name: nameController.text,
-            email: emailController.text,
-            password: passwordController.text);
-         await FireBaseModel.instance.createUser(context: context);
-        log("*********${nameController.text}****************");
-        log("*********${emailController.text}****************");
-        log("*********${passwordController.text}****************");
-        log("*********inserted  sucessfully****************");
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          context.showToastMessage = "The password provided is too weak.";
-        } else if (e.code == 'email-already-in-use') {
-          context.showToastMessage =
-              "The account already exists for that email.";
-        }
-      } catch (e) {
-        print(e);
+      final userCredential=await FireBaseModel.instance
+            .registerWithEmailAndPassword(context: context,
+            email: emailController.text.trim(),
+            password: passwordController.text.trim()
+        );
+      print("************************** Hello World1 **************************");
+
+      final UserModel userModel=UserModel(
+          id: userCredential.user!.uid.toString(),
+          name: nameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+          profilePicture: 'assets/images/jordan3.png',
+          phoneNumber: '',
+      );
+      print("************************** Hello World2 **************************");
+
+      await FirebaseUsersData.getInstance.saveUserRecord(userModel);
+      print("************************** Hello World5 **************************");
+
+      context.showToastMessage = "Accepted Registration.";
+        Navigator.pushNamed(context, Routes.GETSTARTED);
+      }
+      catch(_){
+
       }
     }
+
+
+    // await (await DatabaseUsersData.getInstance).insert(
+    //     name: nameController.text,
+    //     email: emailController.text,
+    //     password: passwordController.text);
   }
+
   // Register With Google Account Method
   Future<void> handleGoogleSignin({required BuildContext context}) async {
     await FireBaseModel.instance.handleGoogleSignIn(context: context);
   }
+
   // Logout From Google Account Method
   Future<void> handleGoogleSignout({required BuildContext context}) async {
     await FireBaseModel.instance.handleGoogleSignout(context: context);
   }
-
-
-
 }

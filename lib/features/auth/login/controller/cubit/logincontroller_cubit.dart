@@ -2,8 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/firebase/firebase.dart';
+import 'package:stylish/core/navigation/routes.dart';
 
 part 'logincontroller_state.dart';
 
@@ -33,14 +34,16 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   // Login User Method
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-      FireBaseModel.instance.email = emailController.text;
-      FireBaseModel.instance.password = passwordController.text;
       try {
-        await FireBaseModel.instance.loginUser(context: context);
-      } on FirebaseAuthException catch (e) {
-        context.showToastMessage = 'Email or Password is not Correct!';
-      } catch (e) {
-        print(e);
+        final userCredentials = await FireBaseModel.instance.
+        loginWithEmailAndPassword(context: context, email: emailController.text.trim(),
+            password: passwordController.text.trim()
+        );
+        context.pushTo=Routes.GETSTARTED;
+
+      }
+      catch (_) {
+        context.showToastMessage="Wrong Inputs";
       }
     }
   }

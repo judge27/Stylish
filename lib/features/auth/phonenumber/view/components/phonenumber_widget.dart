@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
+import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
 
 
 class PhoneNumberWidget extends StatelessWidget {
@@ -85,7 +85,7 @@ class PhoneNumberWidget extends StatelessWidget {
                                 controller.confirmSubmitPhoneNumber(
                                     context: context,phoneNumberController: controller);
                               },
-                              child: Core.instance.coreButton(buttonText: "Submit"),
+                              child: Core.instance.coreButton(buttonText: "Submit",context: context),
                             ),
                             const Spacer(
                               flex: 5,

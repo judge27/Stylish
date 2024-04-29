@@ -4,7 +4,8 @@ abstract class ParentUsersData {
   Future<void> insert(
       {required String name, required String email, required String password});
 
-  Future<void> delete({required int id});
-  Future<List<UserModel>> fetech();
+  Future<void> delete({required String id});
+  Future<UserModel> fetech();
+  Future<void> update({required UserModel userModel});
 
 }

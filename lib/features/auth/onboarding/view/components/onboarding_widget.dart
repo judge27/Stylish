@@ -1,6 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:stylish/features/auth/onboarding/controller/onboarding_controller_cubit.dart';
+import 'package:stylish/features/auth/onboarding/controller/cubit/onboarding_controller_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingWidget extends StatelessWidget {

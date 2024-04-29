@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
+import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
@@ -36,10 +36,10 @@ class LoginBodyWidget extends StatelessWidget {
                               // Screen title Text //Welcome Back!
                               SizedBox(
                                 width: context.width,
-                                child: const Text(
+                                child:  Text(
                                   "Welcome Back!",
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Theme.of(context).hintColor,
                                     fontSize: 43,
                                     fontWeight: FontWeight.w800,
                                   ),
@@ -81,8 +81,8 @@ class LoginBodyWidget extends StatelessWidget {
                                     onTap: controller.togglePassword,
                                     child: Icon(
                                       controller.obscurePassword
-                                          ? CupertinoIcons.eye_fill
-                                          : CupertinoIcons.eye_slash_fill,
+                                          ? CupertinoIcons.eye_slash_fill
+                                          : CupertinoIcons.eye_fill,
                                       color: Colors.black54,
                                       size: 24,
                                     ),
@@ -92,6 +92,7 @@ class LoginBodyWidget extends StatelessWidget {
                                 validator: Validation.instance.validatePassword,
                                 textStyle:Core.instance.authTextStyle
                               )),
+                              SizedBox(height: 5,),
                               Row(
                                 children: [
                                   const Spacer(),
@@ -100,11 +101,11 @@ class LoginBodyWidget extends StatelessWidget {
                                       context.pushTo = "forgotpassword";
                                     },
                                     // Forgot Password TextButton
-                                    child: const Text(
+                                    child:  Text(
                                       "Forgot Password?",
                                       style: TextStyle(
-                                        color: Color(0xFFF83758),
-                                        fontWeight: FontWeight.w400,
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w900,
                                         fontSize: 18,
                                       ),
                                     ),

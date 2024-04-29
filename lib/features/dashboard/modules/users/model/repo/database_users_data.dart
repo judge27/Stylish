@@ -43,7 +43,7 @@ class DatabaseUsersData extends ParentUsersData {
 
 
   @override
-  Future<void> delete({required Comparable<num> id}) async{
+  Future<void> delete({required String id}) async{
     await _database.delete('user',where: 'id=?',whereArgs: [id]);
   }
 
@@ -55,7 +55,17 @@ class DatabaseUsersData extends ParentUsersData {
   }
 
   @override
-  Future<List<UserModel>> fetech()async {
-    return (await _database.query('user')).map((e) => UserModel.fromJson(e)).toList();
+  Future<UserModel> fetech() {
+    // TODO: implement fetech
+    throw UnimplementedError();
   }
+
+  @override
+  Future<void> update({required UserModel userModel}) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+
+
+
 }
