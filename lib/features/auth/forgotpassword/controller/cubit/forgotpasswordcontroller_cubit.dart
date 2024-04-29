@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/firebase/firebase.dart';
 
 part 'forgotpasswordcontroller_state.dart';
 
@@ -24,7 +24,7 @@ class ForgotpasswordcontrollerCubit
       try {
         FireBaseModel.instance.email = emailController.text;
         await FireBaseModel.instance.resetPassword();
-        context.showToastMessage = "Success";
+        context.showToastMessage = "Email Sent";
       } on FirebaseAuthException catch (e) {
         context.showToastMessage = e.toString();
       }

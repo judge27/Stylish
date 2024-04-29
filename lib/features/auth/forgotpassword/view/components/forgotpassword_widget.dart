@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/forgotpassword/controller/forgotpasswordcontroller_cubit.dart';
+import 'package:stylish/features/auth/forgotpassword/controller/cubit/forgotpasswordcontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
@@ -93,7 +93,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                           onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core.instance.coreButton(buttonText: "Submit"),
+                          child: Core.instance.coreButton(buttonText: "Submit",context: context),
                         ),
                       ],
                     ),

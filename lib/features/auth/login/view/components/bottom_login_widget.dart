@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/features/auth/login/controller/logincontroller_cubit.dart';
+import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
 
 class BottomLoginWidget extends StatelessWidget {
   const BottomLoginWidget({super.key, required this.controller});
@@ -26,17 +27,17 @@ class BottomLoginWidget extends StatelessWidget {
                       onTap: () {
                         controller.confirmLogin(context: context);
                       },
-                         child: Core.instance.coreButton(buttonText: "Login"),
+                         child: Core.instance.coreButton(buttonText: "Login",context: context),
                       ),
                       SizedBox(
                         height: context.height / 24,
                       ),
                       Container(
                         alignment: Alignment.center,
-                        child: const Text(
+                        child:  Text(
                           "- OR Continue with -",
                           style: TextStyle(
-                            color: Color(0xFF575757),
+                            color:  Theme.of(context).splashColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
@@ -56,7 +57,7 @@ class BottomLoginWidget extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 33.5,
                               backgroundColor:
-                              const Color(0xFFF83758),
+                              Theme.of(context).primaryColor,
                               child: CircleAvatar(
                                 radius: 32,
                                 backgroundColor:
@@ -76,7 +77,7 @@ class BottomLoginWidget extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 33.5,
                               backgroundColor:
-                              const Color(0xFFF83758),
+                              Theme.of(context).primaryColor,
                               child: CircleAvatar(
                                 radius: 32,
                                 backgroundColor:
@@ -93,7 +94,7 @@ class BottomLoginWidget extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 33.5,
                               backgroundColor:
-                              const Color(0xFFF83758),
+                              Theme.of(context).primaryColor,
                               child: CircleAvatar(
                                 radius: 32,
                                 backgroundColor:
@@ -112,10 +113,10 @@ class BottomLoginWidget extends StatelessWidget {
                         children: [
                           Container(
                             alignment: Alignment.center,
-                            child: const Text(
+                            child:  Text(
                               "Create An Account",
                               style: TextStyle(
-                                color: Color(0xFF575757),
+                                color:Theme.of(context).splashColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -129,11 +130,11 @@ class BottomLoginWidget extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, 'registration');
+                                    context, Routes.SIGN_UP);
                               },
-                              child: const Text("Sign Up",
+                              child:  Text("Sign Up",
                                   style: TextStyle(
-                                    color: Color(0xFFF83758),
+                                    color: Theme.of(context).primaryColor,
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     decoration:

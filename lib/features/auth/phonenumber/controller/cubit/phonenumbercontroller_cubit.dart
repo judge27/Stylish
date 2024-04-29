@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
 
 part 'phonenumbercontroller_state.dart';

@@ -6,49 +6,54 @@ class Validation {
   Validation._init();
 
   // Name validation method
-  String? validateName(String? input) {
-    final RegExp alphaExp = RegExp('[a-zA-Z]');
-    if (alphaExp.hasMatch(input!)) {
-      return null;
-    } else {
-      return 'Only Alphabets are allowed in a username';
+  String? validateName(String? value) {
+    if(value==null || value.isEmpty){
+      return 'Password is required.';
     }
+    if (!value.contains(RegExp(r'[A-Z]'))) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    return null;
   }
 
   // Email validation method
   String? validateEmail(String? value) {
-    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
-        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
-        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
-        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
-        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
-        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
-        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
-    final regex = RegExp(pattern);
-    if (value!.isEmpty) {
-      return 'Please enter Email';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter a valid email address';
-      } else {
-        return null;
-      }
+
+    if(value==null || value.isEmpty){
+      return 'Email is required.';
     }
+
+    const pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+
+    final regex = RegExp(pattern);
+
+    if (!regex.hasMatch(value)) {
+      return 'Invalid email address.';
+   }
+    return null;
+
   }
 
   // Password validation method
   String? validatePassword(String? value) {
-    RegExp regex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-    if (value!.isEmpty) {
-      return 'Please enter password';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter valid password';
-      } else {
-        return null;
-      }
+
+    if(value==null || value.isEmpty){
+      return 'Password is required.';
     }
+
+    if(value.length<6) {
+      return 'Password must be at least 6 characters long.';
+    }
+    if (!value.contains(RegExp(r'[A-Z]'))) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!value.contains(RegExp(r'[0-9]'))) {
+      return 'Password must contain at least one number';
+    }
+    if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return 'Password must contain at least one special character';
+    }
+    return null;
   }
   // Phone Number validation method
 
@@ -71,7 +76,7 @@ class Validation {
   //  smsCode validation method
   String? validateVerificationCode(String? value) {
     if (value!.length < 6) {
-      return "Please Enter The Code";
+      return "Code is Required";
     } else {
       return null;
     }

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
-import 'package:stylish/core/utils/extensions.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
-import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
+import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
+import 'package:stylish/features/auth/verification/controller/cubit/verificationcontroller_cubit.dart';
 
 class VerificationWidget extends StatelessWidget {
   const VerificationWidget({super.key, required this.controller2});
@@ -130,7 +130,7 @@ class VerificationWidget extends StatelessWidget {
                                     context: context,
                                     phoneNumberController: controller2);
                               },
-                              child: Core.instance.coreButton(buttonText: "   Resend   "),
+                              child: Core.instance.coreButton(buttonText: "   Resend   ",context: context),
                             ),
                             const Spacer(
                               flex: 5,

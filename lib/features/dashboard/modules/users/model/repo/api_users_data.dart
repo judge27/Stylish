@@ -12,7 +12,7 @@ class ApiUsersData extends ParentUsersData {
 
 
   @override
-  Future<void> delete({required int id}) {
+  Future<void> delete({required String id}) {
     // TODO: implement delete
     throw UnimplementedError();
   }
@@ -26,9 +26,16 @@ class ApiUsersData extends ParentUsersData {
   }
 
   @override
-  Future<List<UserModel>> fetech() {
+  Future<UserModel> fetech() {
     // TODO: implement fetech
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> update({required UserModel userModel}) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+
   
 }

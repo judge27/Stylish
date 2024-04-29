@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/utils/core.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
-import 'package:stylish/features/dashboard/modules/users/controller/usercontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
 
 class UserItemWidget extends StatelessWidget {
   const UserItemWidget({
@@ -41,15 +41,16 @@ class UserItemWidget extends StatelessWidget {
                     ),
                     Center(
                       child: Stack(alignment: Alignment.bottomRight, children: [
-                        FireBaseModel.instance.image == null
+                        controller.user.profilePicture == null
                             ? const CircleAvatar(
                                 radius: 64,
                                 backgroundImage: AssetImage(
                                     "assets/images/default_avatar.png"),
                               )
-                            :  CircleAvatar(
+                            : CircleAvatar(
                                 radius: 64,
-                                backgroundImage:MemoryImage( FireBaseModel.instance.image!),
+                                backgroundImage:
+                                    MemoryImage(FireBaseModel.instance.image!),
                               ),
                         InkWell(
                             onTap: controller.getImage,
@@ -114,8 +115,8 @@ class UserItemWidget extends StatelessWidget {
                                 onTap: controller.togglePassword,
                                 child: Icon(
                                   controller.obscurePassword
-                                      ? CupertinoIcons.eye_fill
-                                      : CupertinoIcons.eye_slash_fill,
+                                      ? CupertinoIcons.eye_slash_fill
+                                      : CupertinoIcons.eye_fill,
                                   color: Colors.black54,
                                   size: 24,
                                 ),
@@ -131,17 +132,14 @@ class UserItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Core.instance.coreButton(
-                            buttonText: "    Cancel     ",
-                            decoration: Core.instance.boxDecoration
-                                .copyWith(color: Colors.black)),
+                            buttonText: "    Cancel     ",context: context
+                            ),
                         InkWell(
-                          onTap:()=> controller.onSave(context: context),
+                          onTap: () => controller.saveUserRecord(context: context),
                           child: Core.instance.coreButton(
-                              buttonText: "      Save       ",
-                              decoration: Core.instance.boxDecoration
-                                  .copyWith(color: Colors.green)),
+                              buttonText: "      Save       ",context: context),
                         ),
-                         ],
+                      ],
                     )
                   ],
                 ),

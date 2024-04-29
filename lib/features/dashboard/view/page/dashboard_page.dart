@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/features/dashboard/controller/dashboardcontroller_cubit.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
+import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/view/components/dashboard_body_widget.dart';
 import 'package:stylish/features/dashboard/view/components/dashboard_bottom_widget.dart';
 
@@ -24,7 +25,7 @@ class DashboardPage extends StatelessWidget {
               actions: [
                 Padding(padding: EdgeInsets.only(right: 10),
                 child: InkWell(
-                  onTap:()=> context.pushTo='registration',
+                  onTap:()=> context.pushTo=Routes.SIGN_UP,
                   child:Icon(CupertinoIcons.add,color: Colors.black,size: 30,),
                 ),
                 )

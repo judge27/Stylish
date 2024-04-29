@@ -2,8 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stylish/const.dart';
-import 'package:stylish/core/utils/extensions.dart';
-import 'package:stylish/core/utils/firebase.dart';
+import 'package:stylish/core/constants/constants.dart';
+import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/firebase/firebase.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/auth/onboarding/model/onboarding_model.dart';
 
 part 'onboarding_controller_state.dart';
@@ -60,12 +62,13 @@ class OnboardingControllerCubit extends Cubit<OnboardingControllerState> {
 
   // skip button method
   void onSkipButton(BuildContext context) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('onboarding', true);
+    sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences!.setBool('onboarding', true);
     if (FireBaseModel.instance.checkUserNullable()) {
-      context.pushTo = 'login';
+      context.pushTo = Routes.LOGIN;
     } else {
-      context.pushTo = 'getstarted';
+      context.pushTo = Routes.GETSTARTED;
     }
+
   }
 }
