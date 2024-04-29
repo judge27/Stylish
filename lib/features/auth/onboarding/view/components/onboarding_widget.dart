@@ -1,6 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:stylish/features/auth/onboarding/controller/onbarding_controller_cubit.dart';
+import 'package:stylish/features/auth/onboarding/controller/cubit/onboarding_controller_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingWidget extends StatelessWidget {
@@ -10,11 +10,11 @@ class OnboardingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<OnbardingControllerCubit>(
-        create: (context) => OnbardingControllerCubit(),
-        child: BlocBuilder<OnbardingControllerCubit, OnbardingControllerState>(
+    return BlocProvider<OnboardingControllerCubit>(
+        create: (context) => OnboardingControllerCubit(),
+        child: BlocBuilder<OnboardingControllerCubit, OnboardingControllerState>(
             builder: (context, state) {
-          OnbardingControllerCubit controller = OnbardingControllerCubit();
+          OnboardingControllerCubit controller = context.read<OnboardingControllerCubit>();
           return Scaffold(
             appBar: AppBar(
               title: Row(
@@ -49,7 +49,7 @@ class OnboardingWidget extends StatelessWidget {
                             controller.pageIndex=index;
                             },
                       controller: controller.pageController,
-                      children: List.generate(controller.body.length, (index) {
+                      children: List.generate(controller.pages.length, (index) {
                         return Column(
                           children: [
                             const Spacer(
@@ -57,7 +57,7 @@ class OnboardingWidget extends StatelessWidget {
                             ),
                             Center(
                               child: Image.asset(
-                                controller.body[index].image,
+                                controller.pages[index].image,
                                 width: 300,
                                 height: 300,
                               ),
@@ -66,7 +66,7 @@ class OnboardingWidget extends StatelessWidget {
                               height: 10,
                             ),
                             Text(
-                              controller.body[index].title,
+                              controller.pages[index].title,
                               style: const TextStyle(
                                 color: Color(0xFF000000),
                                 fontSize: 26,

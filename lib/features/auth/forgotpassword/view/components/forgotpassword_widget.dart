@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/core/utils/context_extension.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/forgotpassword/controller/forgotpasswordcontroller_cubit.dart';
+import 'package:stylish/features/auth/forgotpassword/controller/cubit/forgotpasswordcontroller_cubit.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 
@@ -24,7 +24,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                   ForgotpasswordcontrollerState>(
                 builder: (context, state) {
                   final ForgotpasswordcontrollerCubit controller =
-                      ForgotpasswordcontrollerCubit();
+                      context.read<ForgotpasswordcontrollerCubit>();
                   return Form(
                     key: controller.formKey,
                     child: Column(
@@ -33,7 +33,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                         // Screen title Text //Welcome Back!
                          SizedBox(
                           width: context.width,
-                          child: Text(
+                          child: const Text(
                             "Forgot password?",
                             style: TextStyle(
                               color: Colors.black,
@@ -50,13 +50,14 @@ class ForgotPasswordWidget extends StatelessWidget {
                         // Email TextField // Username or Email
                         TextFieldWidget(
                           model: TextFieldModel(
-                            inputDecoration: Core().inputDecoration.copyWith(
+                            inputDecoration: Core.instance.authInputDecoration.copyWith(
                                 prefixIcon: const Icon(Icons.email),
                                 hintText: "Enter your email address"),
                             controller: controller.emailController,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.done,
-                            validator: Validation().validateEmail,
+                            validator: Validation.instance.validateEmail,
+                            textStyle: Core.instance.authTextStyle,
                           ),
                         ),
                         SizedBox(
@@ -92,7 +93,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                           onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core().coreButton(buttonText: "Submit", context: context),
+                          child: Core.instance.coreButton(buttonText: "Submit",context: context),
                         ),
                       ],
                     ),

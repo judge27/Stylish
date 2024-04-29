@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/features/auth/phonenumber/controller/phonenumbercontroller_cubit.dart';
-import 'package:stylish/features/auth/verification/controller/verificationcontroller_cubit.dart';
+import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
+import 'package:stylish/features/auth/verification/controller/cubit/verificationcontroller_cubit.dart';
 import 'package:stylish/features/auth/verification/view/components/verification_widget.dart';
 
 class VerificationPage extends StatelessWidget {
