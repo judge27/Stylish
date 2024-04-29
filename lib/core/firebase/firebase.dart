@@ -12,6 +12,7 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
 import 'firebase_options.dart';
 
@@ -137,7 +138,7 @@ class FireBaseModel {
         phoneNumber: _instance.phonenumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {},
-        codeSent: (String verificationId, int? resendToken) {
+        codeSent: (String verificationId, int? resendToken) async {
           _instance.verificationId = verificationId;
           _instance.resendCode
               ? context.showToastMessage = 'Code Resent.'
@@ -145,6 +146,11 @@ class FireBaseModel {
                   'Please check your phone for the verification code.';
           Navigator.pushNamed(context, Routes.VERIFICATION,
               arguments: controller);
+          Map<String, dynamic> model = {
+            'PhoneNumber':_instance.phonenumber,
+          };
+          await FirebaseUsersData.getInstance.updateSingleField(model);
+
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );

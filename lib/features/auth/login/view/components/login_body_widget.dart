@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
@@ -53,7 +54,8 @@ class LoginBodyWidget extends StatelessWidget {
                               // Email TextField // Username or Email
                               TextFieldWidget(
                                 model: TextFieldModel(
-                                  inputDecoration: Core.instance.authInputDecoration
+                                  textStyle: Core.instance.authTextStyle,
+                                  inputDecoration: Core.instance.authInputDecoration(context)
                                       .copyWith(
                                           prefixIcon: const Icon(Icons.email),
                                           hintText: "Username or Email"),
@@ -61,7 +63,6 @@ class LoginBodyWidget extends StatelessWidget {
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   validator: Validation.instance.validateEmail,
-                                  textStyle:Core.instance.authTextStyle
                                 ),
                               ),
                               SizedBox(
@@ -70,11 +71,12 @@ class LoginBodyWidget extends StatelessWidget {
                               // Password TextField // Password
                               TextFieldWidget(
                                   model: TextFieldModel(
+                                 textStyle: Core.instance.authTextStyle,
                                 controller: controller.passwordController,
                                 keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.done,
                                 inputDecoration:
-                                    Core.instance.authInputDecoration.copyWith(
+                                    Core.instance.authInputDecoration(context).copyWith(
                                   prefixIcon: const Icon(Icons.lock),
                                   hintText: "Password",
                                   suffixIcon: InkWell(
@@ -90,7 +92,6 @@ class LoginBodyWidget extends StatelessWidget {
                                 ),
                                 obscureText: controller.obscurePassword,
                                 validator: Validation.instance.validatePassword,
-                                textStyle:Core.instance.authTextStyle
                               )),
                               SizedBox(height: 5,),
                               Row(
@@ -98,7 +99,7 @@ class LoginBodyWidget extends StatelessWidget {
                                   const Spacer(),
                                   InkWell(
                                     onTap: () {
-                                      context.pushTo = "forgotpassword";
+                                      context.pushTo = Routes.FORGOT_PASSWORD;
                                     },
                                     // Forgot Password TextButton
                                     child:  Text(

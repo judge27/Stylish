@@ -33,10 +33,10 @@ class ForgotPasswordWidget extends StatelessWidget {
                         // Screen title Text //Welcome Back!
                          SizedBox(
                           width: context.width,
-                          child: const Text(
+                          child: Text(
                             "Forgot password?",
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(context).hintColor,
                               fontSize: 43,
                               fontWeight: FontWeight.w800,
                             ),
@@ -50,14 +50,14 @@ class ForgotPasswordWidget extends StatelessWidget {
                         // Email TextField // Username or Email
                         TextFieldWidget(
                           model: TextFieldModel(
-                            inputDecoration: Core.instance.authInputDecoration.copyWith(
+                            textStyle: Core.instance.authTextStyle,
+                            inputDecoration: Core.instance.authInputDecoration(context).copyWith(
                                 prefixIcon: const Icon(Icons.email),
                                 hintText: "Enter your email address"),
                             controller: controller.emailController,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.done,
                             validator: Validation.instance.validateEmail,
-                            textStyle: Core.instance.authTextStyle,
                           ),
                         ),
                         SizedBox(
@@ -65,9 +65,9 @@ class ForgotPasswordWidget extends StatelessWidget {
                         ),
                         Container(
                             child: RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                               style: TextStyle(
-                                color: Color(0xFF676767),
+                                color: Theme.of(context).splashColor,
                                 fontSize: 17,
                                 fontWeight: FontWeight.w400,
                               ),
@@ -75,7 +75,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                                 TextSpan(
                                   text: "* ",
                                   style: TextStyle(
-                                      color: Color(0xFFFF4B26), fontSize: 20),
+                                      color: Theme.of(context).primaryColor, fontSize: 20),
                                 ),
                                 TextSpan(
                                   text:
@@ -103,3 +103,4 @@ class ForgotPasswordWidget extends StatelessWidget {
             )));
   }
 }
+

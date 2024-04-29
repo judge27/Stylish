@@ -130,11 +130,18 @@ class UserItemWidget extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Core.instance.coreButton(
-                                buttonText: "    Cancel     ",
-                                context: context),
                             InkWell(
-                              onTap: () {},
+                              onTap: (){
+                                controller.onDelete(context: context);
+                              },
+                              child:   Core.instance.coreButton(
+                                  buttonText: "    Delete     ",
+                                  context: context),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                controller.onSave(context: context);
+                              },
                               child: Core.instance.coreButton(
                                   buttonText: "      Save       ",
                                   context: context),
