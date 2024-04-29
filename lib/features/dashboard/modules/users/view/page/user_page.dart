@@ -18,24 +18,7 @@ class UserPage extends StatelessWidget {
             return Scaffold(
               body: state is UserLoading
                   ? CircularProgressIndicator()
-                  : state is UserEmpty
-                      ? const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              CupertinoIcons.delete,
-
-                              color: Colors.black,
-                            ),
-                            Text("Empty Data",style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black
-                            ),)
-                          ],
-                        )
-                      :  const UserItemWidget(),
+                  :  const UserItemWidget(),
             );
           },
         ));

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,7 +42,7 @@ class FireBaseModel {
   String phonenumber = "";
 
   String? verificationId = "";
-
+  String constImage="";
   Uint8List? image;
 
   bool resendCode = false;
@@ -147,10 +148,13 @@ class FireBaseModel {
           Navigator.pushNamed(context, Routes.VERIFICATION,
               arguments: controller);
           Map<String, dynamic> model = {
-            'PhoneNumber':_instance.phonenumber,
+          'Name': name,
+          'Email': email,
+          'Password': password,
+          'ProfilePicture': '',
+          'PhoneNumber':_instance.phonenumber,
           };
           await FirebaseUsersData.getInstance.updateSingleField(model);
-
         },
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
