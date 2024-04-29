@@ -54,6 +54,7 @@ class LoginBodyWidget extends StatelessWidget {
                               // Email TextField // Username or Email
                               TextFieldWidget(
                                 model: TextFieldModel(
+                                  textStyle: Core.instance.authTextStyle,
                                   inputDecoration: Core.instance.authInputDecoration(context)
                                       .copyWith(
                                           prefixIcon: const Icon(Icons.email),
@@ -70,6 +71,7 @@ class LoginBodyWidget extends StatelessWidget {
                               // Password TextField // Password
                               TextFieldWidget(
                                   model: TextFieldModel(
+                                 textStyle: Core.instance.authTextStyle,
                                 controller: controller.passwordController,
                                 keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.done,

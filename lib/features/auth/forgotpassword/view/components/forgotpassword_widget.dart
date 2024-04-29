@@ -50,6 +50,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                         // Email TextField // Username or Email
                         TextFieldWidget(
                           model: TextFieldModel(
+                            textStyle: Core.instance.authTextStyle,
                             inputDecoration: Core.instance.authInputDecoration(context).copyWith(
                                 prefixIcon: const Icon(Icons.email),
                                 hintText: "Enter your email address"),

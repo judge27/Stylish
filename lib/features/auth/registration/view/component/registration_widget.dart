@@ -54,7 +54,9 @@ class RegistrationWidget extends StatelessWidget {
                           // Name TextField // Your Name
                           TextFieldWidget(
                             model: TextFieldModel(
-                                inputDecoration:
+                              textStyle: Core.instance.authTextStyle,
+
+                              inputDecoration:
                                     Core.instance.authInputDecoration(context),
                                 controller: controller.nameController,
                                 keyboardType: TextInputType.name,
@@ -69,7 +71,9 @@ class RegistrationWidget extends StatelessWidget {
                           // Email TextField // Username or Email
                           TextFieldWidget(
                             model: TextFieldModel(
-                                inputDecoration:
+                              textStyle: Core.instance.authTextStyle,
+
+                              inputDecoration:
                                     Core.instance.authInputDecoration(context).copyWith(
                                         prefixIcon: const Icon(Icons.email),
                                         hintText: "Username or Email"),
@@ -86,7 +90,9 @@ class RegistrationWidget extends StatelessWidget {
                           // Password TextField // Password
                           TextFieldWidget(
                               model: TextFieldModel(
-                                  keyboardType: TextInputType.visiblePassword,
+                                textStyle: Core.instance.authTextStyle,
+
+                                keyboardType: TextInputType.visiblePassword,
                                   controller: controller.passwordController,
                                   textInputAction: TextInputAction.done,
                                   inputDecoration: Core
