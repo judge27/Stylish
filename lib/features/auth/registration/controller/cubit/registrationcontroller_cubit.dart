@@ -55,7 +55,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-          profilePicture: '',
+          profilePicture: 'assets/images/jordan3.png',
           phoneNumber: '',
       );
       print("************************** Hello World2 **************************");
