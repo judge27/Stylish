@@ -15,3 +15,4 @@ const String kBaseUrl = "https://student.valuxapps.com/api/";
 const String kAuth = "assets/images/auth.png";
 const String kWomen= "assets/images/women.png";
 const Color kPrimaryColor = Colors.transparent;
+const String kHodiees= "assets/images/hodiees.png";

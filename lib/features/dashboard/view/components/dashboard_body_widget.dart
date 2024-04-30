@@ -7,6 +7,8 @@ import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/view/page/user_page.dart';
 
+import '../../modules/wishlist/view/page/wishlist_page.dart';
+
 class DashboardBodyWidget extends StatelessWidget {
   const DashboardBodyWidget({super.key,required this.controller});
  final DashboardcontrollerCubit controller;
@@ -28,11 +30,7 @@ class DashboardBodyWidget extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.w700
               ),) ,),
-              const Center(child:Text("Products",style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700
-              ),) ,),
+              WishlistPage(),
               UserPage(),
             ],
           );
