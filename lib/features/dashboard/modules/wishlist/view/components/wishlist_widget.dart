@@ -114,7 +114,7 @@ class WishlistWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           // Example card
-          Container(height: context.height,child:GridView.builder(itemCount: 1 ,gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder:(context,index)=>ProductCard(
+          Container(height: context.height,child:GridView.builder(itemCount: 6 ,gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder:(context,index)=>ProductCard(
             image: AssetImage(kHodiees),
             productname: 'Black Winter...',
             description: 'Autumn And Winter Casual cotton-padded jacket...',
