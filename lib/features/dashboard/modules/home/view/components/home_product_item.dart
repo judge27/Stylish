@@ -6,8 +6,8 @@ import 'package:stylish/features/dashboard/modules/home/view/page/home_page.dart
 
 import '../../../../../../const.dart';
 
-class ProductItem extends StatelessWidget {
-  const ProductItem(
+class HomeProductItem extends StatelessWidget {
+  const HomeProductItem(
       {super.key, required this.productItem,required this.itemScrollController,});
   final List<ProductModel> productItem;
   final ItemScrollController itemScrollController;
@@ -18,12 +18,12 @@ class ProductItem extends StatelessWidget {
         child: ScrollablePositionedList.builder(
           itemCount: productItem.length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) => Container(
+          itemBuilder: (_, index) => Container(
             margin: const EdgeInsets.only(right: 15),
             child: Stack(alignment: Alignment.bottomCenter, children: [
               Center(
                 child: Image.asset(
-                  productItem[index].productImage,
+                  productItem[index].productImage!,
                   fit: BoxFit.cover,
                   width: 250,
                   height: 280,
@@ -48,14 +48,14 @@ class ProductItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis),
                       ),
                       Text(
-                        productItem[index].productTitle,
+                        productItem[index].productDesc!,
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
                             overflow: TextOverflow.ellipsis),
                       ),
-                      productItem[index].isSale?SizedBox():SizedBox(height: 8,),
+                      productItem[index].isSale==1?SizedBox():SizedBox(height: 8,),
                       Text(
                         "\$${productItem[index].productCurrentPrice.toString()}",
                         style: const TextStyle(
@@ -64,7 +64,7 @@ class ProductItem extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      productItem[index].isSale?
+                      productItem[index].isSale==1?
                       Row(
                         children: [
                           Text(
@@ -107,7 +107,7 @@ class ProductItem extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            productItem[index].productDemandNum,
+                            (productItem[index].productAvailableQuantity!).toString(),
                             style: const TextStyle(
                               color: Color(0xFFA4A9B3),
                               fontSize: 10,

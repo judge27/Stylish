@@ -5,17 +5,14 @@ import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/registration/model/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 
 class HomeTopWidget extends StatelessWidget {
-  const HomeTopWidget({super.key, required this.controller});
-  final HomecontrollerCubit controller;
+  const HomeTopWidget({super.key,required this.homeTitle});
+  final String homeTitle;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: controller ,
-      child: BlocBuilder<HomecontrollerCubit, HomecontrollerState>(
-        builder: (context, state) {
-          return Column(
+    return  Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
@@ -41,7 +38,7 @@ class HomeTopWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      controller.homeTitle,
+                       homeTitle ,
                       style: TextStyle(
                           color: Theme.of(context).hintColor,
                           fontSize: 24,
@@ -114,10 +111,7 @@ class HomeTopWidget extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ]);
-        },
-      ),
-    );
+                )
+    ]);
   }
 }

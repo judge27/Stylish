@@ -7,9 +7,8 @@ import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecon
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/big_banner_item.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/category_list_item.dart';
-import 'package:stylish/features/dashboard/modules/home/view/components/product_item.dart';
+import 'package:stylish/features/dashboard/modules/home/view/components/home_product_item.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/view_all_banner.dart';
-
 import 'home_top_item.dart';
 
 class HomeWidgetItem extends StatelessWidget {
@@ -31,7 +30,7 @@ class HomeWidgetItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     HomeTopWidget(
-                      controller: controller,
+                     homeTitle: controller.homeTitle,
                     ),
                     const SizedBox(
                       height: 20,
@@ -54,7 +53,7 @@ class HomeWidgetItem extends StatelessWidget {
                     Stack(
                       alignment: Alignment.centerRight,
                       children: [
-                        ProductItem(
+                        HomeProductItem(
                           itemScrollController: controller.itemScrollController,
                           productItem: controller.products1,
                         ),
@@ -174,7 +173,7 @@ class HomeWidgetItem extends StatelessWidget {
                     Stack(
                       alignment: Alignment.centerRight,
                       children: [
-                        ProductItem(
+                        HomeProductItem(
                           itemScrollController:
                               controller.itemScrollController2,
                           productItem: controller.products2,

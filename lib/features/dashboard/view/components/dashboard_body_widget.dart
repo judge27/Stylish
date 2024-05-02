@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/cart/view/page/cart_page.dart';
 import 'package:stylish/features/dashboard/modules/home/view/page/home_page.dart';
+import 'package:stylish/features/dashboard/modules/products/view/page/products_page.dart';
 import 'package:stylish/features/dashboard/modules/users/view/page/user_page.dart';
 
 class DashboardBodyWidget extends StatelessWidget {
@@ -18,17 +20,9 @@ class DashboardBodyWidget extends StatelessWidget {
             onPageChanged:controller.onChangePage,
             children:  const [
              HomePage(),
-              Center(child:Text("Service",style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700
-              ),) ,),
-              Center(child:Text("Products",style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700
-              ),) ,),
-              UserPage(),
+             ProductsPage(),
+             CartPage(),
+             UserPage(),
             ],
           );
         },
