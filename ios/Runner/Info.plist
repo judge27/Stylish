@@ -63,5 +63,8 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		    <string>We need access to store image from your gallery</string>
+
 	</dict>
 </plist>
