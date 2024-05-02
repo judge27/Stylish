@@ -28,7 +28,6 @@ class NewProductCubit extends Cubit<NewProductState> {
     image = await picker.pickImage(source: ImageSource.camera);
     emit(NewProductInitial());
   }
-
   Future<void> addProduct(context) async {
     // DatabaseUsersData().insert(name: nameController.text, email: emailcontroller.text, password: passcontroller.text) ;
   }
