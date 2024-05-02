@@ -65,7 +65,7 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
     }
   }
   Future<void> getImageUrl() async{
-    final ref = storage.ref().child('default_avatar.png');
+    final ref = storage.ref().child('profile_avatar.png');
     final url= await ref.getDownloadURL();
     user.profilePicture=url;
     FireBaseModel.instance.constImage=user.profilePicture;

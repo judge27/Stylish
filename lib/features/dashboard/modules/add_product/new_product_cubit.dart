@@ -30,6 +30,6 @@ class NewProductCubit extends Cubit<NewProductState> {
   }
 
   Future<void> addProduct(context) async {
-    DatabaseUsersData().insert(name: nameController.text, email: emailcontroller.text, password: passcontroller.text) ;
+    // DatabaseUsersData().insert(name: nameController.text, email: emailcontroller.text, password: passcontroller.text) ;
   }
 }
