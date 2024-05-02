@@ -57,6 +57,7 @@ dependencies:
   cloud_firestore: ^4.17.2
   firebase_crashlytics: ^3.5.4
   firebase_storage: ^11.7.4
+  scrollable_positioned_list: ^0.3.8
 
 
 dev_dependencies:

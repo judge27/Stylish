@@ -22,17 +22,17 @@ class UserItemWidget extends StatelessWidget {
           return SingleChildScrollView(
               physics: const NeverScrollableScrollPhysics(),
               child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   child: Form(
                     key: controller.formKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                         Text(
                           "Edit Profile",
                           style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(context).primaryColor,
                               fontSize: 32,
                               fontWeight: FontWeight.w500),
                         ),
@@ -123,15 +123,15 @@ class UserItemWidget extends StatelessWidget {
                                 obscureText: controller.obscurePassword,
                                 validator: Validation.instance.validatePassword,
                                 textStyle: Core.instance.userTextStyle)),
-                        SizedBox(
+                        const SizedBox(
                           height: 60,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             InkWell(
-                              onTap: (){
-                                controller.onDelete(context: context);
+                              onTap: () async {
+                               await controller.onDelete(context: context);
                               },
                               child:   Core.instance.coreButton(
                                   buttonText: "    Delete     ",

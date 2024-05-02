@@ -1,11 +1,5 @@
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
 
 class Core {
   static Core instance = Core._init();
@@ -64,7 +58,7 @@ class Core {
             color: Color(0xFFA8A8A9),
           )),
       filled: true,
-      fillColor: Color(0xFFF3F3F3),
+      fillColor: const Color(0xFFF3F3F3),
       prefixIcon: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 15),
         child: Icon(
@@ -95,10 +89,12 @@ class Core {
         fontSize: 16,
         fontWeight: FontWeight.w800,
       ),
+      filled: true,
+      fillColor: Color(0xFFF3F3F3),
     );
 
     // user textField Style Object
     TextStyle userTextStyle = const TextStyle(
-        color: Colors.black, fontSize: 16, fontWeight: FontWeight.w700);
+        color: Colors.grey, fontSize: 18, fontWeight: FontWeight.bold);
   }
 

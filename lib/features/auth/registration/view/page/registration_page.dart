@@ -16,6 +16,9 @@ class RegistrationPage extends StatelessWidget {
         builder: (context, state) {
           final RegistrationcontrollerCubit controller =context.read<RegistrationcontrollerCubit>();
           return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            ),
             bottomNavigationBar: BottomRegistrationWidget(controller: controller,),
             body: RegistrationWidget(
               controller: controller,

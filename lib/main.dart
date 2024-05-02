@@ -7,12 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/models/enums/themestate.dart';
 import 'package:stylish/core/theme/themes.dart';
-import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/navigation.dart';
 import 'package:stylish/core/firebase/firebase_options.dart';
 import 'package:stylish/core/theme/apptheme_cubit.dart';
-import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dart';
-import 'features/auth/onboarding/view/page/onboarding_page.dart';
+import 'package:stylish/features/dashboard/modules/home/view/page/home_page.dart';
+
+import 'core/firebase/firebase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,14 +22,23 @@ void main() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   sharedPreferences = await SharedPreferences.getInstance();
   onBoarding = sharedPreferences!.getBool('onboarding') ?? false;
-  runApp(MyApp());
+  runApp(
+      DevicePreview(
+        enabled: false,
+        builder: (context) {
+         return const MyApp();
+        },
+      )
+      );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AppthemeCubit>(
-        create: (context) => AppthemeCubit()..chnageTheme(ThemeState.Light),
+        create: (context) => AppthemeCubit()..chnageTheme(ThemeState.Initial),
         child: BlocBuilder<AppthemeCubit, AppThemeState>(
             builder: (context, state) {
               if( state is AppLightTheme){
@@ -47,7 +56,7 @@ class MyApp extends StatelessWidget {
                   Navigation.routes3
                       : // Onboarding Page
                   Navigation.routes,
-                 );
+                );
               }
               else {
                return MaterialApp(
@@ -64,6 +73,7 @@ class MyApp extends StatelessWidget {
                   Navigation.routes3
                       : // Onboarding Page
                   Navigation.routes,
+
 
                );
               }

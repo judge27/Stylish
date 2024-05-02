@@ -8,7 +8,7 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: OnboardingWidget()
+      body: const OnboardingWidget()
     );
   }
 }

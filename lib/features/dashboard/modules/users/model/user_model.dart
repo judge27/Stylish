@@ -22,15 +22,15 @@ class UserModel {
   //   password = map['password'];
   // }
 
-  String get getName => name!;
+  String get getName => name;
 
-  String get getEmail => email!;
+  String get getEmail => email;
 
-  String get getPassword => password!;
+  String get getPassword => password;
 
-  String get getPhoneNumber => phoneNumber!;
+  String get getPhoneNumber => phoneNumber;
 
-  String get getProfilePicture => profilePicture!;
+  String get getProfilePicture => profilePicture;
 
   static UserModel empty() =>
       UserModel(password: '',

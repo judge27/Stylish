@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/const.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
@@ -13,7 +12,7 @@ class GetStartedWidget extends StatelessWidget {
     return Stack(children: [
       const BackgroundImageWidget(),
       Scaffold(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Colors.transparent,
           body: SizedBox(
             height: context.height,
             child: Column(

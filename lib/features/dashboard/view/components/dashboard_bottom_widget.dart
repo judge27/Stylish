@@ -14,7 +14,8 @@ class DashboardBottomWidegt extends StatelessWidget {
       child: BlocBuilder<DashboardcontrollerCubit, DashboardcontrollerState>(
         builder: (context, state) {
          return BottomNavigationBar(
-              backgroundColor: Colors.white,
+
+              backgroundColor: Colors.transparent,
               selectedItemColor: Colors.blue,
               unselectedItemColor: Colors.lightGreen,
               showSelectedLabels: false,

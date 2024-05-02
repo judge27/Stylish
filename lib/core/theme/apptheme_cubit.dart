@@ -7,10 +7,22 @@ part 'apptheme_state.dart';
 
 class AppthemeCubit extends Cubit<AppThemeState> {
   AppthemeCubit() : super(AppThemeInitial());
-  static bool isLight=true;
   chnageTheme(ThemeState state){
-    isLight=!isLight;
     switch(state){
+      case ThemeState.Initial:
+        if ( sharedPreferences!.getString('theme')!=null) {
+          if (sharedPreferences!.getString('theme') == 'light') {
+                  emit(AppLightTheme());
+          }
+          else {
+            emit(AppDarkTheme());
+          }
+        }
+        else{
+          sharedPreferences!.setString('theme','light');
+          emit(AppDarkTheme());
+        }
+        break;
       case ThemeState.Light:
         sharedPreferences!.setString('theme','light');
         emit(AppLightTheme());

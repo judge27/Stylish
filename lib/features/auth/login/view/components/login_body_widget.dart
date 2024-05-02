@@ -25,19 +25,17 @@ class LoginBodyWidget extends StatelessWidget {
                   key: controller.formKey,
                   child: SingleChildScrollView(
                       physics: const NeverScrollableScrollPhysics(),
-                      child: Container(
-                          height: context.height,
+                      child: SizedBox(
+                          height: context.height / 1.7,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: context.height / 10,
-                              ),
                               // Screen title Text //Welcome Back!
                               SizedBox(
+                                height: context.height / 9,
                                 width: context.width,
-                                child:  Text(
+                                child: Text(
                                   "Welcome Back!",
                                   style: TextStyle(
                                     color: Theme.of(context).hintColor,
@@ -49,72 +47,83 @@ class LoginBodyWidget extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: context.height / 36,
+                                height: context.height / 63,
                               ),
                               // Email TextField // Username or Email
-                              TextFieldWidget(
-                                model: TextFieldModel(
-                                  textStyle: Core.instance.authTextStyle,
-                                  inputDecoration: Core.instance.authInputDecoration(context)
-                                      .copyWith(
-                                          prefixIcon: const Icon(Icons.email),
-                                          hintText: "Username or Email"),
-                                  controller: controller.emailController,
-                                  keyboardType: TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.next,
-                                  validator: Validation.instance.validateEmail,
+                              SizedBox(
+                                height: context.height / 9,
+                                child: TextFieldWidget(
+                                  model: TextFieldModel(
+                                    textStyle: Core.instance.authTextStyle,
+                                    inputDecoration: Core.instance
+                                        .authInputDecoration(context)
+                                        .copyWith(
+                                            prefixIcon: const Icon(Icons.email),
+                                            hintText: "Username or Email"),
+                                    controller: controller.emailController,
+                                    keyboardType: TextInputType.emailAddress,
+                                    textInputAction: TextInputAction.next,
+                                    validator:
+                                        Validation.instance.validateEmail,
+                                  ),
                                 ),
                               ),
                               SizedBox(
-                                height: context.height / 36,
+                                height: context.height / 63,
                               ),
                               // Password TextField // Password
-                              TextFieldWidget(
-                                  model: TextFieldModel(
-                                 textStyle: Core.instance.authTextStyle,
-                                controller: controller.passwordController,
-                                keyboardType: TextInputType.visiblePassword,
-                                textInputAction: TextInputAction.done,
-                                inputDecoration:
-                                    Core.instance.authInputDecoration(context).copyWith(
-                                  prefixIcon: const Icon(Icons.lock),
-                                  hintText: "Password",
-                                  suffixIcon: InkWell(
-                                    onTap: controller.togglePassword,
-                                    child: Icon(
-                                      controller.obscurePassword
-                                          ? CupertinoIcons.eye_slash_fill
-                                          : CupertinoIcons.eye_fill,
-                                      color: Colors.black54,
-                                      size: 24,
-                                    ),
-                                  ),
-                                ),
-                                obscureText: controller.obscurePassword,
-                                validator: Validation.instance.validatePassword,
-                              )),
-                              SizedBox(height: 5,),
-                              Row(
-                                children: [
-                                  const Spacer(),
-                                  InkWell(
-                                    onTap: () {
-                                      context.pushTo = Routes.FORGOT_PASSWORD;
-                                    },
-                                    // Forgot Password TextButton
-                                    child:  Text(
-                                      "Forgot Password?",
-                                      style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 18,
+                              SizedBox(
+                                height: context.height / 9,
+                                child: TextFieldWidget(
+                                    model: TextFieldModel(
+                                  textStyle: Core.instance.authTextStyle,
+                                  controller: controller.passwordController,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  textInputAction: TextInputAction.done,
+                                  inputDecoration: Core.instance
+                                      .authInputDecoration(context)
+                                      .copyWith(
+                                        prefixIcon: const Icon(Icons.lock),
+                                        hintText: "Password",
+                                        suffixIcon: InkWell(
+                                          onTap: controller.togglePassword,
+                                          child: Icon(
+                                            controller.obscurePassword
+                                                ? CupertinoIcons.eye_slash_fill
+                                                : CupertinoIcons.eye_fill,
+                                            color: Colors.black54,
+                                            size: 24,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                ],
+                                  obscureText: controller.obscurePassword,
+                                  validator:
+                                      Validation.instance.validatePassword,
+                                )),
                               ),
                               SizedBox(
-                                height: context.height / 48,
+                                child: Row(
+                                  children: [
+                                    const Spacer(),
+                                    InkWell(
+                                      onTap: () {
+                                        context.pushTo = Routes.FORGOT_PASSWORD;
+                                      },
+                                      // Forgot Password TextButton
+                                      child: Text(
+                                        "Forgot Password?",
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: context.height / 63,
                               ),
                             ],
                           ))));

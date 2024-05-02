@@ -4,7 +4,7 @@ import 'package:stylish/features/auth/onboarding/controller/cubit/onboarding_con
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingWidget extends StatelessWidget {
-  OnboardingWidget({
+  const OnboardingWidget({
     super.key,
   });
 

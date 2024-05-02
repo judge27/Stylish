@@ -1,1 +1,1 @@
-enum ThemeState { Light, Dark }
+enum ThemeState { Initial,Light, Dark }
