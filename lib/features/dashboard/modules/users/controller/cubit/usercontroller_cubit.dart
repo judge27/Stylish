@@ -1,12 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
-import 'package:path/path.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
@@ -56,9 +51,9 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
       nameController.text = user.name;
       emailController.text = user.email;
       passwordController.text = user.password;
-      print("****************"+nameController.text+"****************");
-      print("****************"+emailController.text+"****************");
-      print("****************"+passwordController.text+"****************");
+      print("****************${nameController.text}****************");
+      print("****************${emailController.text}****************");
+      print("****************${passwordController.text}****************");
       emit(UserLoaded());
     } catch (_) {
       user = UserModel.empty();
@@ -93,10 +88,11 @@ class UsercontrollerCubit extends Cubit<UsercontrollerState> {
       }
     }
   }
-  void onDelete({required BuildContext context}){
+  Future<void> onDelete({required BuildContext context}) async {
     try{
+      await FireBaseModel.instance.autUser!.delete();
       final auth= FireBaseModel.instance.autUser;
-      FirebaseUsersData.getInstance.delete(id: auth!.uid.toString());
+      await FirebaseUsersData.getInstance.delete(id: auth!.uid.toString());
       context.showToastMessage="User Deleted";
       context.pushTo=Routes.LOGIN;
     }

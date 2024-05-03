@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
@@ -17,8 +16,7 @@ class UserPage extends StatelessWidget {
                 context.read<UsercontrollerCubit>();
             return Scaffold(
               body: state is UserLoading
-                  ? CircularProgressIndicator()
-                  :  const UserItemWidget(),
+                  ? const Center(child:CircularProgressIndicator()):  const UserItemWidget(),
             );
           },
         ));

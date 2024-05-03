@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
@@ -34,16 +33,16 @@ class VerificationWidget extends StatelessWidget {
                   final VerificationcontrollerCubit controller =context.read<  VerificationcontrollerCubit>();
                   return Form(
                       key: controller.verificationKey,
-                      child: Container(
+                      child: SizedBox(
                         height: context.height,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                             Text(
                               "Verification",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Theme.of(context).primaryColor,
                                 fontSize: 35,
                                 fontWeight: FontWeight.w700,
                               ),

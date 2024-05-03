@@ -77,7 +77,7 @@ class ForgotPasswordWidget extends StatelessWidget {
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor, fontSize: 20),
                                 ),
-                                TextSpan(
+                                const TextSpan(
                                   text:
                                       "We will send you a message to set or reset your new password",
                                 )

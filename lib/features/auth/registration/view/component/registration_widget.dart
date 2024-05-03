@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
@@ -25,18 +24,16 @@ class RegistrationWidget extends StatelessWidget {
                 RegistrationcontrollerState>(builder: (context, state) {
               return Form(
                   key: controller.formKey,
-                  child: Container(
-                      height: context.height / 1.5,
+                  child: SizedBox(
+                      height: context.height / 2.0,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: context.height / 12,
-                          ),
                           // Screen title Text //Welcome Back!
                           SizedBox(
                             width: context.width,
+                            height: context.height / 12,
                             child: Text(
                               "Create an account",
                               style: TextStyle(
@@ -49,55 +46,60 @@ class RegistrationWidget extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: context.height / 48,
+                            height: context.height / 72,
                           ),
                           // Name TextField // Your Name
-                          TextFieldWidget(
-                            model: TextFieldModel(
-                              textStyle: Core.instance.authTextStyle,
-
-                              inputDecoration:
+                          SizedBox(
+                            height: context.height / 9,
+                            child: TextFieldWidget(
+                              model: TextFieldModel(
+                                textStyle: Core.instance.authTextStyle,
+                                inputDecoration:
                                     Core.instance.authInputDecoration(context),
                                 controller: controller.nameController,
                                 keyboardType: TextInputType.name,
                                 textInputAction: TextInputAction.next,
                                 validator: Validation.instance.validateName,
-                                ),
+                              ),
+                            ),
                           ),
                           SizedBox(
-                            height: context.height / 48,
+                            height: context.height / 72,
                           ),
 
                           // Email TextField // Username or Email
-                          TextFieldWidget(
-                            model: TextFieldModel(
+                          SizedBox(
+                            height: context.height / 9,
+                            child: TextFieldWidget(
+                                model: TextFieldModel(
                               textStyle: Core.instance.authTextStyle,
-
-                              inputDecoration:
-                                    Core.instance.authInputDecoration(context).copyWith(
-                                        prefixIcon: const Icon(Icons.email),
-                                        hintText: "Username or Email"),
-                                controller: controller.emailController,
-                                keyboardType: TextInputType.emailAddress,
-                                textInputAction: TextInputAction.next,
-                                validator: Validation.instance.validateEmail,
-                              )
+                              inputDecoration: Core.instance
+                                  .authInputDecoration(context)
+                                  .copyWith(
+                                      prefixIcon: const Icon(Icons.email),
+                                      hintText: "Username or Email"),
+                              controller: controller.emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              validator: Validation.instance.validateEmail,
+                            )),
                           ),
                           SizedBox(
-                            height: context.height / 48,
+                            height: context.height / 72,
                           ),
 
                           // Password TextField // Password
-                          TextFieldWidget(
-                              model: TextFieldModel(
-                                textStyle: Core.instance.authTextStyle,
-
-                                keyboardType: TextInputType.visiblePassword,
-                                  controller: controller.passwordController,
-                                  textInputAction: TextInputAction.done,
-                                  inputDecoration: Core
-                                      .instance.authInputDecoration(context)
-                                      .copyWith(
+                          SizedBox(
+                            height: context.height / 9,
+                            child: TextFieldWidget(
+                                model: TextFieldModel(
+                              textStyle: Core.instance.authTextStyle,
+                              keyboardType: TextInputType.visiblePassword,
+                              controller: controller.passwordController,
+                              textInputAction: TextInputAction.done,
+                              inputDecoration: Core.instance
+                                  .authInputDecoration(context)
+                                  .copyWith(
                                     prefixIcon: const Icon(Icons.lock),
                                     hintText: "Password",
                                     suffixIcon: InkWell(
@@ -111,12 +113,12 @@ class RegistrationWidget extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  obscureText: controller.obscurePassword,
-                                  validator:
-                                      Validation.instance.validatePassword,
-                              )),
+                              obscureText: controller.obscurePassword,
+                              validator: Validation.instance.validatePassword,
+                            )),
+                          ),
                           SizedBox(
-                            height: context.height / 45,
+                            height: context.height / 72,
                           ),
                         ],
                       )));

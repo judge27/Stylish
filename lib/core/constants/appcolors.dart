@@ -9,7 +9,7 @@ class AppColors {
   static const Color TEXT_LIGHT = Color(0xff575757);//text color
   static const Color TEXT_DARK = Colors.white;//text color
   static const Color TEXT_BUTTON_COLOR = Colors.white;//text button color
-  static const Color SCAFFOLD_LIGHT_COLOR = Colors.white;//backscreen
+  static  Color     SCAFFOLD_LIGHT_COLOR =  Colors.white.withOpacity(0.85);//backscreen
   static const Color SCAFFOLD_DARK_COLOR = Color(0xff091027);//backscreen
   static const Color FORGET_DARK_COLOR = Color(0xff01b4e4);//backscreen
 

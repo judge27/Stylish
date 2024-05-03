@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,10 +10,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
-import 'firebase_options.dart';
 
 class FireBaseModel {
   static FireBaseModel _instance = FireBaseModel._init();
@@ -70,11 +66,11 @@ class FireBaseModel {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      context.showToastMessage = '${e.code}';
+      context.showToastMessage = e.code;
       throw(e.code);
     } catch (_) {
       context.showToastMessage = 'something went wrong ,please try again';
-      throw(_);
+      rethrow;
     }
 
     context.showToastMessage = "Let's Start Our Journey.";
@@ -99,7 +95,7 @@ class FireBaseModel {
       throw(e.code);
     } catch (_) {
       context.showToastMessage = 'something went wrong ,please try again';
-      throw(_);
+      rethrow;
     }
   }
 
@@ -125,7 +121,7 @@ class FireBaseModel {
 
   // send a password reset email to a user
   Future<void> resetPassword() async {
-    await _auth.sendPasswordResetEmail(email: _instance!.email);
+    await _auth.sendPasswordResetEmail(email: _instance.email);
   }
 
   // verify the phone number method
@@ -182,10 +178,10 @@ class FireBaseModel {
   }
 
   pickImage({required ImageSource source}) async {
-    final ImagePicker _imagePicker = ImagePicker();
-    XFile? _file = await _imagePicker.pickImage(source: source);
-    if (_file != null) {
-      image = await _file.readAsBytes();
+    final ImagePicker imagePicker = ImagePicker();
+    XFile? file = await imagePicker.pickImage(source: source);
+    if (file != null) {
+      image = await file.readAsBytes();
       return image;
     }
   }

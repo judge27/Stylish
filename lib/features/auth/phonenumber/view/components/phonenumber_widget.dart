@@ -24,7 +24,7 @@ class PhoneNumberWidget extends StatelessWidget {
                   final PhonenumbercontrollerCubit controller =context.read<PhonenumbercontrollerCubit>();
                   return Form(
                       key: controller.phoneKey,
-                      child: Container(
+                      child: SizedBox(
                         height: context.height,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,6 +64,7 @@ class PhoneNumberWidget extends StatelessWidget {
                               validator: (value) {
                                 Validation.instance.validatePhone(
                                     controller.phoneController.text);
+                                return null;
                               },
                               controller: controller.phoneController,
                               onChanged: (data) {
