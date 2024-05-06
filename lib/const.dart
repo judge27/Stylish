@@ -31,5 +31,8 @@ const String kJordan3= "assets/images/jordan3.png";
 const String kBanner2= "assets/images/banner2.png";
 const String kBanner3= "assets/images/banner3.png";
 const String kShoes74= "assets/images/shoes74.png";
-
-
+const String kPaypal= "assets/images/PayPal.png";
+const String kMaestro= "assets/images/Maestro.png";
+const String kVISA= "assets/images/VISA.png";
+const String kStarsImage= "assets/images/StarsImage.png";
+const String kStarsssssImage= "assets/images/Starssss74.png";
