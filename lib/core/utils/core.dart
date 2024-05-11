@@ -1,5 +1,10 @@
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:stylish/core/constants/constants.dart';
+
+import '../../features/dashboard/modules/addproduct/controller/cubit/newproductcontroller_cubit.dart';
 
 class Core {
   static Core instance = Core._init();
@@ -96,5 +101,8 @@ class Core {
     // user textField Style Object
     TextStyle userTextStyle = const TextStyle(
         color: Colors.grey, fontSize: 18, fontWeight: FontWeight.bold);
+
+
+
   }
 

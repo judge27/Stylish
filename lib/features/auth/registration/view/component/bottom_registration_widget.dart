@@ -4,6 +4,7 @@ import 'package:stylish/const.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/registration/controller/cubit/registrationcontroller_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomRegistrationWidget extends StatelessWidget {
   const BottomRegistrationWidget({super.key, required this.controller});
@@ -13,7 +14,7 @@ class BottomRegistrationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height / 2.4,
+        height: context.height / 2.5,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: context.width / 25),
           child: BlocProvider<RegistrationcontrollerCubit>.value(
@@ -30,7 +31,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                       child: SizedBox(
                         height: context.height / 12,
                         child: Core.instance.coreButton(
-                            buttonText: "Create Account", context: context),
+                            buttonText: AppLocalizations.of(context)!.signup, context: context),
                       ),
                     ),
                     SizedBox(
@@ -40,7 +41,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                       height: context.height / 18,
                       alignment: Alignment.center,
                       child: Text(
-                        "- OR Continue with -",
+                        AppLocalizations.of(context)!.or,
                         style: TextStyle(
                           color: Theme.of(context).splashColor,
                           fontSize: 18,
@@ -52,7 +53,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                       height: context.height / 72,
                     ),
                     SizedBox(
-                      height: context.height / 9,
+                      height: context.height / 10,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -109,14 +110,14 @@ class BottomRegistrationWidget extends StatelessWidget {
                     ),
                     SizedBox(height: context.height / 72),
                     SizedBox(
-                      height: context.height / 9,
+                      height: context.height / 10,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             alignment: Alignment.center,
                             child: Text(
-                              "I Already Have an Account",
+                              AppLocalizations.of(context)!.haveaccount,
                               style: TextStyle(
                                 color: Theme.of(context).splashColor,
                                 fontSize: 18,
@@ -133,7 +134,7 @@ class BottomRegistrationWidget extends StatelessWidget {
                               onTap: () {
                                 Navigator.pop(context);
                               },
-                              child: Text("Login",
+                              child: Text(AppLocalizations.of(context)!.login,
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 24,

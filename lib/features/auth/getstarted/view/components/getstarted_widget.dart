@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/getstarted/view/components/background_image_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GetStartedWidget extends StatelessWidget {
   const GetStartedWidget({super.key});
@@ -24,8 +26,8 @@ class GetStartedWidget extends StatelessWidget {
                 Container(
                   margin:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
-                  child: const Text(
-                    "You want Authentic, here you go!",
+                  child:  Text(
+                    AppLocalizations.of(context)!.hereyougo,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 43,
@@ -36,8 +38,8 @@ class GetStartedWidget extends StatelessWidget {
                     overflow: TextOverflow.clip,
                   ),
                 ),
-                const Text(
-                  "Find it here, buy it now!",
+                 Text(
+                   AppLocalizations.of(context)!.finditnow,
                   style: TextStyle(
                     color: Color(0xFFF2F2F2),
                     fontSize: 20,
@@ -51,10 +53,10 @@ class GetStartedWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: InkWell(
-                    onTap: () {
-                      context.pushTo= Routes.DASHBOARD;
+                    onTap: () async{
+                      Navigator.pushNamedAndRemoveUntil(context, Routes.DASHBOARD, (route) => false);
                     },
-                    child: Core.instance.coreButton(buttonText: "Get Started",context: context),
+                    child: Core.instance.coreButton(buttonText:  AppLocalizations.of(context)!.getstarted,context: context),
                   ),
                 ),
                 const Spacer(

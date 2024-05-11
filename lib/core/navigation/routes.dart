@@ -8,4 +8,6 @@ class Routes {
   static const GETSTARTED = "GETSTARTED";
   static const DASHBOARD = "DASHBOARD";
   static const PROFILE = "PROFILE";
+  static const NewProduct = "NEWProduct";
+
 }

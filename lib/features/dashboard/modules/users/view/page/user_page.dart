@@ -8,15 +8,15 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UsercontrollerCubit>(
-        create: (context) => UsercontrollerCubit(),
+    return BlocProvider<UsercontrollerCubit>.value(
+        value:  UsercontrollerCubit.instance,
         child: BlocBuilder<UsercontrollerCubit, UsercontrollerState>(
           builder: (context, state) {
             final UsercontrollerCubit controller =
                 context.read<UsercontrollerCubit>();
             return Scaffold(
               body: state is UserLoading
-                  ? const Center(child:CircularProgressIndicator()):  const UserItemWidget(),
+                  ? const Center(child:CircularProgressIndicator()): UserItemWidget(controller: controller,),
             );
           },
         ));

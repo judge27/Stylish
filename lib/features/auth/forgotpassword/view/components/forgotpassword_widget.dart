@@ -1,13 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/forgotpassword/controller/cubit/forgotpasswordcontroller_cubit.dart';
-import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/core/models/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   const ForgotPasswordWidget({super.key});
@@ -15,7 +14,8 @@ class ForgotPasswordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding:  EdgeInsets.symmetric(horizontal: context.width/25 ,vertical:  context.height/15),
+        padding: EdgeInsets.symmetric(
+            horizontal: context.width / 25, vertical: context.height / 15),
         child: SingleChildScrollView(
             physics: const NeverScrollableScrollPhysics(),
             child: BlocProvider<ForgotpasswordcontrollerCubit>(
@@ -31,10 +31,10 @@ class ForgotPasswordWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Screen title Text //Welcome Back!
-                         SizedBox(
+                        SizedBox(
                           width: context.width,
                           child: Text(
-                            "Forgot password?",
+                            AppLocalizations.of(context)!.forgetpassword,
                             style: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontSize: 43,
@@ -44,24 +44,27 @@ class ForgotPasswordWidget extends StatelessWidget {
                             overflow: TextOverflow.clip,
                           ),
                         ),
-                         SizedBox(
-                          height: context.height/15,
+                        SizedBox(
+                          height: context.height / 15,
                         ),
                         // Email TextField // Username or Email
                         TextFieldWidget(
                           model: TextFieldModel(
                             textStyle: Core.instance.authTextStyle,
-                            inputDecoration: Core.instance.authInputDecoration(context).copyWith(
-                                prefixIcon: const Icon(Icons.email),
-                                hintText: "Enter your email address"),
+                            inputDecoration: Core.instance
+                                .authInputDecoration(context)
+                                .copyWith(
+                                    prefixIcon: const Icon(Icons.email),
+                                    hintText: AppLocalizations.of(context)!.enteryouremail),
                             controller: controller.emailController,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.done,
-                            validator: Validation.instance.validateEmail,
+                            validator: (value) => Validation.instance
+                                .validateEmail(context: context, value: value),
                           ),
                         ),
                         SizedBox(
-                          height: context.height/15,
+                          height: context.height / 15,
                         ),
                         Container(
                             child: RichText(
@@ -75,25 +78,27 @@ class ForgotPasswordWidget extends StatelessWidget {
                                 TextSpan(
                                   text: "* ",
                                   style: TextStyle(
-                                      color: Theme.of(context).primaryColor, fontSize: 20),
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 20),
                                 ),
-                                const TextSpan(
+                                 TextSpan(
                                   text:
-                                      "We will send you a message to set or reset your new password",
+                                  AppLocalizations.of(context)!.wewillsendyou,
                                 )
                               ]),
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                           textAlign: TextAlign.start,
                         )),
-                         SizedBox(
-                          height: context.height/15,
+                        SizedBox(
+                          height: context.height / 15,
                         ),
                         InkWell(
                           onTap: () async {
                             await controller.confirmForgotPassword(context);
                           },
-                          child: Core.instance.coreButton(buttonText: "Submit",context: context),
+                          child: Core.instance.coreButton(
+                              buttonText: AppLocalizations.of(context)!.submit, context: context),
                         ),
                       ],
                     ),
@@ -103,4 +108,3 @@ class ForgotPasswordWidget extends StatelessWidget {
             )));
   }
 }
-

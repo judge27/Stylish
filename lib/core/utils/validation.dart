@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Validation {
 
@@ -6,21 +8,21 @@ class Validation {
   Validation._init();
 
   // Name validation method
-  String? validateName(String? value) {
+  String? validateName({required BuildContext context,String? value}) {
     if(value==null || value.isEmpty){
-      return 'Password is required.';
+      return AppLocalizations.of(context)!.namerequired;
     }
     if (!value.contains(RegExp(r'[A-Z]'))) {
-      return 'Password must contain at least one uppercase letter';
+      return AppLocalizations.of(context)!.nameatleastupper;
     }
     return null;
   }
 
   // Email validation method
-  String? validateEmail(String? value) {
+  String? validateEmail({required BuildContext context,String? value}) {
 
     if(value==null || value.isEmpty){
-      return 'Email is required.';
+      return AppLocalizations.of(context)!.emailrequired;
     }
 
     const pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
@@ -28,36 +30,36 @@ class Validation {
     final regex = RegExp(pattern);
 
     if (!regex.hasMatch(value)) {
-      return 'Invalid email address.';
+      return AppLocalizations.of(context)!.emailinvalid;
    }
     return null;
 
   }
 
   // Password validation method
-  String? validatePassword(String? value) {
+  String? validatePassword({required BuildContext context,String? value}) {
 
     if(value==null || value.isEmpty){
-      return 'Password is required.';
+      return AppLocalizations.of(context)!.passwordrequired;
     }
 
     if(value.length<6) {
-      return 'Password must be at least 6 characters long.';
+      return AppLocalizations.of(context)!.passwordatleastsix;
     }
     if (!value.contains(RegExp(r'[A-Z]'))) {
-      return 'Password must contain at least one uppercase letter';
+      return AppLocalizations.of(context)!.passwordatleastuppercase;
     }
     if (!value.contains(RegExp(r'[0-9]'))) {
-      return 'Password must contain at least one number';
+      return AppLocalizations.of(context)!.passwordatleastonenumber;
     }
     if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return 'Password must contain at least one special character';
+      return AppLocalizations.of(context)!.passwordatleastspecial;
     }
     return null;
   }
   // Phone Number validation method
 
-  bool validatePhone(String? value){
+  bool validatePhone({required BuildContext context,String? value}){
     RegExp regExp=RegExp(r'^(?:[+0]9)?[0-9]{10}$');
     bool isPhoneValidated = false;
     if (value!.isEmpty) {
@@ -74,7 +76,7 @@ class Validation {
   }
 
   //  smsCode validation method
-  String? validateVerificationCode(String? value) {
+  String? validateVerificationCode({required BuildContext context,String? value}) {
     if (value!.length < 6) {
       return "Code is Required";
     } else {

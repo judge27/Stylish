@@ -8,6 +8,7 @@ import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumberco
 import 'package:stylish/features/auth/registration/view/page/registration_page.dart';
 import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dart';
 import 'package:stylish/features/auth/verification/view/page/verification_page.dart';
+import 'package:stylish/features/dashboard/modules/addproduct/view/page/new_product_page.dart';
 import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';
 
 class Navigation {
@@ -16,6 +17,8 @@ class Navigation {
     switch (settings.name) {
       case Routes.SIGN_UP:
         return MaterialPageRoute(builder: (_) => const RegistrationPage());
+      case Routes.NewProduct:
+        return MaterialPageRoute(builder: (_) =>  const NewProductPage());
       case Routes.LOGIN:
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case Routes.FORGOT_PASSWORD:

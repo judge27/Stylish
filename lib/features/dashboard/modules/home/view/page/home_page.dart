@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/home_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key,required this.dashboardcontrollerCubit});
+  final DashboardcontrollerCubit dashboardcontrollerCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class HomePage extends StatelessWidget {
             backgroundColor: Theme
                 .of(context)
                 .scaffoldBackgroundColor,
-            body: HomeWidgetItem(controller: controller,),
+            body: HomeWidgetItem(controller: controller,dashboardcontrollerCubit: dashboardcontrollerCubit,),
           );
         },
       ),

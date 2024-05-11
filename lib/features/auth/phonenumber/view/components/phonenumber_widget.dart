@@ -5,7 +5,7 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhoneNumberWidget extends StatelessWidget {
   const PhoneNumberWidget({super.key});
@@ -21,7 +21,8 @@ class PhoneNumberWidget extends StatelessWidget {
               child: BlocBuilder<PhonenumbercontrollerCubit,
                   PhonenumbercontrollerState>(
                 builder: (context, state) {
-                  final PhonenumbercontrollerCubit controller =context.read<PhonenumbercontrollerCubit>();
+                  final PhonenumbercontrollerCubit controller =
+                      context.read<PhonenumbercontrollerCubit>();
                   return Form(
                       key: controller.phoneKey,
                       child: SizedBox(
@@ -30,8 +31,8 @@ class PhoneNumberWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Text(
-                              "Mobile Number",
+                            Text(
+                              AppLocalizations.of(context)!.mobilenumber,
                               style: TextStyle(
                                 color: Theme.of(context).hintColor,
                                 fontSize: 35,
@@ -40,11 +41,13 @@ class PhoneNumberWidget extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.clip,
                             ),
-                            const SizedBox(height: 20,),
-                             SizedBox(
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
                               width: 350,
                               child: Text(
-                                "Please enter your mobile phone Number",
+                                AppLocalizations.of(context)!.pleaseenterphonenumber,
                                 style: TextStyle(
                                   color: Theme.of(context).splashColor,
                                   fontSize: 21,
@@ -60,10 +63,11 @@ class PhoneNumberWidget extends StatelessWidget {
                             // Phonefield with country code
                             IntlPhoneField(
                               autofocus: true,
-                              initialCountryCode: 'EG',
+                              initialCountryCode: AppLocalizations.of(context)!.eg,
                               validator: (value) {
                                 Validation.instance.validatePhone(
-                                    controller.phoneController.text);
+                                    context: context,
+                                    value: controller.phoneController.text);
                                 return null;
                               },
                               controller: controller.phoneController,
@@ -73,9 +77,10 @@ class PhoneNumberWidget extends StatelessWidget {
                                     data as String;
                               },
                               decoration: InputDecoration(
-                                  labelText: "Phone Number",
+                                  labelText: AppLocalizations.of(context)!.phonenumber,
                                   border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                                    borderSide: BorderSide(
+                                        color: Theme.of(context).primaryColor),
                                   )),
                             ),
                             const Spacer(
@@ -84,9 +89,11 @@ class PhoneNumberWidget extends StatelessWidget {
                             InkWell(
                               onTap: () async {
                                 controller.confirmSubmitPhoneNumber(
-                                    context: context,phoneNumberController: controller);
+                                    context: context,
+                                    phoneNumberController: controller);
                               },
-                              child: Core.instance.coreButton(buttonText: "Submit",context: context),
+                              child: Core.instance.coreButton(
+                                  buttonText: AppLocalizations.of(context)!.submit, context: context),
                             ),
                             const Spacer(
                               flex: 5,

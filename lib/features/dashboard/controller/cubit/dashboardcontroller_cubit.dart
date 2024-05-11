@@ -1,12 +1,20 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stylish/core/constants/constants.dart';
 
 part 'dashboardcontroller_state.dart';
 
 class DashboardcontrollerCubit extends Cubit<DashboardcontrollerState> {
-  DashboardcontrollerCubit() : super(DashboardcontrollerInitial());
+  static DashboardcontrollerCubit instance = DashboardcontrollerCubit();
+  DashboardcontrollerCubit() : super(DashboardcontrollerInitial()){
+    init();
+  }
 
+
+  void init() async {
+    user = await getUser;
+  }
   // controller object of pageView in dashboard Page
   PageController pageController = PageController();
 

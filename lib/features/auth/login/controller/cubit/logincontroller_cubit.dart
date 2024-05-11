@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
@@ -29,19 +31,26 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   }
 
 
-  // Login User Method
+  // Login  with email and password method
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-      try {
-        final userCredentials = await FireBaseModel.instance.
-        loginWithEmailAndPassword(context: context, email: emailController.text.trim(),
-            password: passwordController.text.trim()
-        );
-        context.pushTo=Routes.GETSTARTED;
+        try {
+           await auth.signInWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          );
+           user=await getUser;
+          context.showToastMessage = "Let's Start Our Journey.";
+          Navigator.pushNamedAndRemoveUntil(context, Routes.GETSTARTED, (_) => true);
 
-      }
-      catch (_) {
-      }
+        } on FirebaseAuthException catch (e) {
+          context.showToastMessage = e.code;
+          throw(e.code);
+        } catch (_) {
+          context.showToastMessage = 'something went wrong ,please try again';
+          rethrow;
+        }
+
     }
   }
 

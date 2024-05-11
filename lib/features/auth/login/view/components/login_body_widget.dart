@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,8 +7,10 @@ import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
-import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/core/models/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
 class LoginBodyWidget extends StatelessWidget {
   const LoginBodyWidget({super.key, required this.controller});
@@ -36,7 +39,7 @@ class LoginBodyWidget extends StatelessWidget {
                                 height: context.height / 9,
                                 width: context.width,
                                 child: Text(
-                                  "Welcome Back!",
+                                  AppLocalizations.of(context)!.welcomeback,
                                   style: TextStyle(
                                     color: Theme.of(context).hintColor,
                                     fontSize: 43,
@@ -59,12 +62,15 @@ class LoginBodyWidget extends StatelessWidget {
                                         .authInputDecoration(context)
                                         .copyWith(
                                             prefixIcon: const Icon(Icons.email),
-                                            hintText: "Username or Email"),
+                                            hintText:
+                                                AppLocalizations.of(context)!
+                                                    .email),
                                     controller: controller.emailController,
                                     keyboardType: TextInputType.emailAddress,
                                     textInputAction: TextInputAction.next,
-                                    validator:
-                                        Validation.instance.validateEmail,
+                                    validator: (value) => Validation.instance
+                                        .validateEmail(
+                                            context: context, value: value),
                                   ),
                                 ),
                               ),
@@ -84,7 +90,8 @@ class LoginBodyWidget extends StatelessWidget {
                                       .authInputDecoration(context)
                                       .copyWith(
                                         prefixIcon: const Icon(Icons.lock),
-                                        hintText: "Password",
+                                        hintText: AppLocalizations.of(context)!
+                                            .password,
                                         suffixIcon: InkWell(
                                           onTap: controller.togglePassword,
                                           child: Icon(
@@ -97,8 +104,9 @@ class LoginBodyWidget extends StatelessWidget {
                                         ),
                                       ),
                                   obscureText: controller.obscurePassword,
-                                  validator:
-                                      Validation.instance.validatePassword,
+                                  validator: (value) => Validation.instance
+                                      .validatePassword(
+                                          context: context, value: value),
                                 )),
                               ),
                               SizedBox(
@@ -111,7 +119,8 @@ class LoginBodyWidget extends StatelessWidget {
                                       },
                                       // Forgot Password TextButton
                                       child: Text(
-                                        "Forgot Password?",
+                                        AppLocalizations.of(context)!
+                                            .forgetpassword,
                                         style: TextStyle(
                                           color: Theme.of(context).primaryColor,
                                           fontWeight: FontWeight.w900,

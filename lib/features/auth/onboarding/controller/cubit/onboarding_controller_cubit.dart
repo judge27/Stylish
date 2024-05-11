@@ -7,6 +7,7 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/auth/onboarding/model/onboarding_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'onboarding_controller_state.dart';
 
@@ -15,29 +16,22 @@ class OnboardingControllerCubit extends Cubit<OnboardingControllerState> {
 
   // controller object of pageView in onBoarding Page
   PageController pageController = PageController();
-
   // current onBoarding page variable
   int pageIndex = 0;
-
   // onBoarding pages List
   List pages = [
     OnboardingModel(
         image: kSplash1,
-        title: "Choose Products",
         kCircle: kCircle,
-        pageNumber: "1"),
+       ),
     OnboardingModel(
         image: kSplash2,
-        title: "Choose Products",
         kCircle: kCircle2,
-        prevText: "prev",
-        pageNumber: "2"),
+        ),
     OnboardingModel(
         image: kSplash3,
-        title: "Get Your Order",
         kCircle: kCircle3,
-        prevText: "prev",
-        pageNumber: "3"),
+       ),
   ];
 
   // next button Method
@@ -48,6 +42,7 @@ class OnboardingControllerCubit extends Cubit<OnboardingControllerState> {
       pageIndex++;
       pageController.jumpToPage(pageIndex);
     }
+    emit(OnbardingPageChanges());
   }
 
   // previous button Method
@@ -58,6 +53,8 @@ class OnboardingControllerCubit extends Cubit<OnboardingControllerState> {
     } else {
       context.pop;
     }
+    emit(OnbardingPageChanges());
+
   }
 
   // skip button method
@@ -65,9 +62,9 @@ class OnboardingControllerCubit extends Cubit<OnboardingControllerState> {
     sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences!.setBool('onboarding', true);
     if (FireBaseModel.instance.checkUserNullable()) {
-      context.pushTo = Routes.LOGIN;
+      Navigator.pushNamedAndRemoveUntil(context, Routes.LOGIN, (route) => false);
     } else {
-      context.pushTo = Routes.GETSTARTED;
+      Navigator.pushNamedAndRemoveUntil(context, Routes.DASHBOARD, (route) => false);
     }
 
   }

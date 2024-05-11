@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class UserModel {
   final String id;
@@ -7,12 +10,14 @@ class UserModel {
   String password;
   String phoneNumber;
   String profilePicture;
+  bool admin;
 
   UserModel(
       {required this.id, required this.name, required this.email,
         required this.password,
         required this.phoneNumber,
-        required this.profilePicture
+        required this.profilePicture,
+        this.admin=false,
       });
 
   // UserModel.fromJson(Map map){
@@ -32,13 +37,18 @@ class UserModel {
 
   String get getProfilePicture => profilePicture;
 
+  bool get getAdmin => admin;
+
+
   static UserModel empty() =>
       UserModel(password: '',
           email: '',
           name: '',
           id: '',
           phoneNumber: '',
-          profilePicture: '');
+          profilePicture: '',
+          admin: false,
+      );
 
   Map<String, dynamic> toJson() {
     return {
@@ -47,6 +57,7 @@ class UserModel {
       'Password': password,
       'PhoneNumber': phoneNumber,
       'ProfilePicture': profilePicture,
+      'admin':admin,
     };
   }
 
@@ -61,6 +72,7 @@ class UserModel {
           password: data['Password'] ?? '',
           phoneNumber: data['PhoneNumber'] ?? '',
           profilePicture: data['ProfilePicture'] ?? '',
+          admin: data['admin'] ?? false,
       );
     } else {
       return UserModel.empty();

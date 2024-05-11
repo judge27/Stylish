@@ -11,6 +11,7 @@ class TextFieldModel {
   bool obscureText;
   TextStyle? textStyle;
   List<TextInputFormatter>? inputFormaters;
+  Future<void> Function(String? value)? onSubmit;
   TextFieldModel({
     this.inputFormaters,
     this.obscureText = false,
@@ -21,5 +22,6 @@ class TextFieldModel {
     this.onChange,
     this.textStyle,
     this.validator,
+    this.onSubmit
   });
 }

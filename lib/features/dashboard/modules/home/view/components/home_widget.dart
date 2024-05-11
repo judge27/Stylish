@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/big_banner_item.dart';
@@ -12,8 +13,9 @@ import 'package:stylish/features/dashboard/modules/home/view/components/view_all
 import 'home_top_item.dart';
 
 class HomeWidgetItem extends StatelessWidget {
-  const HomeWidgetItem({super.key, required this.controller});
+  const HomeWidgetItem({super.key, required this.controller,required this.dashboardcontrollerCubit});
   final HomecontrollerCubit controller;
+  final DashboardcontrollerCubit dashboardcontrollerCubit;
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -35,7 +37,7 @@ class HomeWidgetItem extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const CategoryListItemWidget(),
+                    CategoryListItemWidget(dashboardcontrollerCubit: dashboardcontrollerCubit,),
                     const SizedBox(
                       height: 20,
                     ),
@@ -50,32 +52,32 @@ class HomeWidgetItem extends StatelessWidget {
                           title: "Deal of the Day",
                           hintIconText: " 22h 55m 20s remaining "),
                     ),
-                    Stack(
-                      alignment: Alignment.centerRight,
-                      children: [
-                        HomeProductItem(
-                          itemScrollController: controller.itemScrollController,
-                          productItem: controller.products1,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () => controller.onNext(
-                                itemScrollController1:
-                                    controller.itemScrollController,
-                                pageIndex: controller.pageIndex1),
-                            child: const CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              child: Icon(
-                                Icons.arrow_forward_ios_sharp,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    // Stack(
+                    //   alignment: Alignment.centerRight,
+                    //   children: [
+                    //     HomeProductItem(
+                    //       itemScrollController: controller.itemScrollController,
+                    //       productItem: controller.products1,
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.only(right: 8.0),
+                    //       child: InkWell(
+                    //         onTap: () => controller.onNext(
+                    //             itemScrollController1:
+                    //                 controller.itemScrollController,
+                    //             pageIndex: controller.pageIndex1),
+                    //         child: const CircleAvatar(
+                    //           backgroundColor: Colors.grey,
+                    //           child: Icon(
+                    //             Icons.arrow_forward_ios_sharp,
+                    //             color: Colors.black,
+                    //             size: 20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -170,33 +172,33 @@ class HomeWidgetItem extends StatelessWidget {
                           title: "Trending Products ",
                           hintIconText: " Last Date 29/02/22 "),
                     ),
-                    Stack(
-                      alignment: Alignment.centerRight,
-                      children: [
-                        HomeProductItem(
-                          itemScrollController:
-                              controller.itemScrollController2,
-                          productItem: controller.products2,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () => controller.onNext(
-                                itemScrollController1:
-                                    controller.itemScrollController2,
-                                pageIndex: controller.pageIndex2),
-                            child: const CircleAvatar(
-                              backgroundColor: Colors.grey,
-                              child: Icon(
-                                Icons.arrow_forward_ios_sharp,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Stack(
+                    //   alignment: Alignment.centerRight,
+                    //   children: [
+                    //     HomeProductItem(
+                    //       itemScrollController:
+                    //           controller.itemScrollController2,
+                    //       productItem: controller.products2,
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.only(right: 8.0),
+                    //       child: InkWell(
+                    //         onTap: () => controller.onNext(
+                    //             itemScrollController1:
+                    //                 controller.itemScrollController2,
+                    //             pageIndex: controller.pageIndex2),
+                    //         child: const CircleAvatar(
+                    //           backgroundColor: Colors.grey,
+                    //           child: Icon(
+                    //             Icons.arrow_forward_ios_sharp,
+                    //             color: Colors.black,
+                    //             size: 20,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 10,
                     ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/phonenumber/controller/cubit/phonenumbercontroller_cubit.dart';
 import 'package:stylish/features/auth/verification/controller/cubit/verificationcontroller_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VerificationWidget extends StatelessWidget {
   const VerificationWidget({super.key, required this.controller2});
@@ -30,7 +32,7 @@ class VerificationWidget extends StatelessWidget {
               child: BlocBuilder<VerificationcontrollerCubit,
                   VerificationcontrollerState>(
                 builder: (context, state) {
-                  final VerificationcontrollerCubit controller =context.read<  VerificationcontrollerCubit>();
+                  final VerificationcontrollerCubit controller =context.read< VerificationcontrollerCubit>();
                   return Form(
                       key: controller.verificationKey,
                       child: SizedBox(
@@ -40,7 +42,7 @@ class VerificationWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                              Text(
-                              "Verification",
+                              AppLocalizations.of(context)!.verification,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 35,
@@ -55,7 +57,7 @@ class VerificationWidget extends StatelessWidget {
                             SizedBox(
                               width: 400,
                               child: Text(
-                                "Enter 6 digit code we sent to  ${FireBaseModel.instance.phonenumber}",
+                                  AppLocalizations.of(context)!.entersexdigit+ "${phoneNumber}",
                                 style: const TextStyle(
                                   color: Color(0xffB3B3B3),
                                   fontSize: 22,
@@ -82,8 +84,9 @@ class VerificationWidget extends StatelessWidget {
                                 forceErrorState: true,
                                 pinputAutovalidateMode:
                                     PinputAutovalidateMode.onSubmit,
-                                validator:
-                                Validation.instance.validateVerificationCode,
+                                validator:(value)=> Validation.instance.
+                                validateVerificationCode(context: context,
+                                    value:value ),
                                 obscuringCharacter: '*',
                                 obscureText: false,
                                 onCompleted: (value) async {
@@ -97,8 +100,8 @@ class VerificationWidget extends StatelessWidget {
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "Resend code in 0:",
+                                   Text(
+                                     AppLocalizations.of(context)!.resendcodeinzero,
                                     style: TextStyle(
                                         color: Color(0xFFB3B3B3),
                                         fontSize: 20,
@@ -107,7 +110,7 @@ class VerificationWidget extends StatelessWidget {
                                   TweenAnimationBuilder(
                                     tween: Tween(begin: 60.0, end: 0),
                                     onEnd: () {
-                                      FireBaseModel.instance.resendCode =
+                                      resendCode =
                                           true;
                                     },
                                     duration: const Duration(seconds: 60),
@@ -129,7 +132,7 @@ class VerificationWidget extends StatelessWidget {
                                     context: context,
                                     phoneNumberController: controller2);
                               },
-                              child: Core.instance.coreButton(buttonText: "   Resend   ",context: context),
+                              child: Core.instance.coreButton(buttonText:  AppLocalizations.of(context)!.resend,context: context),
                             ),
                             const Spacer(
                               flex: 5,

@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/parent_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
@@ -23,18 +26,25 @@ class FirebaseUsersData extends ParentUsersData {
     }
   }
 
-  @override
   Future<void> insert(
       {required String name,
-      required String email,
-      required String password}) async {
+        required String email,
+        required String password,
+        required bool admin,
+        String? profilePicture,
+        String? phoneNumber,
+
+      }) async {
     CollectionReference users = _db.collection('users');
     await users
         .add({
-          'name': name,
-          'email': email,
-          'password': password,
-        })
+      'name': name,
+      'email': email,
+      'password': password,
+      'admin':admin,
+      'phoneNumber':phoneNumber,
+      'profilePicture':profilePicture
+    })
         .then((_) => print("Added Success"))
         .catchError((error) => print(error));
   }
@@ -58,9 +68,7 @@ class FirebaseUsersData extends ParentUsersData {
 
   Future<void> saveUserRecord(UserModel userModel) async {
     try {
-      print("************************** Hello World3 **************************");
       await _db.collection('users').doc(userModel.id).set(userModel.toJson());
-      print("************************** Hello World4 **************************");
     } catch (_) {
       throw 'something went wrong';
     }

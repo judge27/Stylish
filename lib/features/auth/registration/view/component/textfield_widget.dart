@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/core/models/textfield_model.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({super.key, required this.model});
@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
       onChanged: model.onChange,
       controller: model.controller,
       validator: model.validator,
+      onFieldSubmitted: model.onSubmit,
       decoration: model.inputDecoration,
       keyboardType: model.keyboardType,
       textInputAction: model.textInputAction,

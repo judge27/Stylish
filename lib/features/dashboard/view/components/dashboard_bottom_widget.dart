@@ -1,7 +1,10 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DashboardBottomWidegt extends StatelessWidget {
   const DashboardBottomWidegt({super.key,required this.controller});
@@ -13,32 +16,33 @@ class DashboardBottomWidegt extends StatelessWidget {
       value: controller,
       child: BlocBuilder<DashboardcontrollerCubit, DashboardcontrollerState>(
         builder: (context, state) {
-         return BottomNavigationBar(
-
-              backgroundColor: Colors.transparent,
-              selectedItemColor: Colors.blue,
-              unselectedItemColor: Colors.lightGreen,
-              showSelectedLabels: false,
-              onTap:controller.onChangePage,
-             currentIndex: controller.pageIndex,
-             items: const [
-                BottomNavigationBarItem(
-                  label: "Home",
-                  icon: Icon(CupertinoIcons.home,),
-                ),
-                BottomNavigationBarItem(
-                  label: "Services",
-                  icon: Icon(CupertinoIcons.airplane,),
-                ),
-                BottomNavigationBarItem(
-                  label: "Products",
-                  icon: Icon(CupertinoIcons.archivebox,),
-                ),
-                BottomNavigationBarItem(
-                  label: "Profile",
-                  icon: Icon(CupertinoIcons.profile_circled,),
-                ),
-              ]);
+         return BottomNavyBar(
+           selectedIndex: controller.pageIndex,
+           onItemSelected: (index) {
+             controller.onChangePage(index);
+           },
+           backgroundColor: Theme.of(context).cardColor,
+           itemCornerRadius: 2,
+           items: <BottomNavyBarItem>[
+             BottomNavyBarItem(
+                 title:  Text(AppLocalizations.of(context)!.home),
+                 icon: const Icon(CupertinoIcons.home),
+             ),
+             BottomNavyBarItem(
+                 title:  Text(AppLocalizations.of(context)!.products),
+                 icon: const Icon(CupertinoIcons.heart)
+             ),
+             BottomNavyBarItem(
+                 title:  Text(AppLocalizations.of(context)!.cart),
+                 icon: const Icon(CupertinoIcons.cart
+             ),
+            ),
+             BottomNavyBarItem(
+                 title:  Text(AppLocalizations.of(context)!.settings),
+                 icon: const Icon(CupertinoIcons.settings)
+             ),
+           ],
+         );
         },
       ),
     );

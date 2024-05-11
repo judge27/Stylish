@@ -5,6 +5,7 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/auth/login/controller/cubit/logincontroller_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BottomLoginWidget extends StatelessWidget {
   const BottomLoginWidget({super.key, required this.controller});
@@ -29,7 +30,7 @@ class BottomLoginWidget extends StatelessWidget {
                     child: SizedBox(
                       height: context.height / 14,
                       child: Core.instance
-                          .coreButton(buttonText: "Login", context: context),
+                          .coreButton(buttonText: AppLocalizations.of(context)!.login, context: context),
                     ),
                   ),
                   SizedBox(
@@ -39,7 +40,7 @@ class BottomLoginWidget extends StatelessWidget {
                     height: context.height / 18,
                     alignment: Alignment.center,
                     child: Text(
-                      "- OR Continue with -",
+                      AppLocalizations.of(context)!.or,
                       style: TextStyle(
                         color: Theme.of(context).splashColor,
                         fontSize: 18,
@@ -115,7 +116,7 @@ class BottomLoginWidget extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: Text(
-                            "Create An Account",
+                            AppLocalizations.of(context)!.createanaccount,
                             style: TextStyle(
                               color: Theme.of(context).splashColor,
                               fontSize: 18,
@@ -132,7 +133,7 @@ class BottomLoginWidget extends StatelessWidget {
                             onTap: () {
                               Navigator.pushNamed(context, Routes.SIGN_UP);
                             },
-                            child: Text("Sign Up",
+                            child: Text(AppLocalizations.of(context)!.signup,
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontSize: 24,

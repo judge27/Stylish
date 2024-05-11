@@ -1,8 +1,10 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:stylish/features/dashboard/model/product_model.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/view/page/home_page.dart';
+import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 
 import '../../../../../../const.dart';
 
@@ -21,14 +23,14 @@ class HomeProductItem extends StatelessWidget {
           itemBuilder: (_, index) => Container(
             margin: const EdgeInsets.only(right: 15),
             child: Stack(alignment: Alignment.bottomCenter, children: [
-              Center(
-                child: Image.asset(
-                  productItem[index].productImage!,
-                  fit: BoxFit.cover,
-                  width: 250,
-                  height: 280,
-                ),
-              ),
+              // Center(
+              //   child: Image.memory(
+              //     productItem[index].image!??Uint8List(4),
+              //     fit: BoxFit.cover,
+              //     width: 250,
+              //     height: 280,
+              //   ),
+              // ),
               Container(
                 width: 250,
                 height: 110,

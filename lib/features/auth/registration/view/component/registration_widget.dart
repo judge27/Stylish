@@ -5,8 +5,9 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
 import 'package:stylish/features/auth/registration/controller/cubit/registrationcontroller_cubit.dart';
-import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/core/models/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegistrationWidget extends StatelessWidget {
   const RegistrationWidget({super.key, required this.controller});
@@ -35,7 +36,7 @@ class RegistrationWidget extends StatelessWidget {
                             width: context.width,
                             height: context.height / 12,
                             child: Text(
-                              "Create an account",
+                              AppLocalizations.of(context)!.createanaccount,
                               style: TextStyle(
                                 color: Theme.of(context).hintColor,
                                 fontSize: 35,
@@ -55,11 +56,15 @@ class RegistrationWidget extends StatelessWidget {
                               model: TextFieldModel(
                                 textStyle: Core.instance.authTextStyle,
                                 inputDecoration:
-                                    Core.instance.authInputDecoration(context),
+                                    Core.instance.authInputDecoration(context).copyWith(
+                                      hintText: AppLocalizations.of(context)!.name
+                                    ),
                                 controller: controller.nameController,
                                 keyboardType: TextInputType.name,
                                 textInputAction: TextInputAction.next,
-                                validator: Validation.instance.validateName,
+                                validator: (value) => Validation.instance
+                                    .validateName(
+                                        context: context, value: value),
                               ),
                             ),
                           ),
@@ -77,11 +82,12 @@ class RegistrationWidget extends StatelessWidget {
                                   .authInputDecoration(context)
                                   .copyWith(
                                       prefixIcon: const Icon(Icons.email),
-                                      hintText: "Username or Email"),
+                                      hintText: AppLocalizations.of(context)!.email),
                               controller: controller.emailController,
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
-                              validator: Validation.instance.validateEmail,
+                              validator:  (value) => Validation.instance.validateEmail(
+                                  context: context, value: value)  ,
                             )),
                           ),
                           SizedBox(
@@ -101,7 +107,7 @@ class RegistrationWidget extends StatelessWidget {
                                   .authInputDecoration(context)
                                   .copyWith(
                                     prefixIcon: const Icon(Icons.lock),
-                                    hintText: "Password",
+                                    hintText: AppLocalizations.of(context)!.password,
                                     suffixIcon: InkWell(
                                       onTap: controller.togglePassword,
                                       child: Icon(
@@ -114,9 +120,12 @@ class RegistrationWidget extends StatelessWidget {
                                     ),
                                   ),
                               obscureText: controller.obscurePassword,
-                              validator: Validation.instance.validatePassword,
+                              validator: (value)=> Validation.instance.validatePassword(
+                                    context: context, value: value)  ,
                             )),
                           ),
+
+
                           SizedBox(
                             height: context.height / 72,
                           ),

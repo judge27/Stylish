@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/parent_users_data.dart';
 import 'package:path/path.dart';
@@ -32,12 +34,14 @@ class DatabaseUsersData extends ParentUsersData {
   }
 
   static Future<void> _createTables(Database db, _) async {
-   await db.execute("""
+    await db.execute("""
    CREATE TABLE user (
    id INTEGER PRIMARY KEY AUTOINCREMENT,
    name TEXT  NOT NULL,
    email TEXT  NOT NULL,
-   password Text NOT NULL )
+   password Text NOT NULL,
+   admin BOOLEAN
+   )
    """);
   }
 
@@ -48,11 +52,7 @@ class DatabaseUsersData extends ParentUsersData {
   }
 
 
-  @override
-  Future<void> insert(
-      {required String name, required String email, required String password}) async {
-    await _database.insert('user', {'name':name,'email':email,'password':password});
-  }
+
 
   @override
   Future<UserModel> fetech() {
@@ -64,6 +64,11 @@ class DatabaseUsersData extends ParentUsersData {
   Future<void> update({required UserModel userModel}) {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> insert({required String name, required String email, required String password, required bool admin, }) async{
+    await _database.insert('user', {'name':name,'email':email,'password':password,'admin':admin},);
   }
 
 

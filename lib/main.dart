@@ -10,11 +10,7 @@ import 'package:stylish/core/theme/themes.dart';
 import 'package:stylish/core/navigation/navigation.dart';
 import 'package:stylish/core/firebase/firebase_options.dart';
 import 'package:stylish/core/theme/apptheme_cubit.dart';
-import 'package:stylish/features/dashboard/modules/cart/view/page/cart_page.dart';
-import 'package:stylish/features/dashboard/modules/home/view/page/home_page.dart';
-import 'package:stylish/features/dashboard/modules/payment/view/page/payment_page.dart';
-import 'package:stylish/features/dashboard/modules/products/view/page/products_page.dart';
-import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'core/firebase/firebase.dart';
 
@@ -60,7 +56,7 @@ class MyApp extends StatelessWidget {
                   // Navigation.routes3
                   //     : // Onboarding Page
                   // Navigation.routes,
-                  home: PaymentPage(),
+                  home: DashboardPage(),
                 );
               }
               else {
@@ -70,14 +66,15 @@ class MyApp extends StatelessWidget {
                   theme: Themes.darkTheme,
                   debugShowCheckedModeBanner: false,
                   onGenerateRoute: Navigation.onGenerateRoute,
-                  onGenerateInitialRoutes: (_) => onBoarding
-                      ? FireBaseModel.instance.checkUserNullable()
-                      ? // Login Page
-                  Navigation.routes2
-                      : // GetStarted Page
-                  Navigation.routes3
-                      : // Onboarding Page
-                  Navigation.routes,
+                  // onGenerateInitialRoutes: (_) => onBoarding
+                  //     ? FireBaseModel.instance.checkUserNullable()
+                  //     ? // Login Page
+                  // Navigation.routes2
+                  //     : // GetStarted Page
+                  // Navigation.routes3
+                  //     : // Onboarding Page
+                  // Navigation.routes,
+                 home: DashboardPage(),
 
                );
               }

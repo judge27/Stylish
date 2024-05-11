@@ -1,6 +1,10 @@
 
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
@@ -34,42 +38,46 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
     emit(RegistrationcontrollerSecured());
   }
 
-  // Register User Method
+  // Register with  email and password  method
   void confirmRegistration(BuildContext context) async {
-
     if (formKey.currentState!.validate()) {
       try {
-
-      final userCredential=await FireBaseModel.instance
-            .registerWithEmailAndPassword(context: context,
-            email: emailController.text.trim(),
-            password: passwordController.text.trim()
+        UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
         );
-
-      final UserModel userModel=UserModel(
+        final UserModel userModel = UserModel(
           id: userCredential.user!.uid.toString(),
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
           profilePicture: '',
           phoneNumber: '',
-      );
+          admin: false,
+        );
 
-      FireBaseModel.instance.name=nameController.text;
-      FireBaseModel.instance.email=emailController.text;
-      FireBaseModel.instance.password=passwordController.text;
-      FireBaseModel.instance.constImage= '';
+        await FirebaseUsersData.getInstance.saveUserRecord(userModel);
 
-      await FirebaseUsersData.getInstance.saveUserRecord(userModel);
+        context.showToastMessage = "Accepted Registration.";
 
-      context.showToastMessage = "Accepted Registration.";
-        Navigator.pushNamed(context, Routes.PHONE_NUMBER);
-      }
-      catch(_){
+        Navigator.pushNamed(context, Routes.GETSTARTED);
 
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          context.showToastMessage = "The password provided is too weak.";
+        } else if (e.code == 'email-already-in-use') {
+          context.showToastMessage = "The account already exists for that email.";
+        }
+        throw(e.code);
+      } catch (_) {
+        context.showToastMessage = 'something went wrong ,please try again';
+        rethrow;
       }
     }
+
   }
+
+
 
   // Register With Google Account Method
   Future<void> handleGoogleSignin({required BuildContext context}) async {

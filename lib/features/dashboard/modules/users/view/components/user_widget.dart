@@ -1,242 +1,224 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
-import 'package:stylish/features/auth/registration/model/textfield_model.dart';
+import 'package:stylish/core/models/textfield_model.dart';
 import 'package:stylish/features/auth/registration/view/component/textfield_widget.dart';
 import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserItemWidget extends StatelessWidget {
   const UserItemWidget({
-    Key? key, // Add Key parameter
+    Key? key,required this.controller
   }) : super(key: key);
+  final UsercontrollerCubit controller;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UsercontrollerCubit>(
-      create: (context) => UsercontrollerCubit(),
+    return BlocProvider<UsercontrollerCubit>.value(
+      value:controller,
       child: BlocBuilder<UsercontrollerCubit, UsercontrollerState>(
         builder: (context, state) {
-          UsercontrollerCubit controller = context.read<UsercontrollerCubit>();
           return SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.symmetric( horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: Form(
                 key: controller.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 20, right : context.width/11), // Add padding above the first row
-                      child:
-                      Row(
-                        children: [
-                          Container(
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              size: 32,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: const Text(
-                                "Profile",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                 Center(child:  Stack(
+                             alignment: Alignment.bottomRight,
+                             children: [
+                               CircleAvatar(
+                                 radius: 40,
+                                 backgroundImage:
+                                 NetworkImage(controller.profileImage??"")
+                                 ),
+                               InkWell(
+                                 onTap: () async {
+                                   controller.uploadImageToStorage();
+                                 },
+                                 child: const CircleAvatar(
+                                   radius: 13,
+                                   backgroundColor: Colors.white,
+                                   child: CircleAvatar(
+                                     radius: 11.5,
+                                     backgroundColor: Colors.green,
+                                     child: Icon(
+                                       Icons.edit,
+                                       color: Colors.white,
+                                       size: 17,
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                             ],
+                           ),
+                           ),
                     const SizedBox(
                       height: 30,
                     ),
-                    Center(
-                      child: Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage(
-                              controller.user.profilePicture.toString(),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () => controller.getImageUrl(),
-                            child: const CircleAvatar(
-                              radius: 13,
-                              backgroundColor: Colors.white,
-                              child: CircleAvatar(
-                                radius: 11.5,
-                                backgroundColor: Colors.green,
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 17,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    Text(
+                     AppLocalizations.of(context)!.personaldetails,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context).hintColor),
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text("Personal Details", style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Theme.of(context).hintColor
-                    ),),
                     const SizedBox(
                       height: 15,
                     ),
                     TextFieldWidget(
                       model: TextFieldModel(
+                        textStyle: Core.instance.authTextStyle,
                         inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(labelText: "User Name",
-                            labelStyle: TextStyle(color: Theme.of(context).hintColor , fontWeight: FontWeight.w600,
-                                fontSize: 20) ),
-                        keyboardType: TextInputType.name,
+                            Core.instance.authInputDecoration(context).copyWith(
+                              hintText: AppLocalizations.of(context)!.name,
+                            ),
                         controller: controller.nameController,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
-                        validator: Validation.instance.validateName,
-                        textStyle: Core.instance.userTextStyle,
+                        validator: (value) => Validation.instance
+                            .validateName(context: context, value: value),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     TextFieldWidget(
-                      model: TextFieldModel(
-                        inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(
-                            prefixIcon: const Icon(Icons.email)
-                            ,labelText: "Email Address",labelStyle: TextStyle(color: Theme.of(context).hintColor ,
-                            fontWeight: FontWeight.w600, fontSize: 20)
-                        ),
-                        controller: controller.emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        validator: Validation.instance.validateEmail,
-                        textStyle: Core.instance.userTextStyle,
-                      ),
-                    ),
+                        model: TextFieldModel(
+                      textStyle: Core.instance.authTextStyle,
+                      inputDecoration: Core.instance
+                          .authInputDecoration(context)
+                          .copyWith(
+                              prefixIcon: const Icon(Icons.email),
+                              hintText: AppLocalizations.of(context)!.email),
+                      controller: controller.emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) => Validation.instance
+                          .validateEmail(context: context, value: value),
+                    )),
                     const SizedBox(
                       height: 30,
                     ),
                     TextFieldWidget(
-                      model: TextFieldModel(
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: controller.passwordController,
-                        textInputAction: TextInputAction.done,
-                        inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(
-                          prefixIcon: const Icon(Icons.lock),
-                          labelText: "Password",
-                          labelStyle: TextStyle(color: Theme.of(context).hintColor ,
-                              fontWeight: FontWeight.w600, fontSize: 20),
-                          suffixIcon: InkWell(
-                            onTap: controller.togglePassword,
-                            child: Icon(
-                              controller.obscurePassword
-                                  ? CupertinoIcons.eye_slash_fill
-                                  : CupertinoIcons.eye_fill,
-                              color: Colors.black54,
-                              size: 24,
-                            ),
-                          ),
-                        ),
-                        obscureText: controller.obscurePassword,
-                        validator: Validation.instance.validatePassword,
-                        textStyle: Core.instance.userTextStyle,
-                      ),
-                    ),
+                        model: TextFieldModel(
+                      textStyle: Core.instance.authTextStyle,
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passwordController,
+                      textInputAction: TextInputAction.done,
+                      inputDecoration:
+                          Core.instance.authInputDecoration(context).copyWith(
+                                prefixIcon: const Icon(Icons.lock),
+                                hintText: AppLocalizations.of(context)!.password,
+                                suffixIcon: InkWell(
+                                  onTap: controller.togglePassword,
+                                  child: Icon(
+                                    controller.obscurePassword
+                                        ? CupertinoIcons.eye_slash_fill
+                                        : CupertinoIcons.eye_fill,
+                                    color: Colors.black54,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                      obscureText: controller.obscurePassword,
+                      validator: (value) => Validation.instance
+                          .validatePassword(context: context, value: value),
+                    )),
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      children: [
-                        const Spacer() , Text("Change Password",
-                          style: TextStyle (color: Theme.of(context).primaryColor ,
-                              decoration: TextDecoration.underline
-                              , fontSize: 15, fontWeight: FontWeight.w600),
-                        )
-                      ],
-                    )
-                    ,
                     ///////////////////////////////////////////////////////////////////
                     const SizedBox(
                       height: 20,
                     ),
-                    const Divider(thickness: 1,),
+                    const Divider(
+                      thickness: 1,
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text("Bank Account Details", style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Theme.of(context).hintColor
-                    ),),
+                    Text(
+                      AppLocalizations.of(context)!.bankdetails,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Theme.of(context).hintColor),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
                     TextFieldWidget(
                       model: TextFieldModel(
+                        textStyle: Core.instance.authTextStyle,
                         inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(labelText: "Bank Account Number",
-                            labelStyle: TextStyle(color: Theme.of(context).hintColor , fontWeight: FontWeight.w600,
-                                fontSize: 20) ),
-                        keyboardType: TextInputType.name,
+                            Core.instance.authInputDecoration(context).copyWith(
+                              hintText: AppLocalizations.of(context)!.name
+                            ),
                         controller: controller.nameController,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
-                        validator: Validation.instance.validateName,
-                        textStyle: Core.instance.userTextStyle,
+                        validator: (value) => Validation.instance
+                            .validateName(context: context, value: value),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
                     TextFieldWidget(
-                      model: TextFieldModel(
-                        inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(labelText: "Account Holder’s Name",
-                            labelStyle: TextStyle(color: Theme.of(context).hintColor , fontWeight: FontWeight.w600,
-                                fontSize: 20) ),
-                        keyboardType: TextInputType.name,
-                        controller: controller.nameController,
-                        textInputAction: TextInputAction.next,
-                        validator: Validation.instance.validateName,
-                        textStyle: Core.instance.userTextStyle,
-                      ),
-                    ),
+                        model: TextFieldModel(
+                      textStyle: Core.instance.authTextStyle,
+                      inputDecoration: Core.instance
+                          .authInputDecoration(context)
+                          .copyWith(
+                              prefixIcon: const Icon(Icons.email),
+                              hintText: AppLocalizations.of(context)!.email),
+                      controller: controller.emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                      validator: (value) => Validation.instance
+                          .validateEmail(context: context, value: value),
+                    )),
                     const SizedBox(
                       height: 30,
                     ),
                     TextFieldWidget(
-                      model: TextFieldModel(
-                        inputDecoration:
-                        Core.instance.authInputDecoration(context).copyWith(labelText: "IFSC Code",
-                            labelStyle: TextStyle(color: Theme.of(context).hintColor , fontWeight: FontWeight.w600,
-                                fontSize: 20) ),
-                        keyboardType: TextInputType.name,
-                        controller: controller.nameController,
-                        textInputAction: TextInputAction.next,
-                        validator: Validation.instance.validateName,
-                        textStyle: Core.instance.userTextStyle,
-                      ),
-                    ),
+                        model: TextFieldModel(
+                      textStyle: Core.instance.authTextStyle,
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passwordController,
+                      textInputAction: TextInputAction.done,
+                      inputDecoration:
+                          Core.instance.authInputDecoration(context).copyWith(
+                                prefixIcon: const Icon(Icons.lock),
+                                hintText: AppLocalizations.of(context)!.password,
+                                suffixIcon: InkWell(
+                                  onTap: controller.togglePassword,
+                                  child: Icon(
+                                    controller.obscurePassword
+                                        ? CupertinoIcons.eye_slash_fill
+                                        : CupertinoIcons.eye_fill,
+                                    color: Colors.black54,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                      obscureText: controller.obscurePassword,
+                      validator: (value) => Validation.instance
+                          .validatePassword(context: context, value: value),
+                    )),
                     const SizedBox(
                       height: 30,
                     ),
@@ -245,11 +227,11 @@ class UserItemWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: InkWell(
-                        onTap: () {
-                          controller.onSave(context: context);
+                        onTap: () async{
+                          await controller.onSave(context: context);
                         },
                         child: Core.instance.coreButton(
-                          buttonText: "Save",
+                          buttonText: AppLocalizations.of(context)!.save,
                           context: context,
                         ),
                       ),
