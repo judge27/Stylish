@@ -3,14 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stylish/core/constants/constants.dart';
+import 'package:stylish/core/languages/language_cubit.dart';
+import 'package:stylish/core/models/enums/language.dart';
 import 'package:stylish/core/models/enums/themestate.dart';
 import 'package:stylish/core/theme/themes.dart';
 import 'package:stylish/core/navigation/navigation.dart';
 import 'package:stylish/core/firebase/firebase_options.dart';
 import 'package:stylish/core/theme/apptheme_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:stylish/features/dashboard/modules/addproduct/view/page/new_product_page.dart';
 
 import 'core/firebase/firebase.dart';
 
@@ -22,14 +26,12 @@ void main() async {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   sharedPreferences = await SharedPreferences.getInstance();
   onBoarding = sharedPreferences!.getBool('onboarding') ?? false;
-  runApp(
-      DevicePreview(
-        enabled: false,
-        builder: (context) {
-         return const MyApp();
-        },
-      )
-      );
+  runApp(DevicePreview(
+    enabled: false,
+    builder: (context) {
+      return const MyApp();
+    },
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,47 +39,59 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppthemeCubit>(
-        create: (context) => AppthemeCubit()..chnageTheme(ThemeState.Initial),
-        child: BlocBuilder<AppthemeCubit, AppThemeState>(
-            builder: (context, state) {
-              if( state is AppLightTheme){
-                return MaterialApp(
-                  builder: DevicePreview.appBuilder,
-                  useInheritedMediaQuery: true,
-                  theme: Themes.lightTheme,
-                  debugShowCheckedModeBanner: false,
-                  onGenerateRoute: Navigation.onGenerateRoute,
-                  // onGenerateInitialRoutes: (_) => onBoarding
-                  //     ? FireBaseModel.instance.checkUserNullable()
-                  //     ? // Login Page
-                  // Navigation.routes2
-                  //     : // GetStarted Page
-                  // Navigation.routes3
-                  //     : // Onboarding Page
-                  // Navigation.routes,
-                  home: DashboardPage(),
-                );
-              }
-              else {
-               return MaterialApp(
-                  builder: DevicePreview.appBuilder,
-                  useInheritedMediaQuery: true,
-                  theme: Themes.darkTheme,
-                  debugShowCheckedModeBanner: false,
-                  onGenerateRoute: Navigation.onGenerateRoute,
-                  // onGenerateInitialRoutes: (_) => onBoarding
-                  //     ? FireBaseModel.instance.checkUserNullable()
-                  //     ? // Login Page
-                  // Navigation.routes2
-                  //     : // GetStarted Page
-                  // Navigation.routes3
-                  //     : // Onboarding Page
-                  // Navigation.routes,
-                 home: DashboardPage(),
-
-               );
-              }
-        }));
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AppthemeCubit()..chnageTheme(ThemeState.Initial),
+          ),
+          BlocProvider(
+            create: (context) =>
+            LanguageCubit()..chnageLanguage(Languages.Initial),
+          ),
+        ],
+        child:  Builder(
+            builder: (context) {
+              var themeState =context.select((AppthemeCubit cubit)=>cubit.state);
+              var language =context.select((LanguageCubit cubit)=>cubit.state);
+              return MaterialApp(
+                locale: language is LanguageChanged? language.languageCode=='en'?Locale('en'):Locale('ar'):Locale('en'),
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate
+                ],
+                supportedLocales: const [
+                  Locale("en"),
+                  Locale("ar"),
+                ],
+                localeResolutionCallback: (deviceLocale, supportedLocales) {
+                  for (var locale in supportedLocales) {
+                    if (deviceLocale != null) {
+                      if (deviceLocale.languageCode == locale.languageCode) {
+                        return deviceLocale;
+                      }
+                    }
+                  }
+                  return supportedLocales.first;
+                },
+                builder: DevicePreview.appBuilder,
+                useInheritedMediaQuery: true,
+                theme: themeState is AppChangeTheme? themeState.appTheme=='light'?Themes.lightTheme:Themes.darkTheme :Themes.lightTheme,
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: Navigation.onGenerateRoute,
+                onGenerateInitialRoutes: (_) =>
+                onBoarding
+                    ? FireBaseModel.instance.checkUserNullable()
+                    ? // Login Page
+                Navigation.routes2
+                    : // GetStarted Page
+                Navigation.routes3
+                    : // Onboarding Page
+                Navigation.routes,
+              );
+            }
+        )
+    );
   }
 }
