@@ -8,6 +8,12 @@ class Routes {
   static const GETSTARTED = "GETSTARTED";
   static const DASHBOARD = "DASHBOARD";
   static const PROFILE = "PROFILE";
-  static const NewProduct = "NEWProduct";
+  static const NEWProduct = "NEWProduct";
+  static const PRODUCTDETAILS = "PRODUCTDETAILS";
+  static const CHANGEPASSWORD = "CHANGEPASSWORD";
+  static const CHANGEPHONENUMBER = "CHANGEPHONENUMBER";
+  static const EDITPROFILE = "EDITPROFILE";
+
+
 
 }

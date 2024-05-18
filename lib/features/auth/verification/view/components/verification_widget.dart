@@ -57,7 +57,7 @@ class VerificationWidget extends StatelessWidget {
                             SizedBox(
                               width: 400,
                               child: Text(
-                                  AppLocalizations.of(context)!.entersexdigit+ "${phoneNumber}",
+                                  AppLocalizations.of(context)!.entersexdigit+ "${countryCode+phoneNumber}",
                                 style: const TextStyle(
                                   color: Color(0xffB3B3B3),
                                   fontSize: 22,

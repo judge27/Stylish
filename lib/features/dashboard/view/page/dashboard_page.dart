@@ -33,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                controller.pageIndex==2?AppLocalizations.of(context)!.cart:
               AppLocalizations.of(context)!.settings),
               leading: Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child:InkWell(
                     onTap: (){
                       if ( sharedPreferences!.getString('lang')=='en') {
@@ -44,11 +44,9 @@ class DashboardPage extends StatelessWidget {
                             .chnageLanguage(Languages.en);
                       }
                     },
-                    child: Icon( CupertinoIcons.globe)),
+                    child: const Icon( CupertinoIcons.globe)),
               ),
               actions: [
-
-
 
                 InkWell(
                     onTap: () {
@@ -69,19 +67,17 @@ class DashboardPage extends StatelessWidget {
                       ),
                     )
                 ),
-                user.admin==true?
-                InkWell(
-                    onTap: () {
-                        context.pushTo=Routes.NewProduct;
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20,left: 20),
-                      child:  const Icon(CupertinoIcons.add),
-                      ),
-                    ):SizedBox()
+
               ],
             ),
             body: DashboardBodyWidget(controller: controller,),
+              floatingActionButton:user.admin==false||controller.pageIndex==3?
+              const SizedBox():
+              FloatingActionButton(
+              onPressed: (){context.pushTo=Routes.NEWProduct;},
+              tooltip: 'Insert',
+              child:   const Icon(Icons.add),
+            ),
             bottomNavigationBar: DashboardBottomWidegt(controller: controller),
           );
         },

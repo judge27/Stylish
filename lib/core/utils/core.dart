@@ -103,6 +103,5 @@ class Core {
         color: Colors.grey, fontSize: 18, fontWeight: FontWeight.bold);
 
 
-
-  }
+}
 

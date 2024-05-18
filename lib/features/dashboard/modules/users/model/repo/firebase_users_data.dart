@@ -91,8 +91,8 @@ class FirebaseUsersData extends ParentUsersData {
       await _db.collection('users').doc(FireBaseModel.instance.autUser?.uid).
       update(json);
     }
-    catch(_){
-      throw 'something went wrong';
+    catch(e){
+      throw 'something went wrong $e';
     }
   }
 }

@@ -23,21 +23,18 @@ class ProductItemWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            InkWell(
-              onTap: ()async{
-                if(user.admin)
-                 controller!.updateImage(productModel.id);
-              },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(
-                    Radius.circular(8)),
-                child: productModel.productImage==null? Image.asset(kJordan3):
-                Image.network(productModel.productImage!, fit: BoxFit.cover,
-                height: 196,
-                width: double.infinity,
-              )
-              ),
-              ),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(
+                  Radius.circular(8)),
+              child: connected?
+              Image.network(productModel.productImage!, fit: BoxFit.cover,
+              height: 196,
+              width: double.infinity,
+            ):
+            Image.memory(productModel.image??Uint8List(1),fit: BoxFit.cover,
+              height: 196,
+              width: double.infinity,)
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 8.0,right: 8.0),
               child: SizedBox(

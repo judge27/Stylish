@@ -36,3 +36,4 @@ const String kMaestro= "assets/images/Maestro.png";
 const String kVISA= "assets/images/VISA.png";
 const String kStarsImage= "assets/images/StarsImage.png";
 const String kStarsssssImage= "assets/images/Starssss74.png";
+const String kDefaultAvatar= "assets/images/default_avatar.png";

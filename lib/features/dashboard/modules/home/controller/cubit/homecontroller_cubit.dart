@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:stylish/const.dart';
+import 'package:stylish/core/constants/constants.dart';
+import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 
 part 'homecontroller_state.dart';
@@ -22,6 +24,7 @@ class HomecontrollerCubit extends Cubit<HomecontrollerState> {
         curve: Curves.easeInOutCubic);
     emit(HomecontrollerInitial());
   }
+
 
 
 }

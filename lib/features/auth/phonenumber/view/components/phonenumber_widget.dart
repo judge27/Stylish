@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/core/utils/validation.dart';
@@ -63,7 +64,7 @@ class PhoneNumberWidget extends StatelessWidget {
                             // Phonefield with country code
                             IntlPhoneField(
                               autofocus: true,
-                              initialCountryCode: AppLocalizations.of(context)!.eg,
+                              initialCountryCode: countryCode,
                               validator: (value) {
                                 Validation.instance.validatePhone(
                                     context: context,
@@ -72,7 +73,7 @@ class PhoneNumberWidget extends StatelessWidget {
                               },
                               controller: controller.phoneController,
                               onChanged: (data) {
-                                controller.countrycode = data.countryCode;
+                                countryCode = data.countryCode;
                                 controller.phoneController.text =
                                     data as String;
                               },

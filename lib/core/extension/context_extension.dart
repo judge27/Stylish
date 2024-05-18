@@ -14,8 +14,8 @@ extension ContextExtension on BuildContext {
         msg: message,
         gravity: ToastGravity.TOP,
         timeInSecForIosWeb: 1,
-        backgroundColor: const Color(0xFFF83758),
+        backgroundColor: Theme.of(this).primaryColor,
         textColor: Colors.white,
         fontSize: 18.0,
-      );
+  );
 }

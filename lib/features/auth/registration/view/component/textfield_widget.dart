@@ -11,6 +11,7 @@ class TextFieldWidget extends StatelessWidget {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: model.onChange,
+      readOnly: model.readOnly??false,
       controller: model.controller,
       validator: model.validator,
       onFieldSubmitted: model.onSubmit,

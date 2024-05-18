@@ -29,20 +29,28 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
   // verify smsCode Method
   Future<void> confirmVerification({required BuildContext context}) async {
     if (verificationKey.currentState!.validate()) {
+
+
+
       try {
         PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: verificationId!, smsCode: smsCode);
+            verificationId: verificationId, smsCode: smsCode);
         await auth.signInWithCredential(credential);
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.GETSTARTED, (_) => false);
+        Map<String, dynamic> model = {
+          'PhoneNumber':countryCode+phoneNumber
+        };
+        user.phoneNumber=countryCode+phoneNumber;
+        await FirebaseUsersData.getInstance.updateSingleField(model);
+
         context.showToastMessage = "Phone Verified";
       } catch (e) {
         context.showToastMessage = "Code is Wrong";
         print(e);
       }
     } else {
-
-          context.showToastMessage = AppLocalizations.of(context)!.verficationrequired;
+      context.showToastMessage = AppLocalizations.of(context)!.verficationrequired;
     }
   }
   // resend smsCode method
@@ -51,7 +59,7 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
       required PhonenumbercontrollerCubit phoneNumberController}) async {
     if (resendCode) {
       await auth.verifyPhoneNumber(
-        phoneNumber:phoneNumber,
+        phoneNumber:countryCode+phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
         verificationFailed: (FirebaseAuthException e) {},
         codeSent: (String verificationId, int? resendToken) async {
@@ -60,10 +68,8 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
               ? context.showToastMessage = AppLocalizations.of(context)!.coderesent
               : context.showToastMessage =
           'Please check your phone for the verification code.';
-          Navigator.pushNamed(context, Routes.VERIFICATION,
-              arguments: phoneNumberController);
           Map<String, dynamic> model = {
-            'PhoneNumber':phoneNumber,
+            'PhoneNumber':countryCode+phoneNumber,
           };
           await FirebaseUsersData.getInstance.updateSingleField(model);
         },

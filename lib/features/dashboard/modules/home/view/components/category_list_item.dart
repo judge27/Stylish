@@ -4,6 +4,7 @@ import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 
 class CategoryListItemWidget extends StatelessWidget {
   const CategoryListItemWidget({super.key,required this.dashboardcontrollerCubit});
@@ -16,6 +17,7 @@ class CategoryListItemWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               globalCategory="Beauty";
+              ProductscontrollerCubit.instance.init();
               dashboardcontrollerCubit.onChangePage(1);
             },
             child: SizedBox(
@@ -46,6 +48,8 @@ class CategoryListItemWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               globalCategory="Fashion";
+              ProductscontrollerCubit.instance.init();
+
               dashboardcontrollerCubit.onChangePage(1);
             },
             child: SizedBox(
@@ -77,6 +81,8 @@ class CategoryListItemWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               globalCategory="Kids";
+              ProductscontrollerCubit.instance.init();
+
               dashboardcontrollerCubit.onChangePage(1);
             },
             child: SizedBox(
@@ -108,6 +114,7 @@ class CategoryListItemWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               globalCategory="Mens";
+              ProductscontrollerCubit.instance.init();
               dashboardcontrollerCubit.onChangePage(1);
             },
             child: SizedBox(
@@ -139,6 +146,7 @@ class CategoryListItemWidget extends StatelessWidget {
           InkWell(
             onTap: (){
               globalCategory="Women";
+              ProductscontrollerCubit.instance.init();
               dashboardcontrollerCubit.onChangePage(1);
             },
             child: SizedBox(

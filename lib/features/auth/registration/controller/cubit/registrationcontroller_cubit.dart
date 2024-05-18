@@ -55,7 +55,7 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
           phoneNumber: '',
           admin: false,
         );
-
+        user=userModel;
         await FirebaseUsersData.getInstance.saveUserRecord(userModel);
 
         context.showToastMessage = "Accepted Registration.";

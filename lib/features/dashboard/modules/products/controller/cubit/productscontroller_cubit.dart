@@ -9,6 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
+import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/dashboard/modules/cart/controller/cubit/cartcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/model/repo/database_product_data.dart';
@@ -18,52 +19,64 @@ import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_use
 part 'productscontroller_state.dart';
 
 class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
-  static ProductscontrollerCubit instance=ProductscontrollerCubit();
-  ProductscontrollerCubit() : super(ProductscontrollerLoading())  {
-    init();
+  static ProductscontrollerCubit instance = ProductscontrollerCubit();
 
+  ProductscontrollerCubit() : super(ProductscontrollerLoading()) {
+    init();
   }
+  bool sorted=true;
   XFile? image;
   String homeTitle = "0 Iteams";
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
   List<ProductModel> products = [];
+  var cateogries =[
+    "All",
+    "Beauty",
+    "Fashion",
+    "Kids",
+    "Mens",
+    "Women"
+  ];
 
-  Future<void>init() async {
+
+
+  Future<void> init() async {
     emit(ProductscontrollerLoading());
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    final List<ConnectivityResult> connectivityResult = await (Connectivity()
+        .checkConnectivity());
 
-    if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile)) {
+    if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
       products =
-      globalCategory == "" ? await (await FirebaseProductsData.getInstance)
+      globalCategory == "All" ? await (await FirebaseProductsData.getInstance)
           .fetchProducts() :
       await (await FirebaseProductsData.getInstance).fetchProductsWithCategory(
           productCategory: globalCategory);
     }
-    else{
+    else {
       products =
-      globalCategory == "" ? await (await DatabaseProductsData.getInstance)
+      globalCategory == "All" ? await (await DatabaseProductsData.getInstance)
           .fetchProducts() :
       await (await DatabaseProductsData.getInstance).fetchProductsWithCategory(
           productCategory: globalCategory);
-
     }
 
-    homeTitle=products.length.toString()+" Items";
-    if(products.isEmpty)
+    homeTitle = products.length.toString() + " Items";
+    if (products.isEmpty)
       emit(ProductscontrollerEmpty());
     else {
       emit(ProductscontrollerLoaded());
     }
-
   }
 
 
+  void addTOFav(String id, int value, BuildContext context) async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity()
+        .checkConnectivity());
 
-  void addTOFav(String id,int value,BuildContext context)async{
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
-
-    if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile)) {
+    if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
       (await FirebaseProductsData.getInstance).updateFavorite(value, id);
       (await FirebaseProductsData.getInstance).updateDemandQuantity(value, id);
     }
@@ -76,43 +89,53 @@ class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
     emit(ProductscontrollerLoaded());
   }
 
-  void addTOCart(String id,int value)async {
-
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
-
-    if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile))
+  void addTOCart(String id, int value) async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity()
+        .checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
+      connected = true;
       (await FirebaseProductsData.getInstance).updateCart(value, id);
-    else
+    }
+    else {
+      connected = false;
       (await DatabaseProductsData.getInstance).updateCart(value, id);
-
+    }
     init();
     emit(ProductscontrollerLoaded());
   }
 
-  void onDelete(String id)async{
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
-
-    if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile))
+  void onDelete(String id) async {
+    final List<ConnectivityResult> connectivityResult = await (Connectivity()
+        .checkConnectivity());
+    if (connectivityResult.contains(ConnectivityResult.wifi) ||
+        connectivityResult.contains(ConnectivityResult.mobile)) {
+      connected = true;
       (await FirebaseProductsData.getInstance).deleteProduct(id);
-    else
+    }
+    else {
+      connected = false;
       (await DatabaseProductsData.getInstance).deleteProduct(id);
-
+    }
     init();
     emit(ProductscontrollerLoaded());
   }
 
 
-
-  Future<void> updateImage(String id)async {
+  Future<void> updateImage(String id) async {
     final ImagePicker picker = ImagePicker();
     image = await picker.pickImage(source: ImageSource.gallery);
     if (image!.path != null) {
-      String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-      Reference ref = _storage.ref().child('productsImages').child(uniqueFileName);
+      String uniqueFileName = DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString();
+      Reference ref = _storage.ref().child('productsImages').child(
+          uniqueFileName);
       try {
         await ref.putFile(File(image!.path));
         String downloadUrl = await ref.getDownloadURL();
-        (await FirebaseProductsData.getInstance).newImage(downloadUrl,id);
+        (await FirebaseProductsData.getInstance).newImage(downloadUrl, id);
         init();
         emit(ProductscontrollerLoaded());
       }
@@ -120,15 +143,36 @@ class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
         print(error);
       }
     }
-
   }
 
 
-
-  Future<void>  searchProducts(String searchitem) async {
-    products = await (await FirebaseProductsData.getInstance).fetchSearchProducts(productName: searchitem);
-    init();
-  emit(ProductscontrollerSearched());
+  Future<void> searchProducts(String value) async {
+    if(value.isEmpty){
+      init();
+    }
+    else {
+      products = products.where((element) {
+        String searchItem = "${element.productName.toLowerCase()} ${element
+            .productDesc!.toLowerCase()} ${element.productCategory
+            .toLowerCase()} ";
+        return searchItem.toLowerCase().contains(value.toLowerCase());
+      }).toList();
+      homeTitle = products.length.toString() + " Items";
+    }
+    emit(ProductscontrollerLoaded());
   }
 
+  Future<void> sortProducts() async {
+    sorted=!sorted;
+    Comparator<ProductModel> sortById = (a, b) => a.productCurrentPrice!.compareTo(b.productCurrentPrice!);
+    products.sort(sortById);
+    if(sorted)
+      products=products.reversed.toList();
+    emit(ProductscontrollerLoaded());
+}
+
+  Future<void> filterProducts(String value) async {
+      globalCategory =value;
+     init();
+ }
 }

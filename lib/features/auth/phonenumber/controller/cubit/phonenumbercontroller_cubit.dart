@@ -20,8 +20,7 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
   //  // controller object of phone textField
   TextEditingController phoneController = TextEditingController();
 
-  // country code variable
-  String countrycode = '';
+
 
   // verify the phone number method
   void confirmSubmitPhoneNumber(
@@ -29,17 +28,50 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
       required PhonenumbercontrollerCubit phoneNumberController}) async {
     if (Validation.instance
         .validatePhone(context: context, value: phoneController.text))
-
+      // // verify the phone number method
+      // Future<void> verifyPhoneNumber({
+      //   required BuildContext context,
+      //   required PhonenumbercontrollerCubit controller,
+      // }) async {
+      //   try {
+      //     context.showToastMessage = " Checking ...";
+      //     await FirebaseAuth.instance.verifyPhoneNumber(
+      //       phoneNumber: _instance.phonenumber,
+      //       verificationCompleted: (PhoneAuthCredential credential) {},
+      //       verificationFailed: (FirebaseAuthException e) {},
+      //       codeSent: (String verificationId, int? resendToken) async {
+      //         _instance.verificationId = verificationId;
+      //         _instance.resendCode
+      //             ? context.showToastMessage = 'Code Resent.'
+      //             : context.showToastMessage =
+      //                 'Please check your phone for the verification code.';
+      //         Navigator.pushNamed(context, Routes.VERIFICATION,
+      //             arguments: controller);
+      //         Map<String, dynamic> model = {
+      //         'Name': name,
+      //         'Email': email,
+      //         'Password': password,
+      //         'ProfilePicture': '',
+      //         'PhoneNumber':_instance.phonenumber,
+      //         };
+      //         await FirebaseUsersData.getInstance.updateSingleField(model);
+      //       },
+      //       codeAutoRetrievalTimeout: (String verificationId) {},
+      //     );
+      //   } catch (e) {
+      //     context.showToastMessage = "Wrong Excpection";
+      //   }
+      // }
     {
       try {
         context.showToastMessage = " Checking ...";
-        phoneNumber=countrycode + phoneController.text;
+        phoneNumber= phoneController.text;
         await auth.verifyPhoneNumber(
-          phoneNumber: phoneNumber,
+          phoneNumber: countryCode+phoneNumber,
           verificationCompleted: (PhoneAuthCredential credential) {},
           verificationFailed: (FirebaseAuthException e) {},
-          codeSent: (String verificationId, int? resendToken) async {
-            verificationId = verificationId;
+          codeSent: (String verificationIdd, int? resendToken) async {
+            verificationId = verificationIdd;
             resendCode
                 ? context.showToastMessage = 'Code Resent.'
                 : context.showToastMessage =

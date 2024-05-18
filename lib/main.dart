@@ -14,7 +14,7 @@ import 'package:stylish/core/navigation/navigation.dart';
 import 'package:stylish/core/firebase/firebase_options.dart';
 import 'package:stylish/core/theme/apptheme_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:stylish/features/dashboard/modules/addproduct/view/page/new_product_page.dart';
+import 'package:stylish/core/utils/core.dart';
 
 import 'core/firebase/firebase.dart';
 

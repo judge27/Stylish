@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/users/modules/profile/controller/cubit/profilecontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/users/view/components/settings_widget.dart';
 import 'package:stylish/features/dashboard/modules/users/view/components/user_widget.dart';
 
 class UserPage extends StatelessWidget {
@@ -8,15 +10,15 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UsercontrollerCubit>.value(
-        value:  UsercontrollerCubit.instance,
-        child: BlocBuilder<UsercontrollerCubit, UsercontrollerState>(
+    return BlocProvider<ProfilecontrollerCubit>.value(
+        value:  ProfilecontrollerCubit.instance,
+        child: BlocBuilder<ProfilecontrollerCubit, ProfilecontrollerState>(
           builder: (context, state) {
-            final UsercontrollerCubit controller =
-                context.read<UsercontrollerCubit>();
+            final ProfilecontrollerCubit controller =
+                context.read<ProfilecontrollerCubit>();
             return Scaffold(
-              body: state is UserLoading
-                  ? const Center(child:CircularProgressIndicator()): UserItemWidget(controller: controller,),
+              body:
+              SettingsWidget(cubit: controller,),
             );
           },
         ));

@@ -3,10 +3,14 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:path/path.dart';
 import 'package:stylish/const.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/features/dashboard/modules/cart/controller/cubit/cartcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/products/view/components/product_item_widget.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({super.key,required this.cubit});
@@ -74,12 +78,17 @@ class CartWidget extends StatelessWidget {
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    child:Image(image: NetworkImage(
+                                    child:
+                                    connected?
+                                    Image(image: NetworkImage(
                                         cubit.products[index].productImage??"",
                                     ),width: 130,
                                       height: 125,
                                       fit: BoxFit.cover,
-                                    ),
+                                    ):
+                                    Image.memory(cubit.products[index].image??Uint8List(1),width: 130,
+                                      height: 125,
+                                      fit: BoxFit.cover,)
                                   ),
                                   const SizedBox(
                                     width: 12,

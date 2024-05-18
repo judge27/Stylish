@@ -246,9 +246,8 @@ class FirebaseProductsData extends ParentProductsData {
     return await FirebaseFirestore.instance.collection('products').where('productName', isEqualTo: productName).get().then((QuerySnapshot querySnapshot) {
       return querySnapshot.docs.map((e) {
         final Map data = e.data() as Map;
-
         Map m = {
-          'productName': data.containsKey('productName') ? data['productName']: data['productName'] ,
+          'productName': data.containsKey('productName') ? data['productName']: "" ,
           'image': data.containsKey('image') ? data['image'] : "XXXX",
           'productSale': data.containsKey('productSale') ? data['productSale'] : 0,
           'productDesc': data.containsKey('productDesc') ? data.containsValue(productName) : data.containsValue(productName),
