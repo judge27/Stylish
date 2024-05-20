@@ -5,6 +5,9 @@ import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
+import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
+import 'package:stylish/features/dashboard/modules/users/modules/profile/controller/cubit/profilecontroller_cubit.dart';
 
 part 'logincontroller_state.dart';
 
@@ -35,11 +38,13 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
         try {
-           await auth.signInWithEmailAndPassword(
+          UserCredential userCredential= await auth.signInWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
-           user=await getUser;
+          user=await FirebaseUsersData.getInstance.fetech(id:userCredential.user!.uid);
+           ProfilecontrollerCubit.instance.init();
+           DashboardcontrollerCubit.instance.pageIndex=0;
           context.showToastMessage = "Let's Start Our Journey.";
           Navigator.pushNamedAndRemoveUntil(context, Routes.GETSTARTED, (_) => true);
 
@@ -53,9 +58,6 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
 
     }
   }
-
-
-
   // Login With Google Account Method
   Future<void> handleGoogleSignin({required BuildContext context}) async {
     await FireBaseModel.instance.handleGoogleSignIn(context: context);

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 
 class UserModel {
   final String id;
@@ -11,13 +12,16 @@ class UserModel {
   String phoneNumber;
   String profilePicture;
   bool admin;
-
+  List<ProductModel>? cartProducts=[];
+  List<ProductModel>? favProducts=[];
   UserModel(
       {required this.id, required this.name, required this.email,
         required this.password,
         required this.phoneNumber,
         required this.profilePicture,
         this.admin=false,
+        this.cartProducts,
+        this.favProducts
       });
 
   // UserModel.fromJson(Map map){
@@ -39,6 +43,9 @@ class UserModel {
 
   bool get getAdmin => admin;
 
+  List<ProductModel> get getCartProducts => cartProducts!;
+
+  List<ProductModel> get getFavProducts => favProducts!;
 
   static UserModel empty() =>
       UserModel(password: '',
@@ -48,6 +55,8 @@ class UserModel {
           phoneNumber: '',
           profilePicture: '',
           admin: false,
+          cartProducts:[],
+          favProducts:[],
       );
 
   Map<String, dynamic> toJson() {
@@ -58,6 +67,8 @@ class UserModel {
       'PhoneNumber': phoneNumber,
       'ProfilePicture': profilePicture,
       'admin':admin,
+      'CartProducts':cartProducts,
+      'FavProducts':favProducts,
     };
   }
 
@@ -73,6 +84,8 @@ class UserModel {
           phoneNumber: data['PhoneNumber'] ?? '',
           profilePicture: data['ProfilePicture'] ?? '',
           admin: data['admin'] ?? false,
+          cartProducts:data['CartProducts'] ?? [],
+          favProducts:data['FavProducts'] ?? [],
       );
     } else {
       return UserModel.empty();

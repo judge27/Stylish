@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/parent_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
 
@@ -22,11 +23,6 @@ class ApiUsersData extends ParentUsersData {
 
 
 
-  @override
-  Future<UserModel> fetech() {
-    // TODO: implement fetech
-    throw UnimplementedError();
-  }
 
   @override
   Future<void> update({required UserModel userModel}) {
@@ -39,6 +35,26 @@ class ApiUsersData extends ParentUsersData {
     // TODO: implement insert
     throw UnimplementedError();
   }
+
+  @override
+  Future<UserModel> fetech({required String id}) {
+    // TODO: implement fetech
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateCartProducts(ProductModel value, String id) {
+    // TODO: implement updateCartProducts
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateFavProducts(ProductModel value, String id) {
+    // TODO: implement updateFavProducts
+    throw UnimplementedError();
+  }
+
+
 
   
 }

@@ -7,8 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/features/dashboard/modules/fav/controller/cubit/favoriteproduct_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
+import 'package:stylish/features/dashboard/modules/products/model/repo/firebase_products_data.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
 class ProductItemWidget extends StatelessWidget {
   const ProductItemWidget({super.key,required this.productModel,this.controller});
@@ -23,17 +26,20 @@ class ProductItemWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(
-                  Radius.circular(8)),
-              child: connected?
-              Image.network(productModel.productImage!, fit: BoxFit.cover,
-              height: 196,
-              width: double.infinity,
-            ):
-            Image.memory(productModel.image??Uint8List(1),fit: BoxFit.cover,
-              height: 196,
-              width: double.infinity,)
+            Hero(
+              tag: productModel.productName,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(
+                    Radius.circular(8)),
+                child: connected?
+                Image.network(productModel.productImage!, fit: BoxFit.cover,
+                height: 196,
+                width: double.infinity,
+              ):
+              Image.memory(productModel.image??Uint8List(1),fit: BoxFit.cover,
+                height: 196,
+                width: double.infinity,)
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8.0,right: 8.0),

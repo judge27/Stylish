@@ -9,3 +9,4 @@ final class ProductdetailsLoaded extends ProductdetailsState {}
 
 final class ProductdetailsEmpty extends ProductdetailsState {}
 
+final class ProductdetailsFetchCategory extends ProductdetailsState {}

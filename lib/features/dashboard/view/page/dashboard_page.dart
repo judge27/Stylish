@@ -74,6 +74,7 @@ class DashboardPage extends StatelessWidget {
               floatingActionButton:user.admin==false||controller.pageIndex==3?
               const SizedBox():
               FloatingActionButton(
+                backgroundColor: Theme.of(context).primaryColor,
               onPressed: (){context.pushTo=Routes.NEWProduct;},
               tooltip: 'Insert',
               child:   const Icon(Icons.add),

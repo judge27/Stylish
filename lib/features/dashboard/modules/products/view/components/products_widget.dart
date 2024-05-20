@@ -24,10 +24,13 @@ class ProductsWidget extends StatelessWidget {
           return state is ProductscontrollerLoading
               ? const Center(child: CircularProgressIndicator())
               : state is ProductscontrollerEmpty
-                  ? ProductTopWidget(
-                    controller:controller
-                  )
-                  : Padding(
+                  ? Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 8.0, vertical: 15),
+            child: ProductTopWidget(
+                controller:controller
+            ),
+          ) : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: CustomScrollView(
                         physics: const BouncingScrollPhysics(),

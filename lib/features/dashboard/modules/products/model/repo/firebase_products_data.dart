@@ -109,7 +109,6 @@ class FirebaseProductsData extends ParentProductsData {
       'productImage':productImage,
     }).then((value) => print("Product Inserted")).catchError((error)=>print("Failed to insert Product $error"));
 
-
   }
 
   @override

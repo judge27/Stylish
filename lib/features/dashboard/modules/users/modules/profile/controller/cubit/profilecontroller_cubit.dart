@@ -8,7 +8,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
@@ -23,6 +22,7 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
   static ProfilecontrollerCubit instance = ProfilecontrollerCubit();
   ProfilecontrollerCubit() : super(ProfileLoading()) {
     init();
+
   }
   final storage= FirebaseStorage.instance;
 
@@ -96,7 +96,7 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
   Future<void> init() async {
     emit(ProfileLoading());
     try {
-      user = await getUser;
+      user=await FirebaseUsersData.getInstance.fetech(id: FireBaseModel.instance.autUser!.uid);
       nameController.text = user.name;
       emailController.text = user.email;
       phoneController.text = user.phoneNumber;
@@ -131,7 +131,7 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
 
 
   Future<void> onDelete() async {
-    profileImage="";
+    profileImage="https://firebasestorage.googleapis.com/v0/b/stylish-temp.appspot.com/o/default_avatar.png?alt=media&token=fa3dbdd2-7e9e-4ac1-92c5-ec2b4fef60bb";
     emit(ProfileImage());
   }
 

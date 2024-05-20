@@ -13,9 +13,6 @@ import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
 
   // User Instance Object
   UserModel user = UserModel.empty();
-  Future<UserModel> get getUser =>FirebaseUsersData.getInstance.fetech();
-
-
   //Product Constant
   String globalCategory="All";
 

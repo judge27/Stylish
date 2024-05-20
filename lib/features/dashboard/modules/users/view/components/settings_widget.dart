@@ -5,6 +5,7 @@ import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';
+import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/profile/controller/cubit/profilecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/view/components/settings_items.dart';
@@ -90,14 +91,16 @@ class SettingsWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: context.height/48,),
-              SettingsItems(iconData: Icons.store_mall_directory, pageName: "Shop Profile"),
+              SettingsItems(iconData: CupertinoIcons.heart_fill, pageName: "Fav Products",onTap: (){
+                context.pushTo=Routes.FavProduct;
+              },),
               SizedBox(height: context.height/86,),
               SettingsItems(iconData: Icons.lock, pageName: "Change Password",onTap: (){
                 context.pushTo=Routes.CHANGEPASSWORD;
               },),
               SizedBox(height: context.height/86,),
               SettingsItems(iconData: Icons.list_rounded, pageName: "My Orders",onTap: (){
-                context.pushTo=Routes.CHANGEPHONENUMBER;
+                DashboardcontrollerCubit.instance.onChangePage(2);
               },),
               SizedBox(height: context.height/86,),
               SettingsItems(iconData: Icons.mail_rounded, pageName: "Invite Friends"),

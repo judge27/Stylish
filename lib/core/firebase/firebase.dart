@@ -24,7 +24,6 @@ class FireBaseModel {
 
   // check the user login or nullable
   bool checkUserNullable() {
-
     if (autUser == null) {
       return true;
     } else {

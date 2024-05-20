@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
@@ -11,6 +12,7 @@ import 'package:stylish/features/dashboard/modules/products/modules/productdetai
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/components/similaritems_widget.dart';
 import 'package:stylish/features/dashboard/modules/products/view/components/product_item_widget.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({super.key, required this.productModel});
@@ -33,22 +35,25 @@ class ProductDetailsWidget extends StatelessWidget {
                   child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(14)),
-                        child: connected
-                            ? Image.network(
-                                productModel.productImage!,
-                                fit: BoxFit.cover,
-                                height: 235,
-                                width: double.infinity,
-                              )
-                            : Image.memory(
-                                productModel.image ?? Uint8List(1),
-                                fit: BoxFit.cover,
-                                height: 235,
-                                width: double.infinity,
-                              )),
+                    Hero(
+                      tag: productModel.productName,
+                      child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(14)),
+                          child: connected
+                              ? Image.network(
+                                  productModel.productImage!,
+                                  fit: BoxFit.cover,
+                                  height: 235,
+                                  width: double.infinity,
+                                )
+                              : Image.memory(
+                                  productModel.image ?? Uint8List(1),
+                                  fit: BoxFit.cover,
+                                  height: 235,
+                                  width: double.infinity,
+                                )),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -173,43 +178,48 @@ class ProductDetailsWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          width: 136,
-                          height: 36,
-                          decoration: const BoxDecoration(
-                              color: Color(0xFF3F92FF),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(4),
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(4),
-                              )),
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 18,
-                                backgroundColor:
-                                    const Color(0xFF0B3689).withOpacity(0.6),
-                                child: const Center(
-                                  child: Icon(
-                                    CupertinoIcons.cart,
-                                    size: 20,
-                                    color: Colors.white,
+                        InkWell(
+                        onTap: ()async{
+                            cubit.addTOCart(productModel.id??"",productModel.demandQuantity!+1,context);
+                        },
+                          child: Container(
+                            width: 136,
+                            height: 36,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF3F92FF),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(4),
+                                  bottomLeft: Radius.circular(20),
+                                  bottomRight: Radius.circular(4),
+                                )),
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor:
+                                      const Color(0xFF0B3689).withOpacity(0.6),
+                                  child: const Center(
+                                    child: Icon(
+                                      CupertinoIcons.cart,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const Spacer(),
-                              const Padding(
-                                padding: EdgeInsets.only(right: 10.0),
-                                child: Text(
-                                  "Go to cart",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              )
-                            ],
+                                const Spacer(),
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 10.0),
+                                  child: Text(
+                                    "Go to cart",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -256,7 +266,7 @@ class ProductDetailsWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Text(
@@ -266,14 +276,13 @@ class ProductDetailsWidget extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 12,
                     ),
                     Row(
                       children: [
                         Text(
-                          "${cubit.products.length} " +
-                              AppLocalizations.of(context)!.items,
+                          "${cubit.products.length} ${AppLocalizations.of(context)!.items}",
                           style: TextStyle(
                               color: Theme.of(context).hintColor,
                               fontSize: 24,
@@ -332,13 +341,13 @@ class ProductDetailsWidget extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 18.0),
                                   child: DropdownButton(
-                                    underline: SizedBox(),
-                                    items: cubit.cateogries.map((String item) {
+                                    underline: const SizedBox(),
+                                    items: cubit.cateogriesFilter.map((String item) {
                                       return DropdownMenuItem(
+                                        value: item,
                                         child: Center(
                                           child: Text(item),
                                         ),
-                                        value: item,
                                       );
                                     }).toList(),
                                     onChanged: (String? value) {
@@ -347,7 +356,7 @@ class ProductDetailsWidget extends StatelessWidget {
                                     value: cubit.filterCategory,
                                     dropdownColor: Colors.white,
                                     iconSize: 0,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black, fontSize: 15),
                                   ),
                                 ),
@@ -360,7 +369,7 @@ class ProductDetailsWidget extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     SizedBox(height: 300,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
@@ -374,10 +383,11 @@ class ProductDetailsWidget extends StatelessWidget {
                               productModel: cubit.products[index],
                             ));
                       }, separatorBuilder:(context, index){
-                          return SizedBox(width: 10,);
+                          return const SizedBox(width: 10,);
                           },
                           itemCount: cubit.products.length),
-                    )
+                    ),
+                    SizedBox(height: 18,)
                   ],
                 ),
               ),
@@ -388,16 +398,3 @@ class ProductDetailsWidget extends StatelessWidget {
     );
   }
 }
-/*
-SizedBox(height: 305,
-         child: ListView.separated(itemBuilder: (context, index) {
-           return InkWell(
-               onTap: (){
-                 productModel=cubit.products[index];
-               },
-               child: SimilarItemsWidget(
-                 productModel: cubit.products[index],
-               ));
-         }, separatorBuilder:(context, index){return SizedBox(width: 10,);}, itemCount: cubit.products.length),
-       )
- */

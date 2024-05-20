@@ -51,17 +51,14 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
           name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
-          profilePicture: '',
+          profilePicture: 'https://firebasestorage.googleapis.com/v0/b/stylish-temp.appspot.com/o/default_avatar.png?alt=media&token=fa3dbdd2-7e9e-4ac1-92c5-ec2b4fef60bb',
           phoneNumber: '',
           admin: false,
         );
         user=userModel;
         await FirebaseUsersData.getInstance.saveUserRecord(userModel);
-
         context.showToastMessage = "Accepted Registration.";
-
         Navigator.pushNamed(context, Routes.GETSTARTED);
-
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           context.showToastMessage = "The password provided is too weak.";

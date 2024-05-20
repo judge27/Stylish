@@ -13,6 +13,8 @@ class Routes {
   static const CHANGEPASSWORD = "CHANGEPASSWORD";
   static const CHANGEPHONENUMBER = "CHANGEPHONENUMBER";
   static const EDITPROFILE = "EDITPROFILE";
+  static const FavProduct = "FavProduct";
+
 
 
 

@@ -18,11 +18,11 @@ class DashboardBodyWidget extends StatelessWidget {
           return PageView(
             controller:controller.pageController,
             onPageChanged:controller.onChangePage,
-            children:   [
-             HomePage(dashboardcontrollerCubit: controller,),
-             const ProductsPage(),
-             const CartPage(),
-             const UserPage(),
+            children:   const [
+             HomePage(),
+             ProductsPage(),
+             CartPage(),
+             UserPage(),
             ],
           );
         },

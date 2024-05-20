@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/firebase/firebase.dart';
+import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/parent_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
 
@@ -33,6 +34,8 @@ class FirebaseUsersData extends ParentUsersData {
         required bool admin,
         String? profilePicture,
         String? phoneNumber,
+        List<ProductModel>? cartProducts,
+        List<ProductModel>? favProducts
 
       }) async {
     CollectionReference users = _db.collection('users');
@@ -43,18 +46,20 @@ class FirebaseUsersData extends ParentUsersData {
       'password': password,
       'admin':admin,
       'phoneNumber':phoneNumber,
-      'profilePicture':profilePicture
+      'profilePicture':profilePicture,
+      'cartProducts':cartProducts,
+      'favProducts':favProducts
     })
         .then((_) => print("Added Success"))
         .catchError((error) => print(error));
   }
 
   @override
-  Future<UserModel> fetech() async {
+  Future<UserModel> fetech({required String id}) async {
     try {
       final documentSnapshot = await _db
           .collection('users')
-          .doc(FireBaseModel.instance.autUser?.uid)
+          .doc(id)
           .get();
       if (documentSnapshot.exists) {
         return UserModel.fromSnapshot(documentSnapshot);
@@ -74,6 +79,7 @@ class FirebaseUsersData extends ParentUsersData {
     }
   }
 
+
   @override
   Future<void> update({required UserModel userModel}) async {
     try {
@@ -86,13 +92,16 @@ class FirebaseUsersData extends ParentUsersData {
     }
   }
 
+
   Future<void> updateSingleField(Map<String, dynamic> json,)async {
     try{
-      await _db.collection('users').doc(FireBaseModel.instance.autUser?.uid).
+      await _db.collection('users').doc(user.id).
       update(json);
     }
     catch(e){
       throw 'something went wrong $e';
     }
   }
+
+
 }

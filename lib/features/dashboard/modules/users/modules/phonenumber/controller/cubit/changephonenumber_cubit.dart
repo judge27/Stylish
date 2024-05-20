@@ -12,10 +12,14 @@ import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_use
 part 'changephonenumber_state.dart';
 
 class ChangephonenumberCubit extends Cubit<ChangephonenumberState> {
+  static ChangephonenumberCubit instance=ChangephonenumberCubit();
   ChangephonenumberCubit() : super(ChangephonenumberInitial()){
+    if(user.phoneNumber!="") {
+      countryCode = user.phoneNumber.substring(0, 2);
+      phoneNumber = user.phoneNumber.substring(3, user.phoneNumber.length);
+    }
     phoneController.text=phoneNumber;
   }
-
   // key object of the phoneNumber page form
   GlobalKey<FormState> verificationKey = GlobalKey();
 
@@ -28,8 +32,6 @@ class ChangephonenumberCubit extends Cubit<ChangephonenumberState> {
 
   // smsCode variable
   String smsCode = "";
-
-
 
   // verify the phone number method
   void onSendOTP(

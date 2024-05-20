@@ -127,7 +127,7 @@ class ProductTopWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 18.0),
                                   child: DropdownButton(
                                       underline: SizedBox(),
-                                      items: controller.cateogries.map((String item) {
+                                      items: controller.cateogriesFilter.map((String item) {
                                         return DropdownMenuItem(child:Center(child: Text(item),),value: item,);
                                       }).toList(),
                                       onChanged: (String? value) {

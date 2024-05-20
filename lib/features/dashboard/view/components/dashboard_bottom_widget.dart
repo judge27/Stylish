@@ -17,29 +17,38 @@ class DashboardBottomWidegt extends StatelessWidget {
       child: BlocBuilder<DashboardcontrollerCubit, DashboardcontrollerState>(
         builder: (context, state) {
          return BottomNavyBar(
+
            selectedIndex: controller.pageIndex,
            onItemSelected: (index) {
              controller.onChangePage(index);
            },
-           backgroundColor: Theme.of(context).cardColor,
+           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
            itemCornerRadius: 2,
            items: <BottomNavyBarItem>[
              BottomNavyBarItem(
-                 title:  Text(AppLocalizations.of(context)!.home),
-                 icon: const Icon(CupertinoIcons.home),
+                 title:  Text(AppLocalizations.of(context)!.home,style: TextStyle(
+                   color: Theme.of(context).primaryColor,
+                 ),),
+                 icon:  Icon(CupertinoIcons.home,color: Theme.of(context).primaryColor,),
              ),
              BottomNavyBarItem(
-                 title:  Text(AppLocalizations.of(context)!.products),
-                 icon: const Icon(CupertinoIcons.heart)
+                 title:  Text(AppLocalizations.of(context)!.products,style: TextStyle(
+                   color: Theme.of(context).primaryColor,
+                 ),),
+                 icon:  Icon(CupertinoIcons.bag_fill,color: Theme.of(context).primaryColor,)
              ),
              BottomNavyBarItem(
-                 title:  Text(AppLocalizations.of(context)!.cart),
-                 icon: const Icon(CupertinoIcons.cart
+                 title:  Text(AppLocalizations.of(context)!.cart,style: TextStyle(
+                   color: Theme.of(context).primaryColor,
+                 ),),
+                 icon:  Icon(CupertinoIcons.cart,color: Theme.of(context).primaryColor,
              ),
             ),
              BottomNavyBarItem(
-                 title:  Text(AppLocalizations.of(context)!.settings),
-                 icon: const Icon(CupertinoIcons.settings)
+                 title:  Text(AppLocalizations.of(context)!.settings,style: TextStyle(
+                   color: Theme.of(context).primaryColor,
+                 ),),
+                 icon:  Icon(CupertinoIcons.settings,color: Theme.of(context).primaryColor,)
              ),
            ],
          );

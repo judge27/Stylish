@@ -11,7 +11,7 @@ class ChangePhoneNumberPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ChangephonenumberCubit>(
-      create: (context) => ChangephonenumberCubit(),
+      create: (context) => ChangephonenumberCubit.instance,
       child: BlocBuilder<ChangephonenumberCubit, ChangephonenumberState>(
         builder: (context, state) {
           final ChangephonenumberCubit cubit = context.read<ChangephonenumberCubit>();

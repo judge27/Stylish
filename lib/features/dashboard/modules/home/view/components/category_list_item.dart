@@ -7,8 +7,7 @@ import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_
 import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 
 class CategoryListItemWidget extends StatelessWidget {
-  const CategoryListItemWidget({super.key,required this.dashboardcontrollerCubit});
-  final DashboardcontrollerCubit dashboardcontrollerCubit;
+  const CategoryListItemWidget({super.key,});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -18,7 +17,7 @@ class CategoryListItemWidget extends StatelessWidget {
             onTap: (){
               globalCategory="Beauty";
               ProductscontrollerCubit.instance.init();
-              dashboardcontrollerCubit.onChangePage(1);
+              DashboardcontrollerCubit.instance.onChangePage(1);
             },
             child: SizedBox(
               width: context.width/6,
@@ -50,7 +49,7 @@ class CategoryListItemWidget extends StatelessWidget {
               globalCategory="Fashion";
               ProductscontrollerCubit.instance.init();
 
-              dashboardcontrollerCubit.onChangePage(1);
+              DashboardcontrollerCubit.instance.onChangePage(1);
             },
             child: SizedBox(
               width: context.width/6,
@@ -82,8 +81,7 @@ class CategoryListItemWidget extends StatelessWidget {
             onTap: (){
               globalCategory="Kids";
               ProductscontrollerCubit.instance.init();
-
-              dashboardcontrollerCubit.onChangePage(1);
+              DashboardcontrollerCubit.instance.onChangePage(1);
             },
             child: SizedBox(
               width: context.width/6,
@@ -115,7 +113,7 @@ class CategoryListItemWidget extends StatelessWidget {
             onTap: (){
               globalCategory="Mens";
               ProductscontrollerCubit.instance.init();
-              dashboardcontrollerCubit.onChangePage(1);
+              DashboardcontrollerCubit.instance.onChangePage(1);
             },
             child: SizedBox(
               width: context.width/6,
@@ -147,7 +145,7 @@ class CategoryListItemWidget extends StatelessWidget {
             onTap: (){
               globalCategory="Women";
               ProductscontrollerCubit.instance.init();
-              dashboardcontrollerCubit.onChangePage(1);
+              DashboardcontrollerCubit.instance.onChangePage(1);
             },
             child: SizedBox(
               width: context.width/6,

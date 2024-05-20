@@ -10,7 +10,9 @@ import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/features/dashboard/modules/cart/controller/cubit/cartcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/products/model/repo/firebase_products_data.dart';
 import 'package:stylish/features/dashboard/modules/products/view/components/product_item_widget.dart';
+import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
 
 class CartWidget extends StatelessWidget {
   const CartWidget({super.key,required this.cubit});
@@ -50,11 +52,12 @@ class CartWidget extends StatelessWidget {
                       (context, index) {
                       return Dismissible(
                         onDismissed: (direction)async {
-                          await cubit.addTOFav(cubit.products[index].id??"", 0, context);
-                        },
+                          await cubit.removeFromCart(cubit.products[index].id??"", 0, context);
+
+                          },
                         key: UniqueKey(),
                         background: Container(
-                          color: Colors.green,
+                          color: Theme.of(context).primaryColor,
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -258,7 +261,7 @@ class CartWidget extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),),
                                   Text(
-                                    "\$ ${cubit.products[index].productCurrentPrice.toString()}",
+                                    "\$ ${{cubit.products[index].productCurrentPrice!*cubit.products[index].demandQuantity!}.toString()??{cubit.products[index].productCurrentPrice.toString()}}",
                                     style: const TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,

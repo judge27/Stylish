@@ -70,7 +70,7 @@ class DatabaseProductsData extends ParentProductsData {
   }
 
   Future<List<ProductModel>> fetchProductsWithCategory({required String productCategory}) async {
-    return productCategory==""?await fetchProducts():(await _myObjectDB.query('product', where: 'productCategory=?', whereArgs: [productCategory]))
+    return productCategory=="All"?await fetchProducts():(await _myObjectDB.query('product', where: 'productCategory=?', whereArgs: [productCategory]))
         .map((e) => ProductModel.fromJson(e))
         .toList();
   }

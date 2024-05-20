@@ -13,9 +13,8 @@ import 'package:stylish/features/dashboard/modules/home/view/components/view_all
 import 'home_top_item.dart';
 
 class HomeWidgetItem extends StatelessWidget {
-  const HomeWidgetItem({super.key, required this.controller,required this.dashboardcontrollerCubit});
+  const HomeWidgetItem({super.key, required this.controller,});
   final HomecontrollerCubit controller;
-  final DashboardcontrollerCubit dashboardcontrollerCubit;
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -25,7 +24,7 @@ class HomeWidgetItem extends StatelessWidget {
           width: context.width,
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 40.0, horizontal: 20.0),
+                const EdgeInsets.symmetric( horizontal: 20.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
@@ -37,7 +36,7 @@ class HomeWidgetItem extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    CategoryListItemWidget(dashboardcontrollerCubit: dashboardcontrollerCubit,),
+                    const CategoryListItemWidget(),
                     const SizedBox(
                       height: 20,
                     ),
