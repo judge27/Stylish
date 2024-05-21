@@ -103,9 +103,10 @@ class SettingsWidget extends StatelessWidget {
                 DashboardcontrollerCubit.instance.onChangePage(2);
               },),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: Icons.mail_rounded, pageName: "Invite Friends"),
+              SettingsItems(iconData: CupertinoIcons.creditcard, pageName: "Payment Card",onTap: (){
+                context.pushTo=Routes.PAYMENT;
+              },),
               SizedBox(height: context.height/86,),
-
               SettingsItems(iconData: Icons.headset_mic_outlined, pageName: "Customer Support"),
               SizedBox(height: context.height/86,),
               SettingsItems(iconData: CupertinoIcons.star, pageName: "Rate Our Application"),

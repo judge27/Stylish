@@ -15,10 +15,12 @@ import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_use
 part 'productdetails_state.dart';
 
 class ProductdetailsCubit extends Cubit<ProductdetailsState> {
+  static ProductdetailsCubit instance =ProductdetailsCubit();
   ProductdetailsCubit() : super(ProductdetailsLoading()){
     init(productCategory).then((value) {
       filterCategory=productCategory;
       init(filterCategory);
+      CartcontrollerCubit.instance.init();
     });
   }
   String productCategory="All";
@@ -76,9 +78,8 @@ class ProductdetailsCubit extends Cubit<ProductdetailsState> {
         if(ProductscontrollerCubit.instance.products[i].id==id){
           ProductscontrollerCubit.instance.products[i].cart=1;
           ProductscontrollerCubit.instance.products[i].demandQuantity=
-              ProductscontrollerCubit.instance.products[i].demandQuantity!+1;
-
-          CartcontrollerCubit.instance.init();
+          ProductscontrollerCubit.instance.products[i].demandQuantity!+1;
+          await CartcontrollerCubit.instance.init();
           break;
         }
       }
@@ -92,13 +93,12 @@ class ProductdetailsCubit extends Cubit<ProductdetailsState> {
           ProductscontrollerCubit.instance.products[i].cart=1;
           ProductscontrollerCubit.instance.products[i].demandQuantity=
               ProductscontrollerCubit.instance.products[i].demandQuantity!+1;
-          CartcontrollerCubit.instance.init();
+          await CartcontrollerCubit.instance.init();
           break;
         }
       }
     }
-    CartcontrollerCubit.instance.init();
-    emit(ProductdetailsLoaded());
+    emit(ProductdetailsChanged());
   }
   Future<void> sortProducts() async {
     sorted=!sorted;
@@ -127,8 +127,8 @@ class ProductdetailsCubit extends Cubit<ProductdetailsState> {
     }
     emit(ProductdetailsLoaded());
   }
-  void onClickItem(){
-    emit(ProductdetailsLoaded());
+  void updateProductDetails(ProductModel product) {
+    emit(ProductdetailsUpdated(updatedProduct: product));
   }
 
 }

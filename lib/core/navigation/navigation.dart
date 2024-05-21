@@ -15,6 +15,7 @@ import 'package:stylish/features/dashboard/modules/fav/view/page/favoriteproduct
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/page/productdetails_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/password/view/page/changepassword_page.dart';
+import 'package:stylish/features/dashboard/modules/users/modules/paymentinfo/view/page/payment_info_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/phonenumber/view/page/chnagephonenumber_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/profile/view/page/profile_page.dart';
 import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';
@@ -53,6 +54,8 @@ class Navigation {
         return MaterialPageRoute(builder: (_) => const FavoriteProductPage());
       case Routes.PROFILE:
         return MaterialPageRoute(builder: (_) => const ProfilePage());
+      case Routes.PAYMENT:
+        return MaterialPageRoute(builder: (_) => const PaymentInfoPage());
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
     }

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/firebase/firebase.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
+import 'package:stylish/features/dashboard/modules/users/model/card_model.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/parent_users_data.dart';
 import 'package:stylish/features/dashboard/modules/users/model/user_model.dart';
 
@@ -34,8 +35,10 @@ class FirebaseUsersData extends ParentUsersData {
         required bool admin,
         String? profilePicture,
         String? phoneNumber,
-        List<ProductModel>? cartProducts,
-        List<ProductModel>? favProducts
+        String? cardHolderName,
+        String? expiryDate,
+        String? cardNumber,
+        String? cvvCode,
 
       }) async {
     CollectionReference users = _db.collection('users');
@@ -47,8 +50,10 @@ class FirebaseUsersData extends ParentUsersData {
       'admin':admin,
       'phoneNumber':phoneNumber,
       'profilePicture':profilePicture,
-      'cartProducts':cartProducts,
-      'favProducts':favProducts
+      'cardHolderName':cardHolderName,
+      'expiryDate':expiryDate,
+      'cardNumber':cardNumber,
+      'cvvCode':cvvCode,
     })
         .then((_) => print("Added Success"))
         .catchError((error) => print(error));
@@ -102,6 +107,4 @@ class FirebaseUsersData extends ParentUsersData {
       throw 'something went wrong $e';
     }
   }
-
-
 }

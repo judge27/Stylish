@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/model/repo/parent_products_data.dart';
 
@@ -162,10 +163,9 @@ class FirebaseProductsData extends ParentProductsData {
 
   @override
   Future<List<ProductModel>> fetchProductsWithSale() async {
-    return await FirebaseFirestore.instance.collection('products').where('isSale',isEqualTo: 1).get().then((QuerySnapshot querySnapshot) {
+    return await FirebaseFirestore.instance.collection('products').where('isSale',isEqualTo: 1).where("productCategory",isEqualTo:globalCategory).get().then((QuerySnapshot querySnapshot) {
       return querySnapshot.docs.map((e) {
         final Map data = e.data() as Map;
-
         Map m = {
           'productName': data.containsKey('productName') ? data['productName'] : "affsfda",
           'image': data.containsKey('image') ? data['image'] : "XXXX",
@@ -175,7 +175,7 @@ class FirebaseProductsData extends ParentProductsData {
           'productCategory': data.containsKey('productCategory') ? data['productCategory'] : "XXXX",
           'productAvailableQuantity': data.containsKey('productAvailableQuantity') ? data['productAvailableQuantity'] : 0,
           'productAcutalPrice': data.containsKey('productAcutalPrice') ? data['productAcutalPrice'] : 0,
-          'isSale': data.containsKey('isSale') ? 1 : 1,
+          'isSale': data.containsKey('isSale') ? data['isSale'] : 0,
           'favorite': data.containsKey('favorite') ? data['favorite'] : 0,
           'cart': data.containsKey('cart') ? data['cart'] : 0,
           'demandQuantity': data.containsKey('demandQuantity') ? data['demandQuantity'] : 0,

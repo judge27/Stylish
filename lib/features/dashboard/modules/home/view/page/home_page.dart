@@ -9,8 +9,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomecontrollerCubit(),
+    return BlocProvider<HomecontrollerCubit>.value(
+      value:HomecontrollerCubit.instance,
       child: BlocBuilder<HomecontrollerCubit, HomecontrollerState>(
         builder: (context, state) {
           final HomecontrollerCubit controller =context.read<HomecontrollerCubit>();

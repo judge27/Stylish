@@ -13,6 +13,8 @@ class TextFieldModel {
   bool? readOnly;
   List<TextInputFormatter>? inputFormaters;
   Future<void> Function(String? value)? onSubmit;
+  void Function()? onComplete;
+
   TextFieldModel({
     this.inputFormaters,
     this.obscureText = false,
@@ -24,6 +26,7 @@ class TextFieldModel {
     this.textStyle,
     this.validator,
     this.onSubmit,
-    this.readOnly=false
+    this.readOnly=false,
+    this.onComplete
   });
 }

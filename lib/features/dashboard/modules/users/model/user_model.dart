@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
+import 'package:stylish/features/dashboard/modules/users/model/card_model.dart';
 
 class UserModel {
   final String id;
@@ -12,17 +13,21 @@ class UserModel {
   String phoneNumber;
   String profilePicture;
   bool admin;
-  List<ProductModel>? cartProducts=[];
-  List<ProductModel>? favProducts=[];
+  String? cardHolderName;
+  String? expiryDate;
+  String? cardNumber;
+  String? cvvCode;
   UserModel(
       {required this.id, required this.name, required this.email,
         required this.password,
         required this.phoneNumber,
         required this.profilePicture,
         this.admin=false,
-        this.cartProducts,
-        this.favProducts
-      });
+        this.cardHolderName,
+        this.expiryDate,
+        this.cardNumber,
+        this.cvvCode
+  });
 
   // UserModel.fromJson(Map map){
   //   id = map['id'].toString();
@@ -41,11 +46,16 @@ class UserModel {
 
   String get getProfilePicture => profilePicture;
 
+  String get getUserCardHolderName => cardHolderName!;
+
+  String get getUserCardexpiryDate => expiryDate!;
+
+  String get getUserCardcardNumber => cardNumber!;
+
+  String get getUserCardcvvCode => cvvCode!;
+
   bool get getAdmin => admin;
 
-  List<ProductModel> get getCartProducts => cartProducts!;
-
-  List<ProductModel> get getFavProducts => favProducts!;
 
   static UserModel empty() =>
       UserModel(password: '',
@@ -55,8 +65,11 @@ class UserModel {
           phoneNumber: '',
           profilePicture: '',
           admin: false,
-          cartProducts:[],
-          favProducts:[],
+          cardHolderName:'',
+          expiryDate:'',
+          cardNumber:'',
+          cvvCode:'',
+
       );
 
   Map<String, dynamic> toJson() {
@@ -67,9 +80,11 @@ class UserModel {
       'PhoneNumber': phoneNumber,
       'ProfilePicture': profilePicture,
       'admin':admin,
-      'CartProducts':cartProducts,
-      'FavProducts':favProducts,
-    };
+      'cardHolderName':cardHolderName,
+      'expiryDate': expiryDate ,
+      'cardNumber':cardNumber,
+      'cvvCode':cvvCode ,
+      };
   }
 
   factory UserModel.fromSnapshot(
@@ -84,8 +99,11 @@ class UserModel {
           phoneNumber: data['PhoneNumber'] ?? '',
           profilePicture: data['ProfilePicture'] ?? '',
           admin: data['admin'] ?? false,
-          cartProducts:data['CartProducts'] ?? [],
-          favProducts:data['FavProducts'] ?? [],
+          cardHolderName:data['cardHolderName'] ?? '',
+          expiryDate:data['expiryDate'] ?? '',
+          cardNumber:data['cardNumber'] ?? '',
+          cvvCode:data['cvvCode'] ?? '',
+
       );
     } else {
       return UserModel.empty();

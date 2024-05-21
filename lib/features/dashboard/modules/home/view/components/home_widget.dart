@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +10,9 @@ import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecon
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/big_banner_item.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/category_list_item.dart';
-import 'package:stylish/features/dashboard/modules/home/view/components/home_product_item.dart';
 import 'package:stylish/features/dashboard/modules/home/view/components/view_all_banner.dart';
+import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
+import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/components/similaritems_widget.dart';
 import 'home_top_item.dart';
 
 class HomeWidgetItem extends StatelessWidget {
@@ -19,7 +22,9 @@ class HomeWidgetItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
         value: controller,
-        child: SizedBox(
+        child: BlocBuilder<HomecontrollerCubit, HomecontrollerState>(
+        builder: (context, state) {
+        return SizedBox(
           height: context.height,
           width: context.width,
           child: Padding(
@@ -32,6 +37,7 @@ class HomeWidgetItem extends StatelessWidget {
                   children: [
                     HomeTopWidget(
                      homeTitle: controller.homeTitle,
+                      cubit: controller,
                     ),
                     const SizedBox(
                       height: 20,
@@ -51,32 +57,24 @@ class HomeWidgetItem extends StatelessWidget {
                           title: "Deal of the Day",
                           hintIconText: " 22h 55m 20s remaining "),
                     ),
-                    // Stack(
-                    //   alignment: Alignment.centerRight,
-                    //   children: [
-                    //     HomeProductItem(
-                    //       itemScrollController: controller.itemScrollController,
-                    //       productItem: controller.products1,
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(right: 8.0),
-                    //       child: InkWell(
-                    //         onTap: () => controller.onNext(
-                    //             itemScrollController1:
-                    //                 controller.itemScrollController,
-                    //             pageIndex: controller.pageIndex1),
-                    //         child: const CircleAvatar(
-                    //           backgroundColor: Colors.grey,
-                    //           child: Icon(
-                    //             Icons.arrow_forward_ios_sharp,
-                    //             color: Colors.black,
-                    //             size: 20,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
+                    SizedBox(height: 15,),
+                    controller.products.length!=0?
+                    SizedBox(height: 300,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+
+                            return InkWell(
+                                onTap: (){
+                                },
+                                child: SimilarItemsWidget(
+                                  productModel: controller.products[index],
+                                ));
+                          }, separatorBuilder:(context, index){
+                        return const SizedBox(width: 10,);
+                      },
+                          itemCount: controller.products.length),
+                    ):SizedBox(),
                     const SizedBox(
                       height: 15,
                     ),
@@ -127,32 +125,37 @@ class HomeWidgetItem extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 7),
-                                  width: 100,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      color: const Color(0xFFF83758),
-                                      border: Border.all(color: Colors.white)),
-                                  child: const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        "View all",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward_outlined,
-                                        color: Colors.white,
-                                        size: 15,
-                                      )
-                                    ],
+                                InkWell(
+                                  onTap: (){
+                                    controller.onTapViewAll();
+                                  },
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 7),
+                                    width: 100,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: const Color(0xFFF83758),
+                                        border: Border.all(color: Colors.white)),
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          "View all",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Icon(
+                                          Icons.arrow_forward_outlined,
+                                          color: Colors.white,
+                                          size: 15,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -171,33 +174,23 @@ class HomeWidgetItem extends StatelessWidget {
                           title: "Trending Products ",
                           hintIconText: " Last Date 29/02/22 "),
                     ),
-                    // Stack(
-                    //   alignment: Alignment.centerRight,
-                    //   children: [
-                    //     HomeProductItem(
-                    //       itemScrollController:
-                    //           controller.itemScrollController2,
-                    //       productItem: controller.products2,
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(right: 8.0),
-                    //       child: InkWell(
-                    //         onTap: () => controller.onNext(
-                    //             itemScrollController1:
-                    //                 controller.itemScrollController2,
-                    //             pageIndex: controller.pageIndex2),
-                    //         child: const CircleAvatar(
-                    //           backgroundColor: Colors.grey,
-                    //           child: Icon(
-                    //             Icons.arrow_forward_ios_sharp,
-                    //             color: Colors.black,
-                    //             size: 20,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    SizedBox(height: 15,),
+                    controller.products.length!=0?
+                    SizedBox(height: 300,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                                onTap: (){
+                                },
+                                child: SimilarItemsWidget(
+                                  productModel:controller.products[index],
+                                ));
+                          }, separatorBuilder:(context, index){
+                        return const SizedBox(width: 10,);
+                      },
+                          itemCount: controller.products.length),
+                    ):SizedBox(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -245,34 +238,39 @@ class HomeWidgetItem extends StatelessWidget {
 
                                         ),
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 7),
-                                        width: 100,
-                                        height: 32,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            color: const Color(0xFFF83758),
-                                            border:
-                                                Border.all(color: Colors.white)),
-                                        child: const Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Text(
-                                              "View all",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Icon(
-                                              Icons.arrow_forward_outlined,
-                                              color: Colors.white,
-                                              size: 15,
-                                            )
-                                          ],
+                                      InkWell(
+                                        onTap: (){
+                                          controller.onTapViewAll();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 7),
+                                          width: 100,
+                                          height: 32,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              color: const Color(0xFFF83758),
+                                              border:
+                                                  Border.all(color: Colors.white)),
+                                          child: const Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                "View all",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w600),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_forward_outlined,
+                                                color: Colors.white,
+                                                size: 15,
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -312,18 +310,21 @@ class HomeWidgetItem extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("up to 50% Off",style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black
-                              ),),
-                              Icon(Icons.arrow_forward_ios,size: 15,color: Colors.black,)
-                              
-                            ],
+                          InkWell(
+                            onTap:()=>controller.onTapViewAll(),
+                            child: const Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("up to 50% Off",style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black
+                                ),),
+                                Icon(Icons.arrow_forward_ios,size: 15,color: Colors.black,)
+
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -331,6 +332,8 @@ class HomeWidgetItem extends StatelessWidget {
                   ]),
             ),
           ),
-        ));
+        );
+  },
+));
   }
 }

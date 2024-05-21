@@ -15,7 +15,9 @@ part 'favoriteproduct_state.dart';
 class FavoriteproductCubit extends Cubit<FavoriteproductState> {
   static FavoriteproductCubit instance=FavoriteproductCubit();
   FavoriteproductCubit() : super(FavoriteproductLoading()){
-    init();
+    init().then((value)  {
+      CartcontrollerCubit.instance.init();
+    });
   }
 
   List<ProductModel> products = [];
@@ -51,7 +53,7 @@ class FavoriteproductCubit extends Cubit<FavoriteproductState> {
           ProductscontrollerCubit.instance.init();
           ProductscontrollerCubit.instance.products[i].demandQuantity=FavoriteproductCubit.instance.products[i].demandQuantity!+1;
           FavoriteproductCubit.instance.products[i].demandQuantity=FavoriteproductCubit.instance.products[i].demandQuantity!+1;
-          CartcontrollerCubit.instance.init();
+          await CartcontrollerCubit.instance.init();
           break;
         }
       }
@@ -64,14 +66,13 @@ class FavoriteproductCubit extends Cubit<FavoriteproductState> {
         if(FavoriteproductCubit.instance.products[i].id==id){
           ProductscontrollerCubit.instance.init();
           ProductscontrollerCubit.instance.products[i].demandQuantity=FavoriteproductCubit.instance.products[i].demandQuantity!+1;
-
           FavoriteproductCubit.instance.products[i].demandQuantity=FavoriteproductCubit.instance.products[i].demandQuantity!+1;
-          CartcontrollerCubit.instance.init();
+          await CartcontrollerCubit.instance.init();
           break;
         }
       }
     }
-    emit(FavoriteproductLoaded());
+    emit(FavoriteproductChanged());
   }
 
 

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 
 class BigBanner extends StatelessWidget {
   const BigBanner({super.key});
@@ -54,29 +55,34 @@ class BigBanner extends StatelessWidget {
                 const SizedBox(
                   height: 8,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7),
-                  width: 100,
-                  height: 32,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Shop Now",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                InkWell(
+                  onTap: (){
+                    HomecontrollerCubit.instance.onTapViewAll();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 7),
+                    width: 100,
+                    height: 32,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white)),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Shop Now",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        size: 18,
-                        color: Colors.white,
-                      )
-                    ],
+                        Icon(
+                          Icons.arrow_forward_outlined,
+                          size: 18,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
                   ),
                 ),
 

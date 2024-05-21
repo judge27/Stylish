@@ -29,7 +29,6 @@ class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
   XFile? image;
   String homeTitle = "0 Iteams";
   final FirebaseStorage _storage = FirebaseStorage.instance;
-
   List<ProductModel> products = [];
   var cateogriesFilter =[
     "All",
@@ -39,8 +38,6 @@ class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
     "Mens",
     "Women"
   ];
-
-
 
   Future<void> init() async {
     emit(ProductscontrollerLoading());
@@ -197,7 +194,6 @@ class ProductscontrollerCubit extends Cubit<ProductscontrollerState> {
           }
         }
       }
-
      emit(ProductscontrollerLoaded());
  }
 }

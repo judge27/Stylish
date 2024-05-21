@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:math';
 
 extension ContextExtension on BuildContext {
   double get width => MediaQuery.of(this).size.width;
@@ -18,4 +19,10 @@ extension ContextExtension on BuildContext {
         textColor: Colors.white,
         fontSize: 18.0,
   );
+}
+
+extension RandomListItem<T> on List<T> {
+  T randomItem() {
+    return this[Random().nextInt(length)];
+  }
 }

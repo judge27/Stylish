@@ -52,7 +52,7 @@ class CartcontrollerCubit extends Cubit<CartcontrollerState> {
         if(CartcontrollerCubit.instance.products[i].id==id){
           products.removeAt(i);
           ProductscontrollerCubit.instance.products[i].demandQuantity=0;
-         FavoriteproductCubit.instance.products[i].demandQuantity=0;
+          FavoriteproductCubit.instance.products[i].demandQuantity=0;
           ProductscontrollerCubit.instance.init();
           break;
         }

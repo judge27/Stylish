@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
 
 class ViewAllBannerItem extends StatelessWidget {
@@ -53,7 +54,7 @@ class ViewAllBannerItem extends StatelessWidget {
             ],
           ),
           InkWell(
-            onTap: model.onViewAll,
+            onTap: ()=>HomecontrollerCubit.instance.onTapViewAll(),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 7),
               width: 100,

@@ -14,6 +14,7 @@ class Routes {
   static const CHANGEPHONENUMBER = "CHANGEPHONENUMBER";
   static const EDITPROFILE = "EDITPROFILE";
   static const FavProduct = "FavProduct";
+  static const PAYMENT = "PAYMENT";
 
 
 
