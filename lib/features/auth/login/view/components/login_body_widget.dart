@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/core/utils/core.dart';

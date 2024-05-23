@@ -54,6 +54,7 @@ class GetStartedWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: InkWell(
                     onTap: () async{
+                      user = await getUser;
                       Navigator.pushNamedAndRemoveUntil(context, Routes.DASHBOARD, (route) => false);
                     },
                     child: Core.instance.coreButton(buttonText:  AppLocalizations.of(context)!.getstarted,context: context),

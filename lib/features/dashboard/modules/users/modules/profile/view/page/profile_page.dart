@@ -15,36 +15,14 @@ class ProfilePage extends StatelessWidget {
       child: BlocBuilder<ProfilecontrollerCubit, ProfilecontrollerState>(
         builder: (context, state) {
           final ProfilecontrollerCubit cubit =context.read<ProfilecontrollerCubit>();
-          return Scaffold(
-            backgroundColor: Theme
-                .of(context)
-                .scaffoldBackgroundColor,
-            bottomNavigationBar: SizedBox(
-              height: 150,
-              child:  Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: InkWell(
-                        onTap: () async{
-                          await cubit.onSave(context: context);
-                        },
-                        child: Core.instance.coreButton(
-                          buttonText: AppLocalizations.of(context)!.save,
-                          context: context,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+          return Directionality(
+            textDirection: TextDirection.ltr,
+            child: Scaffold(
+              backgroundColor: Theme
+                  .of(context)
+                  .scaffoldBackgroundColor,
+              body: ProfileWidget(controller: cubit,),
             ),
-            body: ProfileWidget(controller: cubit,),
           );
         },
       ),

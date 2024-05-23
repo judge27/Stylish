@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/constants/constants.dart';
@@ -51,21 +52,29 @@ class HomecontrollerCubit extends Cubit<HomecontrollerState> {
 
     if (connectivityResult.contains(ConnectivityResult.wifi) ||
         connectivityResult.contains(ConnectivityResult.mobile)) {
-      products = globalCategory == "All" ? await (await FirebaseProductsData.getInstance)
-          .fetchProducts() :
-      await (await FirebaseProductsData.getInstance).fetchProductsWithSale();
-      Set<ProductModel> itemSet = products.toSet();
-      products = itemSet.toList();
-      products.shuffle();
+          products =  await (await FirebaseProductsData.getInstance)
+          .fetchProducts().then((value) async{
+            products=[];
+            for(int i=0;i<value.length-1;i++){
+                  if(value[i].isSale==1){
+                    products.add(value[i]);
+                  }
+              }
+            return products;
+      });
     }
     else {
       products =
-      globalCategory == "All" ? await (await DatabaseProductsData.getInstance)
-          .fetchProducts() :
-      await (await DatabaseProductsData.getInstance).fetchProductsWithSale();
-      Set<ProductModel> itemSet = products.toSet();
-      products = itemSet.toList();
-      products.shuffle();
+      await (await DatabaseProductsData.getInstance)
+          .fetchProducts().then((value) async{
+        products=[];
+        for(int i=0;i<value.length-1;i++){
+          if(value[i].isSale==1){
+            products.add(value[i]);
+          }
+        }
+        return products;
+      });
     }
     if (products.isEmpty) {
       emit(HomecontrollerEmpty());
@@ -79,8 +88,8 @@ class HomecontrollerCubit extends Cubit<HomecontrollerState> {
       init();
     }
     else {
-      ProductscontrollerCubit.instance.products=await (await FirebaseProductsData.getInstance)
-          .fetchProducts();
+      globalCategory="All";
+      ProductscontrollerCubit.instance.init();
       ProductscontrollerCubit.instance.products = ProductscontrollerCubit.instance.products.where((element) {
         String searchItem = "${element.productName.toLowerCase()} ${element
             .productDesc!.toLowerCase()} ${element.productCategory
@@ -124,4 +133,5 @@ class HomecontrollerCubit extends Cubit<HomecontrollerState> {
     DashboardcontrollerCubit.instance.onChangePage(1);
     emit(HomecontrollerChanged());
   }
+
 }

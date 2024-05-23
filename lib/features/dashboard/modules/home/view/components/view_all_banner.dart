@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ViewAllBannerItem extends StatelessWidget {
   const ViewAllBannerItem({super.key,required this.model});
@@ -32,7 +33,7 @@ class ViewAllBannerItem extends StatelessWidget {
                     fontWeight: FontWeight.w500),
               ),
               const SizedBox(
-                height: 5,
+                height: 2,
               ),
               Row(
                 children: [
@@ -61,17 +62,17 @@ class ViewAllBannerItem extends StatelessWidget {
               height: 32,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white)),
-              child: const Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "View all",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.viewall,
+                    style: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
                         fontWeight: FontWeight.w600),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.arrow_forward_outlined,
                     size: 18,
                     color: Colors.white,

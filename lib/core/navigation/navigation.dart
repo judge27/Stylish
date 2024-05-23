@@ -12,12 +12,16 @@ import 'package:stylish/features/auth/phonenumber/view/page/phonenumber_page.dar
 import 'package:stylish/features/auth/verification/view/page/verification_page.dart';
 import 'package:stylish/features/dashboard/modules/addproduct/view/page/new_product_page.dart';
 import 'package:stylish/features/dashboard/modules/fav/view/page/favoriteproduct_page.dart';
+import 'package:stylish/features/dashboard/modules/payment/controller/cubit/paymentcontroller_cubit.dart';
+import 'package:stylish/features/dashboard/modules/payment/modules/checkout/view/page/payment_page.dart';
+import 'package:stylish/features/dashboard/modules/payment/view/page/shopping_bag_page.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/page/productdetails_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/password/view/page/changepassword_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/paymentinfo/view/page/payment_info_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/phonenumber/view/page/chnagephonenumber_page.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/profile/view/page/profile_page.dart';
+import 'package:stylish/features/dashboard/modules/users/modules/rateourapplication/view/page/rateourapplication_page.dart';
 import 'package:stylish/features/dashboard/view/page/dashboard_page.dart';
 
 class Navigation {
@@ -56,6 +60,15 @@ class Navigation {
         return MaterialPageRoute(builder: (_) => const ProfilePage());
       case Routes.PAYMENT:
         return MaterialPageRoute(builder: (_) => const PaymentInfoPage());
+      case Routes.RATEOURAPP:
+        return MaterialPageRoute(builder: (_) =>  RateOurApplicationPage());
+        case Routes.SHOPPINGBAG:
+        final ProductModel data = settings.arguments as ProductModel;
+        return MaterialPageRoute(builder: (_) =>  ShoppingBagPage(productModel:data));
+      case Routes.CHECKOUT:
+      final PaymentcontrollerCubit data = settings.arguments as PaymentcontrollerCubit;
+      return MaterialPageRoute(builder: (_) =>  PaymentPage(cubit:data));
+
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
     }

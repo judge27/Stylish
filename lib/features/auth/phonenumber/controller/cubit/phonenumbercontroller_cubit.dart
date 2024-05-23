@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
@@ -28,43 +29,10 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
       required PhonenumbercontrollerCubit phoneNumberController}) async {
     if (Validation.instance
         .validatePhone(context: context, value: phoneController.text))
-      // // verify the phone number method
-      // Future<void> verifyPhoneNumber({
-      //   required BuildContext context,
-      //   required PhonenumbercontrollerCubit controller,
-      // }) async {
-      //   try {
-      //     context.showToastMessage = " Checking ...";
-      //     await FirebaseAuth.instance.verifyPhoneNumber(
-      //       phoneNumber: _instance.phonenumber,
-      //       verificationCompleted: (PhoneAuthCredential credential) {},
-      //       verificationFailed: (FirebaseAuthException e) {},
-      //       codeSent: (String verificationId, int? resendToken) async {
-      //         _instance.verificationId = verificationId;
-      //         _instance.resendCode
-      //             ? context.showToastMessage = 'Code Resent.'
-      //             : context.showToastMessage =
-      //                 'Please check your phone for the verification code.';
-      //         Navigator.pushNamed(context, Routes.VERIFICATION,
-      //             arguments: controller);
-      //         Map<String, dynamic> model = {
-      //         'Name': name,
-      //         'Email': email,
-      //         'Password': password,
-      //         'ProfilePicture': '',
-      //         'PhoneNumber':_instance.phonenumber,
-      //         };
-      //         await FirebaseUsersData.getInstance.updateSingleField(model);
-      //       },
-      //       codeAutoRetrievalTimeout: (String verificationId) {},
-      //     );
-      //   } catch (e) {
-      //     context.showToastMessage = "Wrong Excpection";
-      //   }
-      // }
     {
       try {
-        context.showToastMessage = " Checking ...";
+        final progress = ProgressHUD.of(context);
+        progress?.show();
         phoneNumber= phoneController.text;
         await auth.verifyPhoneNumber(
           phoneNumber: countryCode+phoneNumber,
@@ -76,6 +44,7 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
                 ? context.showToastMessage = 'Code Resent.'
                 : context.showToastMessage =
             'Please check your phone for the verification code.';
+            progress?.dismiss();
             Navigator.pushNamed(context, Routes.VERIFICATION,
                 arguments: phoneNumberController);
           },

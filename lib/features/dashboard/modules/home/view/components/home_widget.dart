@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/const.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/home/model/view_all_model.dart';
@@ -14,6 +15,7 @@ import 'package:stylish/features/dashboard/modules/home/view/components/view_all
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/components/similaritems_widget.dart';
 import 'home_top_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeWidgetItem extends StatelessWidget {
   const HomeWidgetItem({super.key, required this.controller,});
@@ -54,10 +56,10 @@ class HomeWidgetItem extends StatelessWidget {
                       model: ViewAllModel(
                           prefixIcon: Icons.access_alarm,
                           backgroundColor: Colors.blue,
-                          title: "Deal of the Day",
-                          hintIconText: " 22h 55m 20s remaining "),
+                          title:AppLocalizations.of(context)!.dealofday,
+                          hintIconText: AppLocalizations.of(context)!.remaining+"22h 55m 20s"),
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     controller.products.length!=0?
                     SizedBox(height: 300,
                       child: ListView.separated(
@@ -66,6 +68,7 @@ class HomeWidgetItem extends StatelessWidget {
 
                             return InkWell(
                                 onTap: (){
+                                  Navigator.pushNamed(context, Routes.PRODUCTDETAILS,arguments: controller.products[index]);
                                 },
                                 child: SimilarItemsWidget(
                                   productModel: controller.products[index],
@@ -74,7 +77,7 @@ class HomeWidgetItem extends StatelessWidget {
                         return const SizedBox(width: 10,);
                       },
                           itemCount: controller.products.length),
-                    ):SizedBox(),
+                    ):const SizedBox(),
                     const SizedBox(
                       height: 15,
                     ),
@@ -92,35 +95,35 @@ class HomeWidgetItem extends StatelessWidget {
                                 const BoxDecoration(color: Color(0xFFEFAD18)),
                           ),
                           Image.asset(kHeels),
-                          Spacer(),
+                          const Spacer(),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 40.0, right: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                const Column(
+                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      "Flat and Heels",
-                                      style: TextStyle(
+                                      AppLocalizations.of(context)!.flatandheels,
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 16,
                                           color: Color(0xFF232327)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Text(
-                                      "Stand a chance to get rewarded",
-                                      style: TextStyle(
+                                      AppLocalizations.of(context)!.standachancetogetrewarded,
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
                                           color: Color(0xFF232327)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                   ],
@@ -138,18 +141,18 @@ class HomeWidgetItem extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(4),
                                         color: const Color(0xFFF83758),
                                         border: Border.all(color: Colors.white)),
-                                    child: const Row(
+                                    child:  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
                                       children: [
                                         Text(
-                                          "View all",
-                                          style: TextStyle(
+                                          AppLocalizations.of(context)!.viewall,
+                                          style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 13,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        Icon(
+                                        const Icon(
                                           Icons.arrow_forward_outlined,
                                           color: Colors.white,
                                           size: 15,
@@ -171,17 +174,20 @@ class HomeWidgetItem extends StatelessWidget {
                       model: ViewAllModel(
                           prefixIcon: Icons.calendar_month_outlined,
                           backgroundColor: const Color(0xFFFD6E87),
-                          title: "Trending Products ",
-                          hintIconText: " Last Date 29/02/22 "),
+                          title: AppLocalizations.of(context)!.trendingproduct,
+                          hintIconText: AppLocalizations.of(context)!.lastdate+" 29/02/22"),
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     controller.products.length!=0?
                     SizedBox(height: 300,
                       child: ListView.separated(
+                          reverse: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return InkWell(
                                 onTap: (){
+                                  Navigator.pushNamed(context, Routes.PRODUCTDETAILS,arguments: controller.products[index]);
+
                                 },
                                 child: SimilarItemsWidget(
                                   productModel:controller.products[index],
@@ -190,7 +196,7 @@ class HomeWidgetItem extends StatelessWidget {
                         return const SizedBox(width: 10,);
                       },
                           itemCount: controller.products.length),
-                    ):SizedBox(),
+                    ):const SizedBox(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -217,9 +223,9 @@ class HomeWidgetItem extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    "New Arrivals",
-                                    style: TextStyle(
+                                   Text(
+                                    AppLocalizations.of(context)!.newarrivals,
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black
@@ -229,9 +235,9 @@ class HomeWidgetItem extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text(
-                                        "Summer’ 25 Collections",
-                                        style: TextStyle(
+                                       Text(
+                                        AppLocalizations.of(context)!.summercollection,
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           color: Colors.black,
@@ -253,18 +259,18 @@ class HomeWidgetItem extends StatelessWidget {
                                               color: const Color(0xFFF83758),
                                               border:
                                                   Border.all(color: Colors.white)),
-                                          child: const Row(
+                                          child:  Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               Text(
-                                                "View all",
-                                                style: TextStyle(
+                                                AppLocalizations.of(context)!.viewall,
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.w600),
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.arrow_forward_outlined,
                                                 color: Colors.white,
                                                 size: 15,
@@ -294,8 +300,8 @@ class HomeWidgetItem extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Sponserd",
-                              style: TextStyle(
+                           Text(AppLocalizations.of(context)!.sponserd,
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.w400,
                               color: Colors.black)),
                           const SizedBox(
@@ -312,11 +318,12 @@ class HomeWidgetItem extends StatelessWidget {
                           ),
                           InkWell(
                             onTap:()=>controller.onTapViewAll(),
-                            child: const Row(
+                            child:  Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("up to 50% Off",style: TextStyle(
+                                Text(AppLocalizations.of(context)!.upto+"50% "+AppLocalizations.of(context)!.off
+                                  ,style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black

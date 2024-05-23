@@ -40,10 +40,15 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
   // controller object of password textField
   TextEditingController phoneController = TextEditingController();
 
+  TextEditingController userCreditCardNumber  = TextEditingController();
+
+  TextEditingController userCreditHolderName  = TextEditingController();
+
+  TextEditingController userCreditCVVCode = TextEditingController();
+
 
   // UserModel user = UserModel.empty();
 
-  final firebaseUserData = FirebaseUsersData.getInstance;
 
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
@@ -101,6 +106,9 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
       emailController.text = user.email;
       phoneController.text = user.phoneNumber;
       profileImage= await user.profilePicture??"";
+      userCreditCardNumber.text=user.cardNumber??"";
+      userCreditHolderName.text=user.cardHolderName??"";
+      userCreditCVVCode.text=user.cvvCode??"";
       emit(ProfileLoaded());
     } catch (_) {
       user = UserModel.empty();
@@ -110,18 +118,19 @@ class ProfilecontrollerCubit extends Cubit<ProfilecontrollerState> {
 
   Future<void> onSave({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-       if(user.email!=emailController.text)
-         {
-           await auth.currentUser?.updateEmail(emailController.text);
-         }
+      if (user.profilePicture != profileImage|| user.phoneNumber!=phoneController.text) {
         Map<String, dynamic> model = {
 
-          'ProfilePicture': profileImage??"",
+          'ProfilePicture': profileImage ?? "",
 
         };
         await FirebaseUsersData.getInstance.updateSingleField(model);
         context.pop;
       }
+      else {
+        context.showToastMessage="Data Still the Same";
+      }
+    }
   }
 
 

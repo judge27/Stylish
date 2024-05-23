@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
@@ -41,11 +42,16 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   // Register with  email and password  method
   void confirmRegistration(BuildContext context) async {
     if (formKey.currentState!.validate()) {
+      final progress = ProgressHUD.of(context);
+      progress?.show();
+
       try {
         UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
+        progress?.dismiss();
+
         final UserModel userModel = UserModel(
           id: userCredential.user!.uid.toString(),
           name: nameController.text,
@@ -54,6 +60,10 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
           profilePicture: 'https://firebasestorage.googleapis.com/v0/b/stylish-temp.appspot.com/o/default_avatar.png?alt=media&token=fa3dbdd2-7e9e-4ac1-92c5-ec2b4fef60bb',
           phoneNumber: '',
           admin: false,
+          cardHolderName: '',
+          cardNumber: '',
+          cvvCode: '',
+          expiryDate:''
         );
         user=userModel;
         await FirebaseUsersData.getInstance.saveUserRecord(userModel);

@@ -11,6 +11,7 @@ import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/dashboard/modules/fav/controller/cubit/favoriteproduct_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/model/repo/firebase_users_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteProductWidget extends StatelessWidget {
   const FavoriteProductWidget({super.key,required this.cubit});
@@ -30,7 +31,7 @@ class FavoriteProductWidget extends StatelessWidget {
               slivers: [
                 SliverToBoxAdapter(
                   child: Text(
-                    "Fav List",
+                    AppLocalizations.of(context)!.favoritelist,
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                       fontWeight: FontWeight.w600,
@@ -218,7 +219,7 @@ class FavoriteProductWidget extends StatelessWidget {
                                                     ),
                                                   ),
                                                   const SizedBox(
-                                                    width: 20,
+                                                    width: 15,
                                                   ),
                                                   cubit.products[index].isSale==1?
                                                   Column(
@@ -259,15 +260,15 @@ class FavoriteProductWidget extends StatelessWidget {
                                     ),
                                    InkWell(
                                      onTap: ()async{
-                                        cubit.addTOCart(cubit.products[index].id??"", cubit.products[index].demandQuantity!+1);
+                                        cubit.addTOCart(cubit.products[index].id??"", 1);
                                          },
                                      child: Container(
                                        height: 35,
                                        alignment: Alignment.center,
                                        color: Theme.of(context).primaryColor,
-                                       child:const Text(
-                                         "Add to Cart",
-                                         style: TextStyle(
+                                       child: Text(
+                                         AppLocalizations.of(context)!.addedtocart,
+                                         style: const TextStyle(
                                              color:Colors.black,
                                              fontWeight: FontWeight.w800
                                          ),

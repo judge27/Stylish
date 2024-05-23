@@ -69,6 +69,7 @@ class NewproductcontrollerCubit extends Cubit<NewproductcontrollerState> {
           productSale: int.parse(productSale.text),
           isSale: (int.parse(productSale.text) > 0 ? 1 : 0) ,
           productImage: producttImage,
+          demandQuantity: 0,
           //image: await image!.readAsBytes(),
           productAcutalPrice: int.parse(productAcutalPrice.text),
         );
@@ -82,6 +83,7 @@ class NewproductcontrollerCubit extends Cubit<NewproductcontrollerState> {
           isSale: (int.parse(productSale.text) > 0 ? 1 : 0 ) ,
           image: await image!.readAsBytes(),
           productImage: producttImage,
+          demandQuantity: 0,
           productAcutalPrice: int.parse(productAcutalPrice.text),
         );
         globalCategory = productCategory.text.trim();

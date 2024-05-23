@@ -64,6 +64,9 @@ dependencies:
   connectivity_plus: ^6.0.3
   bottom_navy_bar: ^6.0.0
   flutter_credit_card: ^4.0.1
+  rating_dialog: ^2.0.4
+  url_launcher: ^6.2.6
+  flutter_progress_hud: ^2.0.2
 
 
 dev_dependencies:

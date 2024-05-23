@@ -21,7 +21,7 @@ class LanguageCubit extends Cubit<LanguageState> {
           }
         }
         else{
-          sharedPreferences!.setString('lang','ar');
+          sharedPreferences!.setString('lang','en');
           emit(LanguageChanged(languageCode: 'en'));
         }
         break;

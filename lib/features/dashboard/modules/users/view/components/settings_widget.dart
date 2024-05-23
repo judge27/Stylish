@@ -9,6 +9,7 @@ import 'package:stylish/features/dashboard/controller/cubit/dashboardcontroller_
 import 'package:stylish/features/dashboard/modules/users/controller/cubit/usercontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/profile/controller/cubit/profilecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/users/view/components/settings_items.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key,required this.cubit});
@@ -27,7 +28,7 @@ class SettingsWidget extends StatelessWidget {
                 height: context.height/16,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Text("Account", style: TextStyle(
+                  child: Text(AppLocalizations.of(context)!.account, style: TextStyle(
                       color: Theme
                           .of(context)
                           .hintColor,
@@ -81,7 +82,7 @@ class SettingsWidget extends StatelessWidget {
                             context.pushTo=Routes.PROFILE;                          },
                           child: Core.instance.coreButton(
                               height: context.height/30,
-                              buttonText: "   Edit Profile    ",
+                              buttonText: AppLocalizations.of(context)!.editprofile,
                               context: context
                             )
                         ),
@@ -91,27 +92,27 @@ class SettingsWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: context.height/48,),
-              SettingsItems(iconData: CupertinoIcons.heart_fill, pageName: "Fav Products",onTap: (){
+              SettingsItems(iconData: CupertinoIcons.heart_fill, pageName: AppLocalizations.of(context)!.favproducts,onTap: (){
                 context.pushTo=Routes.FavProduct;
               },),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: Icons.lock, pageName: "Change Password",onTap: (){
+              SettingsItems(iconData: Icons.lock, pageName: AppLocalizations.of(context)!.changePassword,onTap: (){
                 context.pushTo=Routes.CHANGEPASSWORD;
               },),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: Icons.list_rounded, pageName: "My Orders",onTap: (){
+              SettingsItems(iconData: Icons.list_rounded, pageName: AppLocalizations.of(context)!.myOrders,onTap: (){
                 DashboardcontrollerCubit.instance.onChangePage(2);
               },),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: CupertinoIcons.creditcard, pageName: "Payment Card",onTap: (){
+              SettingsItems(iconData: CupertinoIcons.creditcard, pageName: AppLocalizations.of(context)!.paymentcard,onTap: (){
                 context.pushTo=Routes.PAYMENT;
               },),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: Icons.headset_mic_outlined, pageName: "Customer Support"),
+              SettingsItems(iconData: Icons.headset_mic_outlined, pageName: AppLocalizations.of(context)!.customersupport),
               SizedBox(height: context.height/86,),
-              SettingsItems(iconData: CupertinoIcons.star, pageName: "Rate Our Application"),
+              SettingsItems(iconData: CupertinoIcons.star, pageName: AppLocalizations.of(context)!.rateourapplication,onTap: (){context.pushTo=Routes.RATEOURAPP;}),
               SizedBox(height: context.height/32,),
-              SettingsItems(iconData: Icons.logout, pageName: "Logout",onTap: (){
+              SettingsItems(iconData: Icons.logout, pageName: AppLocalizations.of(context)!.logout,onTap: (){
                 FireBaseModel.instance.onSignout(context: context);
               },),
             ],

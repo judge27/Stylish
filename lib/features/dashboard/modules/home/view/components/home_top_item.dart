@@ -9,6 +9,7 @@ import 'package:stylish/features/auth/registration/view/component/textfield_widg
 import 'package:stylish/features/dashboard/modules/home/controller/cubit/homecontroller_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/controller/cubit/productscontroller_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeTopWidget extends StatelessWidget {
   const HomeTopWidget(
@@ -59,7 +60,7 @@ class HomeTopWidget extends StatelessWidget {
                 ),
                 Row(children: [
                   Text(
-                    "All Featured",
+                    AppLocalizations.of(context)!.allfeatured,
                     style: TextStyle(
                         color: Theme.of(context).hintColor,
                         fontSize: 24,

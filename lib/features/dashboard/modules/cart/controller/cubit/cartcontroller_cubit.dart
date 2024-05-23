@@ -46,32 +46,15 @@ class CartcontrollerCubit extends Cubit<CartcontrollerState> {
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
     if(connectivityResult.contains(ConnectivityResult.wifi)||connectivityResult.contains(ConnectivityResult.mobile)) {
       connected=true;
-      await (await FirebaseProductsData.getInstance).updateCart(0, id);
-      (await FirebaseProductsData.getInstance).updateDemandQuantity(0, id);
-      for (int i=0;i<=CartcontrollerCubit.instance.products.length-1;i++){
-        if(CartcontrollerCubit.instance.products[i].id==id){
-          products.removeAt(i);
-          ProductscontrollerCubit.instance.products[i].demandQuantity=0;
-          FavoriteproductCubit.instance.products[i].demandQuantity=0;
-          ProductscontrollerCubit.instance.init();
-          break;
-        }
-      }
+   await (await FirebaseProductsData.getInstance).updateCart(0, id);
+    await(await FirebaseProductsData.getInstance).updateDemandQuantity(0, id);
     }
     else {
       connected=false;
-      (await DatabaseProductsData.getInstance).updateCart(0, id);
-      (await DatabaseProductsData.getInstance).updateDemandQuantity(0, id);
-      for (int i=0;i<=CartcontrollerCubit.instance.products.length-1;i++){
-        if(CartcontrollerCubit.instance.products[i].id==id){
-          products.removeAt(i);
-          ProductscontrollerCubit.instance.products[i].demandQuantity=0;
-          FavoriteproductCubit.instance.products[i].demandQuantity=0;
-          ProductscontrollerCubit.instance.init();
-          break;
-        }
-      }
+    await  (await DatabaseProductsData.getInstance).updateCart(0, id);
+   await   (await DatabaseProductsData.getInstance).updateDemandQuantity(0, id);
     }
+    ProductscontrollerCubit.instance.init();
     emit(CartcontrollerRemoved());
   }
 }

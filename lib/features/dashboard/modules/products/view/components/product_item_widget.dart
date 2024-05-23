@@ -199,8 +199,6 @@ class ProductItemWidget extends StatelessWidget {
                                 FontWeight.w400,
                               ),
                             ),
-
-
                           ],
 
                         ),

@@ -1,11 +1,14 @@
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/core/extension/context_extension.dart';
+import 'package:stylish/core/navigation/routes.dart';
 import 'package:stylish/features/dashboard/modules/products/model/entity/product_model.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/controller/cubit/productdetails_cubit.dart';
 import 'package:stylish/features/dashboard/modules/products/modules/productdetails/view/components/similaritems_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
@@ -40,13 +43,13 @@ class ProductDetailsWidget extends StatelessWidget {
                           ? Image.network(
                         currentProduct.productImage!,
                         fit: BoxFit.cover,
-                        height: 235,
+                        height: 320,
                         width: double.infinity,
                       )
                           : Image.memory(
                         currentProduct.image ?? Uint8List(1),
                         fit: BoxFit.cover,
-                        height: 235,
+                        height: 320,
                         width: double.infinity,
                       ),
                     ),
@@ -62,7 +65,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Product Category : ${currentProduct.productCategory}",
+                    "${AppLocalizations.of(context)!.productcategory} : ${currentProduct.productCategory}",
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                       fontWeight: FontWeight.w500,
@@ -122,7 +125,7 @@ class ProductDetailsWidget extends StatelessWidget {
                       const SizedBox(width: 5),
                       if (currentProduct.isSale == 1)
                         Text(
-                          "${currentProduct.productSale}% Off",
+                          "${currentProduct.productSale}% ${AppLocalizations.of(context)!.off}",
                           style: const TextStyle(
                             color: Color(0xFFFE735C),
                             fontSize: 10,
@@ -133,7 +136,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Product Details",
+                    AppLocalizations.of(context)!.productdetails,
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                       fontWeight: FontWeight.w600,
@@ -158,10 +161,10 @@ class ProductDetailsWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () async {
-                          cubit.addTOCart(currentProduct.id ?? "", currentProduct.demandQuantity! + 1, context);
+                          cubit.addTOCart(currentProduct.id ?? "", 1, context);
                         },
                         child: Container(
-                          width: 136,
+                          width: 150,
                           height: 36,
                           decoration: const BoxDecoration(
                             color: Color(0xFF3F92FF),
@@ -173,6 +176,7 @@ class ProductDetailsWidget extends StatelessWidget {
                             ),
                           ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               CircleAvatar(
                                 radius: 18,
@@ -185,14 +189,14 @@ class ProductDetailsWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const Spacer(),
-                              const Padding(
-                                padding: EdgeInsets.only(right: 10.0),
+                               Spacer(),
+                               Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
                                 child: Text(
-                                  "Go to cart",
-                                  style: TextStyle(
+                                  AppLocalizations.of(context)!.goTocart,
+                                  style: const TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -202,51 +206,57 @@ class ProductDetailsWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 20),
-                      Container(
-                        width: 136,
-                        height: 36,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF71F9A9),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(4),
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(4),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context,Routes.SHOPPINGBAG,arguments: currentProduct);
+                        },
+                        child: Container(
+                          width: 136,
+                          height: 36,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF71F9A9),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(4),
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(4),
+                            ),
                           ),
-                        ),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 18,
-                              backgroundColor: const Color(0xFF31B769).withOpacity(0.6),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.ads_click,
-                                  size: 20,
-                                  color: Colors.white,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                radius: 18,
+                                backgroundColor: const Color(0xFF31B769).withOpacity(0.6),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.ads_click,
+                                    size: 20,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Spacer(),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 10.0),
-                              child: Text(
-                                "Buy Now",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
+                              const Spacer(),
+                               Padding(
+                                padding: EdgeInsets.only(right: 10.0),
+                                child: Text(
+                                  AppLocalizations.of(context)!.buynow,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    "Similar To",
+                    AppLocalizations.of(context)!.similarTO,
                     style: TextStyle(
                       color: Theme.of(context).hintColor,
                       fontWeight: FontWeight.w700,

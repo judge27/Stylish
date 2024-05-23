@@ -17,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:stylish/core/utils/core.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/paymentinfo/view/components/pament_info_widget.dart';
 import 'package:stylish/features/dashboard/modules/users/modules/paymentinfo/view/page/payment_info_page.dart';
+import 'package:stylish/features/dashboard/modules/users/modules/rateourapplication/view/page/rateourapplication_page.dart';
 
 import 'core/firebase/firebase.dart';
 

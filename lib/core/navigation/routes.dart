@@ -15,6 +15,11 @@ class Routes {
   static const EDITPROFILE = "EDITPROFILE";
   static const FavProduct = "FavProduct";
   static const PAYMENT = "PAYMENT";
+  static const SHOPPINGBAG = "SHOPPINGBAG";
+  static const CHECKOUT = "CHECKOUT";
+
+  static const RATEOURAPP = "RATEOURAPP";
+
 
 
 

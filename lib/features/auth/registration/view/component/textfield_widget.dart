@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return TextFormField(
+      textAlign: model.textAlign!,
       onEditingComplete: model.onComplete,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: model.onChange,

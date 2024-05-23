@@ -11,6 +11,7 @@ class TextFieldModel {
   bool obscureText;
   TextStyle? textStyle;
   bool? readOnly;
+  TextAlign? textAlign;
   List<TextInputFormatter>? inputFormaters;
   Future<void> Function(String? value)? onSubmit;
   void Function()? onComplete;
@@ -27,6 +28,7 @@ class TextFieldModel {
     this.validator,
     this.onSubmit,
     this.readOnly=false,
-    this.onComplete
+    this.onComplete,
+    this.textAlign=TextAlign.start
   });
 }

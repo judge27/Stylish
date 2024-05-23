@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:stylish/core/constants/constants.dart';
 import 'package:stylish/core/extension/context_extension.dart';
 import 'package:stylish/core/firebase/firebase.dart';
@@ -37,6 +38,7 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   // Login  with email and password method
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
+
         try {
           UserCredential userCredential= await auth.signInWithEmailAndPassword(
             email: emailController.text.trim(),

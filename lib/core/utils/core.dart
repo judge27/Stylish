@@ -11,7 +11,7 @@ class Core {
 
   Core._init();
 
-  // Auth button view with custom Title
+  // Auth button components with custom Title
   Container coreButton(
       {double? height, required String buttonText, BoxDecoration? decoration,required BuildContext context}) {
     return Container(

@@ -72,6 +72,7 @@ class ChangephonenumberCubit extends Cubit<ChangephonenumberState> {
           'phoneNumber':countryCode+phoneNumber
         };
         await FirebaseUsersData.getInstance.updateSingleField(model);
+        user=await getUser;
         context.pop;
         context.showToastMessage = "Phone Changed";
       } catch (e) {
