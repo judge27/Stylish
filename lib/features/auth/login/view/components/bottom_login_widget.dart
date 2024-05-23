@@ -21,144 +21,138 @@ class BottomLoginWidget extends StatelessWidget {
               builder: (context, state) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: context.width / 25),
-              child: ProgressHUD(
-                child: Builder(
-              builder: (context) => Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        final progress = ProgressHUD.of(context);
-                        progress?.show();
+              child:  Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
                         controller.confirmLogin(context: context);
-                        progress?.dismiss();
 
-                      },
-                      child: SizedBox(
-                        height: context.height / 14,
-                        child: Core.instance
-                            .coreButton(buttonText: AppLocalizations.of(context)!.login, context: context),
+                    },
+                    child: SizedBox(
+                      height: context.height / 14,
+                      child: Core.instance
+                          .coreButton(buttonText: AppLocalizations.of(context)!.login, context: context),
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.height / 63,
+                  ),
+                  Container(
+                    height: context.height / 18,
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppLocalizations.of(context)!.or,
+                      style: TextStyle(
+                        color: Theme.of(context).splashColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(
-                      height: context.height / 63,
-                    ),
-                    Container(
-                      height: context.height / 18,
-                      alignment: Alignment.center,
-                      child: Text(
-                        AppLocalizations.of(context)!.or,
-                        style: TextStyle(
-                          color: Theme.of(context).splashColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                  ),
+                  SizedBox(
+                    height: context.height / 63,
+                  ),
+                  SizedBox(
+                    height: context.height / 9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            await controller.handleGoogleSignin(
+                                context: context);
+                          },
+                          child: CircleAvatar(
+                            radius: 33.5,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            child: CircleAvatar(
+                              radius: 32,
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              child: Image.asset(kGoogle),
+                            ),
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: context.width / 8,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await controller.handleGoogleSignout(
+                                context: context);
+                          },
+                          child: CircleAvatar(
+                            radius: 33.5,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            child: CircleAvatar(
+                              radius: 32,
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              child: Image.asset(kApple),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.width / 8,
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: CircleAvatar(
+                            radius: 33.5,
+                            backgroundColor: Theme.of(context).primaryColor,
+                            child: CircleAvatar(
+                              radius: 32,
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              child: Image.asset(kFacebook),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: context.height / 63,
-                    ),
-                    SizedBox(
-                      height: context.height / 9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              await controller.handleGoogleSignin(
-                                  context: context);
+                  ),
+                  SizedBox(height: context.height / 63),
+                  SizedBox(
+                    height: context.height / 9,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            AppLocalizations.of(context)!.createanaccount,
+                            style: TextStyle(
+                              color: Theme.of(context).splashColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.width / 25,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.SIGN_UP);
                             },
-                            child: CircleAvatar(
-                              radius: 33.5,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: CircleAvatar(
-                                radius: 32,
-                                backgroundColor: const Color(0xFFFFFFFF),
-                                child: Image.asset(kGoogle),
-                              ),
-                            ),
+                            child: Text(AppLocalizations.of(context)!.signup,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                )),
                           ),
-                          SizedBox(
-                            width: context.width / 8,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await controller.handleGoogleSignout(
-                                  context: context);
-                            },
-                            child: CircleAvatar(
-                              radius: 33.5,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: CircleAvatar(
-                                radius: 32,
-                                backgroundColor: const Color(0xFFFFFFFF),
-                                child: Image.asset(kApple),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: context.width / 8,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              radius: 33.5,
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: CircleAvatar(
-                                radius: 32,
-                                backgroundColor: const Color(0xFFFFFFFF),
-                                child: Image.asset(kFacebook),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: context.height / 63),
-                    SizedBox(
-                      height: context.height / 9,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              AppLocalizations.of(context)!.createanaccount,
-                              style: TextStyle(
-                                color: Theme.of(context).splashColor,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: context.width / 25,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.SIGN_UP);
-                              },
-                              child: Text(AppLocalizations.of(context)!.signup,
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.underline,
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.height / 63,
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: context.height / 63,
+                  )
+                ],
               ),
-            ));
+            );
           })),
     );
   }

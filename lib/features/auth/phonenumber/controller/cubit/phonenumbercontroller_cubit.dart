@@ -31,8 +31,6 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
         .validatePhone(context: context, value: phoneController.text))
     {
       try {
-        final progress = ProgressHUD.of(context);
-        progress?.show();
         phoneNumber= phoneController.text;
         await auth.verifyPhoneNumber(
           phoneNumber: countryCode+phoneNumber,
@@ -44,7 +42,6 @@ class PhonenumbercontrollerCubit extends Cubit<PhonenumbercontrollerState> {
                 ? context.showToastMessage = 'Code Resent.'
                 : context.showToastMessage =
             'Please check your phone for the verification code.';
-            progress?.dismiss();
             Navigator.pushNamed(context, Routes.VERIFICATION,
                 arguments: phoneNumberController);
           },

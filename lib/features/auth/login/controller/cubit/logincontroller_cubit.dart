@@ -28,6 +28,7 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   // password showen & hiden variable
   bool obscurePassword = true;
 
+  bool showindcator =false;
   // Show & Hide Password Method
   void togglePassword(){
     obscurePassword = !obscurePassword;
@@ -38,15 +39,17 @@ class LogincontrollerCubit extends Cubit<LogincontrollerState> {
   // Login  with email and password method
   void confirmLogin({required BuildContext context}) async {
     if (formKey.currentState!.validate()) {
-
+          showindcator=true;
         try {
           UserCredential userCredential= await auth.signInWithEmailAndPassword(
             email: emailController.text.trim(),
             password: passwordController.text.trim(),
           );
+
           user=await FirebaseUsersData.getInstance.fetech(id:userCredential.user!.uid);
            ProfilecontrollerCubit.instance.init();
            DashboardcontrollerCubit.instance.pageIndex=0;
+           showindcator=false;
           context.showToastMessage = "Let's Start Our Journey.";
           Navigator.pushNamedAndRemoveUntil(context, Routes.GETSTARTED, (_) => true);
 

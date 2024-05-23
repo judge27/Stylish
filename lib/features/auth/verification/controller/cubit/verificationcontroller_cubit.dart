@@ -30,13 +30,10 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
   // verify smsCode Method
   Future<void> confirmVerification({required BuildContext context}) async {
     if (verificationKey.currentState!.validate()) {
-      final progress = ProgressHUD.of(context);
-      progress?.show();
       try {
         PhoneAuthCredential credential = PhoneAuthProvider.credential(
             verificationId: verificationId, smsCode: smsCode);
         await auth.signInWithCredential(credential);
-        progress?.dismiss();
         Navigator.pushNamedAndRemoveUntil(
             context, Routes.GETSTARTED, (_) => false);
         Map<String, dynamic> model = {
@@ -65,8 +62,7 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
       {required BuildContext context,
       required PhonenumbercontrollerCubit phoneNumberController}) async {
     if (resendCode) {
-      final progress = ProgressHUD.of(context);
-      progress?.show();
+
       await auth.verifyPhoneNumber(
         phoneNumber:countryCode+phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {},
@@ -77,7 +73,6 @@ class VerificationcontrollerCubit extends Cubit<VerificationcontrollerState> {
               ? context.showToastMessage = AppLocalizations.of(context)!.coderesent
               : context.showToastMessage =
           'Please check your phone for the verification code.';
-          progress?.dismiss();
           Map<String, dynamic> model = {
             'PhoneNumber':countryCode+phoneNumber,
           };

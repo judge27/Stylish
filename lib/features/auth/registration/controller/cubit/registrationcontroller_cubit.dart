@@ -42,15 +42,11 @@ class RegistrationcontrollerCubit extends Cubit<RegistrationcontrollerState> {
   // Register with  email and password  method
   void confirmRegistration(BuildContext context) async {
     if (formKey.currentState!.validate()) {
-      final progress = ProgressHUD.of(context);
-      progress?.show();
-
       try {
         UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-        progress?.dismiss();
 
         final UserModel userModel = UserModel(
           id: userCredential.user!.uid.toString(),
